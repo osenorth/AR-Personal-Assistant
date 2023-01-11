@@ -18,5 +18,10 @@ We are currently in the development phase of this project and are working hard t
 
 We are excited to share this project with you and look forward to hearing your feedback and suggestions as we continue to develop it. If you would like to contribute to the project, feel free to fork the repository and submit a pull request. Together, we can create a fun and interactive way for people to enjoy a vacation experience right from the comfort of their own homes!
 
-
 For more info checkout [Notion Page](https://osenorth.notion.site/Problem-1-902bdea7a1ee4bc9b78f76809f6dded9)
+
+## Support
+For any support or help with the installation please open an issue in the Github Repository
+
+## Contact
+Reach us at hi@osenorth.co for any other queries.
