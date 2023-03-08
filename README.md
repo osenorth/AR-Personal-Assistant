@@ -10,10 +10,10 @@ This project aims to make a personal assistant that utilizes Augmented Reality (
 
 Some of the use-cases for this assistant include:
 
-Getting directions or recommendations in a virtual environment
-Setting reminders or alarms
-Playing music or media, and answering questions
-In addition to these everyday tasks, the assistant also has potential for educational and training purposes. Users can learn new skills or information in a virtual augmented environment, making the learning experience more interactive and engaging.
+- Getting directions or recommendations in a virtual environment
+- Setting reminders or alarms
+- Playing music or media, and answering questions
+- In addition to these everyday tasks, the assistant also has potential for educational and training purposes. Users can learn new skills or information in a virtual augmented environment, making the learning experience more interactive and engaging.
 
 We are excited to see the potential of this AR assistant and hope it can make a positive impact in people's daily lives. Stay tuned for updates and release!
 
