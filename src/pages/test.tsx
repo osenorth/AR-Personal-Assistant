@@ -1,6 +1,7 @@
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Sky, OrbitControls } from "@react-three/drei";
-import XrHitModelContainer from "../components/XRHitModelContainer"
+import XrHitModelContainer from "../components/XRHitModelContainer";
+import "./test.module.css";
 
 export default function Test()
 {

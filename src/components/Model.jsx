@@ -1,37 +1,34 @@
 import React, { useRef } from "react";
-// import { useGLTF, useAnimations } from "@react-three/drei";
+import { useGLTF } from "@react-three/drei";
 
-// export default function Model(props) {
-//   const group = useRef();
-//   const { nodes, materials, animations } = useGLTF("/test_model.glb");
-//   const { actions } = useAnimations(animations, group);
-//   return (
-//     <group ref={group} {...props} dispose={null}>
-//       <group scale={1.91}>
-//         <primitive object={nodes.root} />
-//         <skinnedMesh
-//           geometry={nodes.druid.geometry}
-//           material={materials.color_main}
-//           skeleton={nodes.druid.skeleton}
-//         />
-//       </group>
-//     </group>
-//   );
-// }
-
-// useGLTF.preload("/test_model.glb");
-
-import { useLoader } from "@react-three/fiber";
-import { Suspense } from "react";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-
-const Model = ({ position }) => {
-  const gltf = useLoader(GLTFLoader, "/test_model.glb");
+export default function Model(props) {
+  const { nodes, materials } = useGLTF("/test_model.glb");
   return (
-    <Suspense fallback={null}>
-      <primitive position={position} object={gltf.scene} />
-    </Suspense>
+    <group {...props} dispose={null}>
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.Mesh.geometry}
+        material={materials.SpacePirate_M}
+        scale={0.05}
+      />
+    </group>
   );
-};
+}
 
-export default Model;
+useGLTF.preload("/test_model.glb");
+
+// import { useLoader } from "@react-three/fiber";
+// import { Suspense } from "react";
+// import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+
+// const Model = ({ position }) => {
+//   const gltf = useLoader(GLTFLoader, "/test_model.glb");
+//   return (
+//     <Suspense fallback={null}>
+//       <primitive position={position} object={gltf.scene} />
+//     </Suspense>
+//   );
+// };
+
+// export default Model;
