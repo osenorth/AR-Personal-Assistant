@@ -10,7 +10,7 @@ export default function Model(props) {
         receiveShadow
         geometry={nodes.Mesh.geometry}
         material={materials.SpacePirate_M}
-        scale={0.05}
+        scale={[0.01, 0.01, 0.01]}
       />
     </group>
   );
