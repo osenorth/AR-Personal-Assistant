@@ -1,5 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import NextCors from "nextjs-cors";
+import * as fs from "fs";
+const { Configuration, OpenAIApi } = require("openai");
 
 type Data = {
   text: String;
@@ -24,32 +26,17 @@ export default async function handler(
       .status(200)
       .json({ text: "This endpoint is for Speech-to-Text conversion" });
   } else if (method === "POST") {
-    const { file } = JSON.parse(body);
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("model", "whisper-1");
-    formData.append("language", "en");
-
-    // Limit the audio file size to 25MB
-    if (file.size > 25 * 1024 * 1024) {
-      res
-        .status(400)
-        .json({ text: "Please upload an audio file less than 25MB" });
-      return;
-    }
-    const response = await fetch(
-      "https://api.openai.com/v1/audio/transcriptions",
-      {
-        headers: {
-          Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
-        },
-        method: "POST",
-        body: formData,
-      }
+    const file: string = req.body;
+    console.log(file);
+    const configuration = new Configuration({
+      apiKey: process.env.OPENAI_API_KEY,
+    });
+    const openai = new OpenAIApi(configuration);
+    const resp = await openai.createTranscription(
+      fs.createReadStream("/home/harshil/Downloads/speech.mp3"),
+      "whisper-1"
     );
-    const data = await response.json();
-    console.log(data);
-    res.status(200).json({ text: "Whisper Generated text as output" });
+    res.status(200).json({ text: resp.data.text });
   } else {
     res.status(405).json({ text: "Method not allowed" });
   }
