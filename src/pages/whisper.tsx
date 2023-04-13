@@ -8,11 +8,18 @@ into the index.tsx file.
   <Whisper/>
 */
 
-import { ChangeEvent, useState } from "react";
+/*
+The working demo of OpenAI prompts for GPT-3.5 models is 
+also now included into this demo file itself. 
+It should hit /api/chat endpoint.
+*/
+import { ChangeEvent, SetStateAction, useState } from "react";
 
 export default function () {
   const [file, setFile] = useState<File | null>(null);
   const [convertedText, setConvertedText] = useState<string>("");
+  const [inputValue, setInputValue] = useState("");
+  const [outputValue, setOutputValue] = useState("");
 
   const handleFile = async (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -42,11 +49,38 @@ export default function () {
     setConvertedText(data.text);
   };
 
+  const handleInputChange = (event: {
+    target: { value: SetStateAction<string> };
+  }) => {
+    setInputValue(event.target.value);
+  };
+
+  const handleGPT = async (event: { preventDefault: () => void }) => {
+    event.preventDefault();
+
+    const response = await fetch("/api/chat", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ text: inputValue }),
+    });
+    const data = await response.json();
+    setOutputValue(data.text.content);
+    setInputValue("");
+  };
   return (
     <div>
+      <h1>Whisper</h1>
       <input type="file" accept="audio/*" onChange={handleFile} />
       <button onClick={sendAudio}>Convert</button>
       <div>{convertedText}</div>
+      <br />
+      <h1>ChatGPT</h1>
+      <label>Enter text:</label>
+      <input type="text" value={inputValue} onChange={handleInputChange} />
+      <button onClick={handleGPT}>Submit</button>
+      <div>{outputValue}</div>
     </div>
   );
 }
