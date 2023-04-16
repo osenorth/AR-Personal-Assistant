@@ -22,6 +22,7 @@ export default function () {
   const [outputValue, setOutputValue] = useState("");
 
   const handleFile = async (e: ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
       setFile(file);
@@ -39,11 +40,15 @@ export default function () {
       console.log("No audio file found");
       return;
     }
-    const response = await fetch("/api/transcribeAudio", {
+    const formData = new FormData();
+    formData.append("file",file);
+    formData.append("model","whisper-1");
+    const response: any = await fetch("https://api.openai.com/v1/audio/transcriptions", {
+      headers: {
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_OPENAI_API_KEY ?? ""}`,
+      },
       method: "POST",
-      body: JSON.stringify({
-        file: file,
-      }),
+      body: formData,
     });
     const data = await response.json();
     setConvertedText(data.text);

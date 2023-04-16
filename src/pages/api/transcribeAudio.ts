@@ -1,3 +1,12 @@
+/* 
+Not used currently. There are some troubles which handling the 
+audio file in the server for creating readStream. So, Whisper is 
+handled from client side leveraging direct openAI API endpoint.
+
+TODO: We need to fix this endpoint for dealing with formData 
+and create ReadStream and then we shall handle the queries on 
+server side.
+*/
 import type { NextApiRequest, NextApiResponse } from "next";
 import NextCors from "nextjs-cors";
 import * as fs from "fs";
@@ -33,7 +42,7 @@ export default async function handler(
     });
     const openai = new OpenAIApi(configuration);
     const resp = await openai.createTranscription(
-      fs.createReadStream("/home/harshil/Downloads/speech.mp3"),
+      fs.createReadStream("location-of-file-goes-here"),
       "whisper-1"
     );
     res.status(200).json({ text: resp.data.text });
