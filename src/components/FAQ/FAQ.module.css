@@ -1,0 +1,89 @@
+.faqContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 5rem;
+}
+
+.faqLabel {
+  font-size: 1.5rem;
+}
+
+.faqDes {
+  text-align: center;
+  width: 80%;
+}
+
+.faqList {
+  width: 80%;
+}
+
+.faqItem {
+  margin-bottom: 15px;
+}
+
+.quebtn {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  text-align: left;
+  padding: 10px;
+  font-weight: 500;
+  font-size: 1.1rem;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  border-radius: 12px;
+  color: var(--primary);
+  background: #fff;
+  box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease-in-out;
+}
+
+.quebtn span {
+  width: 90%;
+}
+
+.quebtn:hover {
+  background-color: var(--primary);
+  color: #fff;
+}
+
+.faqAnswer {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  font-weight: 500;
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+  border-radius: 0px 0px 12px 12px;
+  background: #fff;
+  color: var(--primary);
+  text-align: left;
+  border: 1px solid var(--primary);
+  transition: all 0.3s ease-in-out;
+}
+
+.activeQue {
+  background-color: var(--primary);
+  color: #fff;
+  border-radius: 12px 12px 0px 0px;
+}
+
+.closedAns {
+  display: none;
+}
+
+.rotateIcon {
+  transform: rotate(45deg);
+}
+
+@media screen and (max-width: 768px) {
+  .faqList,
+  .faqDes {
+    width: 100%;
+  }
+}
