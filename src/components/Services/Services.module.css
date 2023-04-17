@@ -1,0 +1,37 @@
+.servicesContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.servicesLabel {
+  font-size: 1.5rem;
+}
+
+.servicesDes {
+  text-align: center;
+  width: 60%;
+}
+
+.servicesList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  margin-top: 30px;
+}
+
+@media screen and (max-width: 768px) {
+  .servicesContainer {
+    margin-top: 30px;
+  }
+  .servicesDes {
+    width: 100%;
+  }
+  .servicesList {
+    gap: 2rem;
+  }
+}

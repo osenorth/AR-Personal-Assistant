@@ -1,0 +1,56 @@
+.cardContainer {
+  position: relative;
+  padding: 18px;
+  border-radius: 24px;
+  height: auto;
+  width: 250px;
+  box-shadow: 0px 2px 16px 2px rgba(0, 0, 0, 0.15);
+  text-align: left;
+  margin-top: 75px;
+}
+
+.imageContainer {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+  position: absolute;
+  top: -75px;
+  left: 50px;
+  border: 3px solid var(--primary);
+}
+
+.avatarImg {
+  width: 100%;
+  height: auto;
+  transition: all 0.3s ease-in-out;
+}
+
+.cardContainer:hover .avatarImg {
+  transform: scale(1.1);
+  filter: brightness(1.05);
+}
+
+.devInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 75px;
+  gap: 5px;
+}
+
+.devName {
+  font-size: 1.3rem;
+  margin: 0;
+}
+
+.link {
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+  color: #0077b5;
+}
+
+.link:hover {
+  transform: scale(1.1);
+}
