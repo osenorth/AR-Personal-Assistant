@@ -17,9 +17,13 @@
     "@types/react-dom": "18.0.11",
     "@types/three": "^0.150.1",
     "next": "13.2.4",
+    "prop-types": "^15.8.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "three": "^0.150.1",
+    "react-hamburger-button": "0.0.1",
+    "react-icons": "^4.8.0",
+    "react-stars": "^2.2.5",
     "typescript": "5.0.3"
   }
 }
