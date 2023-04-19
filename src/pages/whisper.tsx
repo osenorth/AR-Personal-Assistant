@@ -1,7 +1,6 @@
 /* 
 This file is an example and reference for how you can 
-leverage the transcribeAudio endpoint to convert speech 
-to text.
+convert speech to text.
 
 In order to test the functionality just load this component 
 into the index.tsx file.
@@ -14,45 +13,15 @@ also now included into this demo file itself.
 It should hit /api/chat endpoint.
 */
 import { ChangeEvent, SetStateAction, useState } from "react";
+import React from "react";
+import SpeechRecognition, {
+  useSpeechRecognition,
+} from "react-speech-recognition";
 
 export default function () {
-  const [file, setFile] = useState<File | null>(null);
-  const [convertedText, setConvertedText] = useState<string>("");
+  // ChatGPT
   const [inputValue, setInputValue] = useState("");
   const [outputValue, setOutputValue] = useState("");
-
-  const handleFile = async (e: ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    if (e.target.files && e.target.files[0]) {
-      const file = e.target.files[0];
-      setFile(file);
-      // check if the size is less than 25MB
-      if (file.size > 25 * 1024 * 1024) {
-        alert("Please upload an audio file less than 25MB");
-        return;
-      }
-    }
-  };
-
-  const sendAudio = async () => {
-    console.log(file);
-    if (file == null) {
-      console.log("No audio file found");
-      return;
-    }
-    const formData = new FormData();
-    formData.append("file",file);
-    formData.append("model","whisper-1");
-    const response: any = await fetch("https://api.openai.com/v1/audio/transcriptions", {
-      headers: {
-        Authorization: `Bearer ${process.env.NEXT_PUBLIC_OPENAI_API_KEY ?? ""}`,
-      },
-      method: "POST",
-      body: formData,
-    });
-    const data = await response.json();
-    setConvertedText(data.text);
-  };
 
   const handleInputChange = (event: {
     target: { value: SetStateAction<string> };
@@ -74,18 +43,29 @@ export default function () {
     setOutputValue(data.text.content);
     setInputValue("");
   };
+
+  // Speech Recognition
+  const { transcript, listening, resetTranscript } = useSpeechRecognition();
+
   return (
     <div>
-      <h1>Whisper</h1>
-      <input type="file" accept="audio/*" onChange={handleFile} />
-      <button onClick={sendAudio}>Convert</button>
-      <div>{convertedText}</div>
-      <br />
-      <h1>ChatGPT</h1>
-      <label>Enter text:</label>
-      <input type="text" value={inputValue} onChange={handleInputChange} />
-      <button onClick={handleGPT}>Submit</button>
-      <div>{outputValue}</div>
+      <div>
+        <h1>ChatGPT</h1>
+        <label>Enter text:</label>
+        <input type="text" value={inputValue} onChange={handleInputChange} />
+        <button onClick={handleGPT}>Submit</button>
+        <div>{outputValue}</div>
+      </div>
+      <div>
+        <h1>Speech to Text</h1>
+        <p>Microphone: {listening ? "on" : "off"}</p>
+        <button onClick={() => SpeechRecognition.startListening()}>
+          Start
+        </button>
+        <button onClick={() => SpeechRecognition.stopListening()}>Stop</button>
+        <button onClick={() => resetTranscript()}>Reset</button>
+        <p>{transcript}</p>
+      </div>
     </div>
   );
 }
