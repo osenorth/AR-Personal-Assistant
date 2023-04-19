@@ -1,0 +1,120 @@
+.navContainer {
+  padding: 1.5rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.logoLinks {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+  gap: 10px;
+}
+.logoImg {
+  width: 200px;
+  height: auto;
+}
+.navAuth {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-grow: 1;
+}
+.navLinks,
+.authLinks {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  list-style: none;
+}
+
+.authLinks {
+  gap: 20px;
+}
+
+.navLink {
+  width: 100px;
+  font-size: 1.1rem;
+  text-decoration: none;
+  color: var(--primary);
+  transition: all 0.1s ease-in-out;
+  text-align: center;
+  cursor: pointer;
+}
+.navLink:hover {
+  font-weight: 500;
+  padding: 0;
+}
+.activeNavLink,
+.activeNavLink:hover {
+  font-weight: 900;
+}
+.navLink a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.navMenuButton {
+  display: none;
+}
+.insideContainer {
+  display: none;
+}
+@media only screen and (max-width: 1024px) {
+  .navMenuButton {
+    display: inline-block;
+    cursor: pointer;
+  }
+  .navAuth {
+    z-index: 999;
+    position: absolute;
+    top: 90px;
+    left: 0;
+    color: var(--primary);
+    background-color: white;
+    min-height: 100vh;
+    max-height: 100vh;
+    width: 100%;
+    flex-direction: column;
+    justify-content: flex-start;
+    transition: all 0.5s ease-in-out;
+  }
+  .navLinks,
+  .authLinks {
+    flex-direction: column;
+    justify-content: center;
+  }
+  .hide {
+    transform: translateX(-100%);
+  }
+  .show {
+    transform: translateX(0);
+  }
+  .navLink,
+  .navLink:hover,
+  .navLink:active {
+    margin: 0;
+    width: 100vw;
+    padding: 1.8rem 0;
+    border-bottom: 1px solid;
+    border-color: var(--primary);
+    align-self: stretch;
+    text-align: center;
+  }
+  .navLink a {
+    color: var(--primary);
+  }
+  .authLinks {
+    gap: 0px;
+  }
+  .authButton {
+    margin-top: 1.8rem;
+  }
+  .insideContainer {
+    position: absolute;
+    right: 10%;
+    top: 5%;
+    display: block;
+  }
+}

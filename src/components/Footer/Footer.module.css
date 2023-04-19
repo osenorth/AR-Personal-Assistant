@@ -1,0 +1,6 @@
+.footerContainer {
+  background: var(--secondary);
+  margin-top: 5rem;
+  padding: 3% 5%;
+  color: var(--heading);
+}

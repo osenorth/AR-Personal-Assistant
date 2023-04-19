@@ -1,0 +1,44 @@
+.statsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3% 5%;
+  gap: 30px;
+  margin-top: 50px;
+}
+
+.statsLabel {
+  font-size: 1.5rem;
+}
+
+.statsList {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+}
+
+.statsCard {
+  border-radius: 24px;
+  padding: 25px;
+  background: #fff;
+  width: 300px;
+  height: 150px;
+  box-shadow: 0px 2px 16px 2px rgba(0, 0, 0, 0.15);
+}
+
+.number {
+  font-size: 3rem;
+  margin-bottom: 5px;
+}
+
+@media screen and (max-width: 768px) {
+  .statsContainer {
+    padding: 8% 5%;
+  }
+  .statsList {
+    gap: 2rem;
+  }
+}
