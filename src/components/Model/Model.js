@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
+// import testModel from "../../assets/models/test_model.glb";
 
 export default function Model(props) {
   const { nodes, materials } = useGLTF("/test_model.glb");
