@@ -48,8 +48,9 @@ body {
 button {
   border: none;
   outline: none;
-  width: 120px;
-  padding: 12px;
+  width: fit-content;
+  min-width: 120px;
+  padding: 12px 20px;
   border-radius: 50px;
   font-size: 1rem;
   cursor: pointer;

@@ -1,8 +1,9 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import * as styles from "./ServiceCard.module.css";
 
-const ServiceCard = ({ title, desc, poster }) => {
+const ServiceCard = ({ title, desc, poster, route, exploreText }) => {
   return (
     <div className={`${styles.cardContainer} secondary-background`}>
       <div className={styles.imageContainer}>
@@ -11,7 +12,9 @@ const ServiceCard = ({ title, desc, poster }) => {
       <h4 className={`${styles.serviceTitle} text-subHeading`}>{title}</h4>
       <p>{desc}</p>
       <div className={styles.serviceButtons}>
-        <button className="primary-btn">Explore</button>
+        <Link href={route} className={styles.serviceLink}>
+          <button className="primary-btn">{exploreText}</button>
+        </Link>
       </div>
     </div>
   );

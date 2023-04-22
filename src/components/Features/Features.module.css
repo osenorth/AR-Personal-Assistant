@@ -2,7 +2,22 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 2% 5%;
+  padding: 3% 5%;
+}
+.featureHeading {
+  font-size: 2rem;
+  text-align: center;
+}
+.featureSubheading {
+  font-size: 1.5rem;
+  margin: 0.25rem 0;
+  text-align: center;
+}
+.featureDes {
+  font-size: 1.1rem;
+  font-weight: 300;
+  padding: 3%;
+  padding-top: 0;
 }
 .featuresImageContainer {
   width: 45%;
@@ -43,6 +58,12 @@
 @media only screen and (max-width: 768px) {
   .featuresContainer {
     flex-direction: column;
+  }
+  .featureHeading {
+    font-size: 2rem;
+  }
+  .featureSubheading {
+    font-size: 1.3rem;
   }
   .featuresImageContainer,
   .featuresInfo,

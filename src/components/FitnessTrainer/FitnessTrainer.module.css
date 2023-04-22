@@ -1,0 +1,118 @@
+.workoutContainer {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  align-items: center;
+  justify-content: space-around;
+  margin: auto;
+  height: 100vh;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.cameraContainer {
+  display: flex;
+  position: relative;
+  border-radius: 2rem;
+  width: 100%;
+}
+
+.webcamContainer {
+  width: 100%;
+}
+
+.canvasContainer {
+  position: absolute;
+  width: 100%;
+}
+
+.resultsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  width: 40%;
+  gap: 1rem;
+}
+
+.workoutTitle {
+  font-size: 1.5rem;
+  margin: 0.25rem 0;
+  text-align: center;
+}
+
+.demoContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.demoImage {
+  width: 100%;
+  height: auto;
+}
+
+.modelContrainer {
+  height: 45vh;
+  width: 100%;
+  border: 0px;
+}
+
+.countSettings {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  padding: 1rem;
+}
+
+.countDisplay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.countInput {
+  border: none;
+  outline: none;
+  width: 150px;
+  padding: 12px;
+  font-size: 1rem;
+  border-radius: 6px;
+  box-shadow: 0px 2px 16px 2px rgba(0, 0, 0, 0.15);
+}
+
+.countControls {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  border-radius: 2rem;
+}
+
+.link {
+  text-decoration: none;
+}
+
+@media screen and (max-width: 768px) {
+  .workoutContainer {
+    flex-direction: column;
+    height: fit-content;
+  }
+  .resultsContainer {
+    width: 100%;
+  }
+  .workoutTitle {
+    font-size: 1.3rem;
+  }
+  .modelContrainer {
+    height: 33vh;
+  }
+}
