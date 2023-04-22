@@ -50,10 +50,10 @@ const Navbar = () => {
                 setNavOpen((current) => !current);
               }}
             >
-              <button className={`primary-btn ${styles.authButton}`}>
+              <button className={`primary-btn ${styles.authButton} landing-button`}>
                 Login
               </button>
-              <button className={`secondary-btn ${styles.authButton}`}>
+              <button className={`secondary-btn ${styles.authButton} landing-button`}>
                 Register
               </button>
             </div>

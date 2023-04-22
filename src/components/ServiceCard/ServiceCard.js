@@ -11,7 +11,7 @@ const ServiceCard = ({ title, desc, poster }) => {
       <h4 className={`${styles.serviceTitle} text-subHeading`}>{title}</h4>
       <p>{desc}</p>
       <div className={styles.serviceButtons}>
-        <button className="primary-btn">Explore</button>
+        <button className="primary-btn landing-button">Explore</button>
       </div>
     </div>
   );
