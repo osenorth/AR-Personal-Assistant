@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Pose } from "@mediapipe/pose";
 import * as cam from "@mediapipe/camera_utils";
 import Webcam from "react-webcam";
-import angleBetweenThreePoints from "../../helpers/Utils";
+import { angleBetweenThreePoints } from "../../helpers/Utils";
 import * as styles from "./FitnessTrainer.module.css";
 
 const PushUps = () => {
