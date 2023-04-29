@@ -1,0 +1,93 @@
+.instructionsContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 1rem 2rem;
+  gap: 1rem;
+}
+
+.diffContainer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
+  width: 100%;
+}
+
+.easy {
+  color: #00af9b;
+  border-color: #00af9b;
+  text-transform: capitalize;
+  cursor: auto;
+}
+
+.medium {
+  color: #ffb800;
+  border-color: #ffb800;
+  text-transform: capitalize;
+  cursor: auto;
+}
+
+.hard {
+  color: #ef4733;
+  border-color: #ef4733;
+  text-transform: capitalize;
+  cursor: auto;
+}
+
+.stepsText {
+  width: 100%;
+  text-align: left;
+}
+
+.instructionsList {
+  width: 100%;
+  margin-top: 10px;
+  max-height: 60vh;
+  overflow: auto;
+}
+
+.instruction {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin: 10px 0;
+  gap: 1rem;
+}
+
+.actionButtons {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  gap: 1rem;
+}
+
+.noButton {
+  min-width: fit-content;
+  width: 30px;
+  height: 40px;
+  border-radius: 50%;
+  padding: 8px 16px;
+  cursor: auto;
+}
+
+@media screen and (max-width: 1024px) {
+  .instructionsContainer {
+    gap: 0.75rem;
+    padding: 1.5rem;
+  }
+  .instructionsList {
+    max-height: 25vh;
+  }
+  .diffContainer {
+    justify-content: center;
+  }
+  .stepsText {
+    text-align: center;
+  }
+  .actionButtons {
+    justify-content: center;
+  }
+}
