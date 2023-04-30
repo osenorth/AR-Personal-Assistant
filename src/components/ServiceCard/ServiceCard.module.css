@@ -18,16 +18,17 @@
 
 .imageContainer {
   width: 290px;
-  height: 175px;
+  height: 200px;
   overflow: hidden;
   border-radius: 12px;
 }
 
 .serviceImg {
-  width: 100%;
-  height: auto;
+  height: 100%;
+  width: auto;
   transition: all 0.3s ease-in-out;
   overflow: hidden;
+  border-radius: 12px;
 }
 
 .cardContainer:hover .serviceImg {
@@ -40,4 +41,8 @@
   justify-content: flex-end;
   align-items: center;
   width: 100%;
+}
+
+.serviceLink {
+  text-decoration: none;
 }
