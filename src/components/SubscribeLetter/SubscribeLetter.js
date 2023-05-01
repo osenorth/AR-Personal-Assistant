@@ -15,7 +15,7 @@ const SubscribeLetter = () => {
     <section className={styles.subscribeContainer}>
       <Image src={logo} className={styles.logoImg} alt="ossistant-logo" />
       <div className={styles.subscribeInfo}>
-        <p className="text-subheading">Subscribe to our News Letter</p>
+        <p className="text-subheading landing-button">Subscribe to our News Letter</p>
         <form className={styles.subscribeForm} onSubmit={submitToSubscribe}>
           <HiOutlineMail
             size={20}
@@ -28,7 +28,7 @@ const SubscribeLetter = () => {
             className={`text-subheading ${styles.emailInput}`}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <button className="primary-btn">Subscribe</button>
+          <button className="primary-btn landing-button">Subscribe</button>
         </form>
       </div>
     </section>

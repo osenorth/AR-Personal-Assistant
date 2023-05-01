@@ -23,8 +23,8 @@ const Hero = () => {
         </p>
 
         <div className={styles.heroButtons}>
-          <button className="primary-btn">Explore</button>
-          <button className="secondary-btn">Know More</button>
+          <button className="primary-btn landing-button">Explore</button>
+          <button className="secondary-btn landing-button">Know More</button>
         </div>
         <div className={`${styles.trustedOrgs} ${styles.deskOrgs}`}>
           <p className="text-subheading">Trusted By :</p>

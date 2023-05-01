@@ -116,7 +116,7 @@ const Contact = () => {
           />
         </div>
         <div className={styles.submitContainer}>
-          <button type="submit" className="primary-btn">
+          <button type="submit" className="primary-btn landing-button">
             Submit
           </button>
         </div>
