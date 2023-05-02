@@ -1,17 +1,9 @@
-import type { NextApiRequest, NextApiResponse } from "next";
 import NextCors from "nextjs-cors";
 const { Configuration, OpenAIApi } = require("openai");
 
-type Data = {
-  text: String;
-};
-
 // GET base-url/api/chat
 // POST base-url/api/chat | body { text: inputValue }
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<Data>
-) {
+export default async function handler(req, res) {
   await NextCors(req, res, {
     // Options
     methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
@@ -25,7 +17,7 @@ export default async function handler(
       .status(200)
       .json({ text: "This endpoint is for conversation with GPT-3.5 turbo\n" });
   } else if (method === "POST") {
-    const message: string = req.body.text;
+    const message = req.body.text;
 
     const configuration = new Configuration({
       apiKey: process.env.OPENAI_API_KEY,

@@ -8,20 +8,16 @@ import { TbRobot } from "react-icons/tb";
 import Link from "next/link";
 
 export default function () {
-  const [messages, setMessages] = useState<
-    Array<{ sender: string; content: string }>
-  >([]);
+  const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const [showPalette, setShowPalette] = useState(false);
 
-  const handleInputChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+  const handleInputChange = (event) => {
     console.log("handled");
     setInputValue(event.target.value);
   };
 
-  const handleGPT = async (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
+  const handleGPT = async (event) => {
     event.preventDefault();
     const content = showPalette ? transcript : inputValue;
     const response = await fetch("/api/chat", {
