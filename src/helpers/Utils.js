@@ -1,34 +1,36 @@
-function angleBetweenThreePoints(pos) {
-  //console.log("Reached angle")
-  //vertexed around p1
+const angleBetweenThreePoints = (point1, point2, point3) => {
+  // angle in radian
+  let angle =
+    Math.atan2(point3.y - point2.y, point3.x - point2.x) -
+    Math.atan2(point1.y - point2.y, point1.x - point2.x);
 
-  var a = Math.pow(pos[1].x - pos[0].x, 2) + Math.pow(pos[1].y - pos[0].y, 2);
-  var b = Math.pow(pos[1].x - pos[2].x, 2) + Math.pow(pos[1].y - pos[2].y, 2);
-  var c = Math.pow(pos[2].x - pos[0].x, 2) + Math.pow(pos[2].y - pos[0].y, 2);
+  // converting to degrees
+  angle = (angle * 180) / Math.PI;
+  if (angle < 0) {
+    angle += 360;
+    if (angle > 180) {
+      angle = 360 - angle;
+    }
+  } else if (angle > 180) {
+    angle = 360 - angle;
+  }
+  return angle;
+};
 
-  //angle in radians
-  //var resultRadian = Math.acos(((Math.pow(p12, 2)) + (Math.pow(p13, 2)) - (Math.pow(p23, 2))) / (2 * p12 * p13));
-
-  //angle in degrees
-  var resultDegree =
-    (Math.acos((a + b - c) / Math.sqrt(4 * a * b)) * 180) / Math.PI;
-  return resultDegree;
-}
-
-function drawSegment(ctx, [mx, my], [tx, ty], color) {
+const drawSegment = (ctx, [mx, my], [tx, ty], color) => {
   ctx.beginPath();
   ctx.moveTo(mx, my);
   ctx.lineTo(tx, ty);
   ctx.lineWidth = 5;
   ctx.strokeStyle = color;
   ctx.stroke();
-}
+};
 
-function drawPoint(ctx, x, y, r, color) {
+const drawPoint = (ctx, x, y, r, color) => {
   ctx.beginPath();
   ctx.arc(x, y, r, 0, 2 * Math.PI);
   ctx.fillStyle = color;
   ctx.fill();
-}
+};
 
 export { angleBetweenThreePoints, drawSegment, drawPoint };

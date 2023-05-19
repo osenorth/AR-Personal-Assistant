@@ -18,25 +18,27 @@
   width: 100%;
 }
 
-.webcamContainer {
-  width: 100%;
-  transform: rotateY(180deg);
-}
-
-.canvasContainer {
-  position: absolute;
-  width: 100%;
-  transform: rotateY(180deg);
-}
-
-.yogaDetectContainer {
+.detectContainer {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 60%;
+  width: 70%;
   height: 100vh;
   overflow: hidden;
+}
+
+.workoutWebcam {
+  position: absolute;
+  transform: rotateY(180deg);
+  width: 100%;
+}
+
+.workoutCanvas {
+  position: absolute;
+  z-index: 1;
+  transform: rotateY(180deg);
+  width: 100%;
 }
 
 .yogaWebcam {
@@ -139,13 +141,16 @@
     flex-direction: column;
     height: fit-content;
   }
-  .yogaDetectContainer {
+  .detectContainer {
     width: 100%;
     height: 51vh;
   }
-  .yogaInfoContainer {
+  .infoContainer {
     flex-direction: row-reverse;
     height: 56vh;
+  }
+  .workoutWebcam, .workoutCanvas {
+    width: auto;
   }
   .resultsContainer {
     width: 100%;

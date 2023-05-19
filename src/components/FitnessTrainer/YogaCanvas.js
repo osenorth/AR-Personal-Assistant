@@ -5,7 +5,7 @@ import yogaData from "../../data/YogaData";
 import * as poseDetection from "@tensorflow-models/pose-detection";
 import * as tf from "@tensorflow/tfjs";
 import "@tensorflow/tfjs-backend-webgpu";
-import POINTS from "../../data/points";
+import { POINTS } from "../../data/points";
 import keypointConnections from "../../data/keypointConnections";
 import { drawPoint, drawSegment } from "../../helpers/Utils";
 import Webcam from "react-webcam";
@@ -77,12 +77,17 @@ const YogaCanvas = () => {
     [currentTime]
   );
 
+  const initTF = async () => {
+    await tf.ready();
+  };
+
   useEffect(
     () => {
       setCurrentTime(0);
       setPoseTime(0);
       setBestPerform(0);
       setSpeech(window.speechSynthesis);
+      initTF();
     },
     // eslint-disable-next-line
     [currentPose]
@@ -266,8 +271,8 @@ const YogaCanvas = () => {
     <div className={styles.workoutContainer}>
       <title>Ossistant</title>
       <div
-        className={`${styles.yogaDetectContainer} ${
-          isStartPose && styles.yogaInfoContainer
+        className={`${styles.detectContainer} ${
+          isStartPose && styles.infoContainer
         }`}
       >
         {isStartPose ? (
@@ -287,10 +292,7 @@ const YogaCanvas = () => {
           </>
         ) : (
           currentPoseData && (
-            <Instructions
-              currentPoseData={currentPoseData}
-              startYoga={startYoga}
-            />
+            <Instructions data={currentPoseData} startSession={startYoga} />
           )
         )}
       </div>
