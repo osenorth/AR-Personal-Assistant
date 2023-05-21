@@ -1,15 +1,7 @@
-import NextCors from 'nextjs-cors';
-import type { NextApiRequest, NextApiResponse } from "next";
-
-type Data = {
-  project: string;
-};
+import NextCors from "nextjs-cors";
 
 // GET base-url/api/project
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<Data>
-) {
+export default async function handler(req, res) {
   await NextCors(req, res, {
     // Options
     methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
