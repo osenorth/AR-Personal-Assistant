@@ -9,7 +9,7 @@ import {
   drawSegment,
   angleBetweenThreePoints,
 } from "../../helpers/Utils";
-import { POINTS, LINES } from "../../data/points";
+import { POINTS, LINES } from "../../data/WorkoutPoints";
 import workoutData from "../../data/WorkoutData";
 import Instructions from "../Instructions/Instructions";
 import * as styles from "./FitnessTrainer.module.css";
@@ -98,7 +98,6 @@ const WorkoutCanvas = () => {
     } else {
       leftUp = false;
       clearInterval(interval);
-      speak("Fix your Posture");
       if (reps > 0) {
         speak("You holded Plank for" + reps + "seconds last time!");
       }
@@ -684,7 +683,6 @@ const WorkoutCanvas = () => {
       });
 
       if (isStartSession) camera.start();
-      else if (camera) camera.stop();
     }
   }, [isStartSession]);
 
@@ -701,6 +699,7 @@ const WorkoutCanvas = () => {
 
   const startSession = () => {
     setisStartSession(true);
+    speak("Lets start a workout session");
   };
 
   const stopSession = () => {
