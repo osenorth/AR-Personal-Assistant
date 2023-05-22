@@ -1,3 +1,3 @@
 export default function () {
-  return <h1>Directions Page</h1>;
+  return <h1>Netlify Test</h1>;
 }
