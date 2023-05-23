@@ -1,3 +1,3 @@
 export default function () {
-  return <h1>Exercise Training Page</h1>;
+  return <h1>Exercise Page</h1>;
 }
