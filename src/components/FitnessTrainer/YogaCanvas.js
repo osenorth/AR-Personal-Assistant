@@ -4,9 +4,7 @@ import { useRouter } from "next/router";
 import yogaData from "../../data/YogaData";
 import * as poseDetection from "@tensorflow-models/pose-detection";
 import * as tf from "@tensorflow/tfjs";
-import "@tensorflow/tfjs-backend-webgpu";
-import POINTS from "../../data/points";
-import keypointConnections from "../../data/keypointConnections";
+import { POINTS, keypointConnections } from "../../data/YogaPoints";
 import { drawPoint, drawSegment } from "../../helpers/Utils";
 import Webcam from "react-webcam";
 import Instructions from "../Instructions/Instructions";
@@ -266,8 +264,8 @@ const YogaCanvas = () => {
     <div className={styles.workoutContainer}>
       <title>Ossistant</title>
       <div
-        className={`${styles.yogaDetectContainer} ${
-          isStartPose && styles.yogaInfoContainer
+        className={`${styles.detectContainer} ${
+          isStartPose && styles.infoContainer
         }`}
       >
         {isStartPose ? (
@@ -287,10 +285,7 @@ const YogaCanvas = () => {
           </>
         ) : (
           currentPoseData && (
-            <Instructions
-              currentPoseData={currentPoseData}
-              startYoga={startYoga}
-            />
+            <Instructions data={currentPoseData} startSession={startYoga} />
           )
         )}
       </div>

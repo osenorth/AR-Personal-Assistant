@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Tourney:ital,wght@1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Tourney:ital,wght@1,900&display=swap");
 :root {
   --primary: #458ff6;
   --secondary: #c3e2ff;
@@ -46,7 +46,8 @@ body {
 .secondary-background {
   background-color: var(--secondary);
 }
-.landing-button {
+.primary-btn,
+.secondary-btn {
   border: none;
   outline: none;
   width: fit-content;
@@ -57,7 +58,8 @@ body {
   cursor: pointer;
   transition: all 0.1s ease-in-out;
 }
-.landing-button:hover {
+.primary-btn:hover,
+.secondary-btn:hover {
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
 }
 .primary-btn {
@@ -146,7 +148,7 @@ body {
 }
 
 .chat-heading {
-  font-family: 'Tourney', cursive;
+  font-family: "Tourney", cursive;
 }
 /* Responsive styles */
 @media (max-width: 767px) {
@@ -172,8 +174,8 @@ body {
   }
 
   .rounded-popup {
-   bottom: 1rem;
-   right: 1rem;
+    bottom: 1rem;
+    right: 1rem;
   }
 }
 
