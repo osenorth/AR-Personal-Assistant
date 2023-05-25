@@ -4,7 +4,7 @@ import useDeviceOrientation from "../../components/Directions/useDeviceOrientati
 import CameraScreen from "../../components/Directions/CameraScreen";
 
 export default function () {
-  const { alpha, beta, gamma } = useDeviceOrientation();
+  const {  beta } = useDeviceOrientation();
   const isGround = () => {
     if (beta > -90 && beta < 60) {
       return true;
