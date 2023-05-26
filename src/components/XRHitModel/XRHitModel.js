@@ -38,7 +38,7 @@ const XrHitModel = ({ modelName }) => {
       <ambientLight />
       {isPresenting &&
         models.map(({ position, id }) => {
-          return <Model key={id} position={position} />;
+          return <Model key={id} position={position} modelName={modelName} />;
         })}
       {isPresenting && (
         <Interactive onSelect={placeModel}>
