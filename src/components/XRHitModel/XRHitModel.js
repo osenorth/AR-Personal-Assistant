@@ -4,7 +4,7 @@ import { Interactive, useHitTest, useXR } from "@react-three/xr";
 import { useRef, useState } from "react";
 import Model from "../Model/Model";
 
-const XrHitModel = () => {
+const XrHitModel = ({ modelName }) => {
   const reticleRef = useRef();
   const [models, setModels] = useState([]);
 
@@ -49,7 +49,7 @@ const XrHitModel = () => {
         </Interactive>
       )}
 
-      {!isPresenting && <Model />}
+      {!isPresenting && <Model modelName={modelName} />}
     </>
   );
 };

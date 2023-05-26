@@ -3,7 +3,7 @@ import { ARButton, XR } from "@react-three/xr";
 import XrHitModel from "../../components/XRHitModel/XRHitModel";
 import "./XRHitModelContainer.module.css";
 
-const XrHitModelContainer = () => {
+const XrHitModelContainer = ({ modelName }) => {
   return (
     <>
       <ARButton
@@ -11,9 +11,9 @@ const XrHitModelContainer = () => {
           requiredFeatures: ["hit-test"],
         }}
       />
-      <Canvas>
+      <Canvas style={{ width: "100vw", height: "100vh" }}>
         <XR>
-          <XrHitModel />
+          <XrHitModel modelName={modelName} />
         </XR>
       </Canvas>
     </>
