@@ -21,7 +21,8 @@ export default function Model(props) {
         <group
           name="Armature"
           rotation={[Math.PI / 2, 0, 0]}
-          scale={[0.15, 0.15, 0.15]}
+          scale={[0.3, 0.3, 0.3]}
+          position={[0, -1.5, 0]}
         >
           <primitive object={nodes.mixamorigHips} />
           <skinnedMesh
@@ -119,10 +120,8 @@ export default function Model(props) {
 // For test_model.glb
 
 // export default function Model(props) {
-//   const { modelName } = props;
-
-// useGLTF.preload("/test_model.glb");
-//   const { nodes, materials } = useGLTF(`/test_model.glb`);
+//   useGLTF.preload("/models/test_model.glb");
+//   const { nodes, materials } = useGLTF(`/models/test_model.glb`);
 
 //   return (
 //     <group {...props} dispose={null}>
@@ -136,5 +135,3 @@ export default function Model(props) {
 //     </group>
 //   );
 // }
-
-// export default Model;

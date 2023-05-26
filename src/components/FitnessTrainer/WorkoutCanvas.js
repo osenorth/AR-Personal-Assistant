@@ -12,6 +12,7 @@ import {
 import { POINTS, LINES } from "../../data/WorkoutPoints";
 import workoutData from "../../data/WorkoutData";
 import Instructions from "../Instructions/Instructions";
+import XrHitModelContainer from "../../containers/XRHitModelContainer/XRHitModelContainer";
 import * as styles from "./FitnessTrainer.module.css";
 
 const WorkoutCanvas = () => {
@@ -739,21 +740,24 @@ const WorkoutCanvas = () => {
             {isStartSession ? currentWorkoutData.name : "View in 3D"}
           </h4>
         </div>
-        {currentWorkoutData && (
-          <iframe
-            title={currentWorkoutData.name}
-            allowFullScreen
-            mozallowfullscreen="true"
-            webkitallowfullscreen="true"
-            allow="autoplay; fullscreen; xr-spatial-tracking"
-            xr-spatial-tracking="true"
-            execution-while-out-of-viewport="true"
-            execution-while-not-rendered="true"
-            web-share="true"
-            src={currentWorkoutData.modelLink}
-            className={styles.modelContrainer}
-          ></iframe>
-        )}
+        {currentWorkoutData &&
+          (currentWorkoutData.modelAvailable ? (
+            <XrHitModelContainer modelName={currentWorkout} />
+          ) : (
+            <iframe
+              title={currentWorkoutData.name}
+              allowFullScreen
+              mozallowfullscreen="true"
+              webkitallowfullscreen="true"
+              allow="autoplay; fullscreen; xr-spatial-tracking"
+              xr-spatial-tracking="true"
+              execution-while-out-of-viewport="true"
+              execution-while-not-rendered="true"
+              web-share="true"
+              src={currentWorkoutData.modelLink}
+              className={styles.modelContrainer}
+            ></iframe>
+          ))}
         {isStartSession && (
           <div className={styles.countDisplay}>
             <p className="text-subheading">Count</p>

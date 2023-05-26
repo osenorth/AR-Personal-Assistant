@@ -72,6 +72,7 @@ const workoutData = {
   exerciseData: {
     bicepcurls: {
       name: "Bicep Curls",
+      modelAvailable: false,
       modelLink:
         "https://sketchfab.com/models/4e958ee159fe46128b044b6e63d0ec69/embed?autostart=1&dnt=1",
       difficulty: "easy",
@@ -84,6 +85,7 @@ const workoutData = {
     },
     jumpingjacks: {
       name: "Jumping Jacks",
+      modelAvailable: true,
       modelLink:
         "https://sketchfab.com/models/4fcbfb3ef1124df8afd57204f9a516ac/embed?autostart=1&dnt=1",
       difficulty: "easy",
@@ -99,6 +101,7 @@ const workoutData = {
     },
     pullups: {
       name: "Pull Ups",
+      modelAvailable: false,
       modelLink:
         "https://sketchfab.com/models/feffc536b46442bfbe0fd3dfb99861c0/embed?autostart=1&dnt=1",
       difficulty: "hard",
@@ -114,6 +117,7 @@ const workoutData = {
     },
     squats: {
       name: "Squats",
+      modelAvailable: true,
       modelLink:
         "https://sketchfab.com/models/a3eebd6b06fb4ad5b6462dd28ee8dde6/embed?autostart=1&dnt=1",
       difficulty: "easy",
@@ -126,6 +130,7 @@ const workoutData = {
     },
     lungs: {
       name: "Lungs",
+      modelAvailable: false,
       modelLink:
         "https://sketchfab.com/models/93b25198122b4417a5da3d8428fae423/embed?autostart=1&dnt=1",
       difficulty: "medium",
@@ -138,6 +143,7 @@ const workoutData = {
     },
     plank: {
       name: "Plank",
+      modelAvailable: true,
       modelLink:
         "https://sketchfab.com/models/1643f24070c34e6ca82b59a5145b949a/embed?autostart=1&dnt=1",
       difficulty: "medium",
@@ -150,6 +156,7 @@ const workoutData = {
     },
     pushups: {
       name: "Push Ups",
+      modelAvailable: true,
       modelLink:
         "https://sketchfab.com/models/6c7bc2c57c8648f3a70488155b326a16/embed?autostart=1&dnt=1",
       difficulty: "hard",
