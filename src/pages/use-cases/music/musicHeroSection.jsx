@@ -1,0 +1,71 @@
+import * as THREE from 'three'
+import React, { Suspense, useRef } from 'react'
+import { Canvas, useThree, useFrame } from '@react-three/fiber'
+import { ContactShadows } from '@react-three/drei'
+import Model from './Model'
+import { Text } from '@react-three/drei'
+import stylesHero from '../../../styles/musicHeroSection.module.css'
+
+function Rig({ children }) {
+  const ref = useRef()
+  useFrame((state) => {
+    ref.current.rotation.y = THREE.MathUtils.lerp(ref.current.rotation.y, (state.mouse.x * Math.PI) / 20, 0.05)
+    ref.current.rotation.x = THREE.MathUtils.lerp(ref.current.rotation.x, (state.mouse.y * Math.PI) / 20, 0.05)
+  })
+  return <group ref={ref}>{children}</group>
+}
+
+function Caption({ children }) {
+  const { width } = useThree((state) => state.viewport)
+  return (
+    <Text
+      position={[0, -8, -5]}
+      lineHeight={0.9}
+      fontSize={width / 10}
+      color="#282828"
+      material-toneMapped={false}
+      anchorX="center"
+      anchorY="middle">
+      {children}
+    </Text>
+  )
+}
+
+export default function MusicHeroSection() {
+  return (
+    <>
+      <Canvas camera={{ position: [0, -10, 65], fov: 50 }} dpr={[1, 2]}>
+        <pointLight position={[100, 100, 100]} intensity={0.8} />
+        <hemisphereLight color="#ffffff" groundColor="#b9b9b9" position={[-7, 25, 13]} intensity={0.85} />
+        <Suspense fallback={null}>
+          <group position={[0, 10, 0]}>
+            <Rig>
+              <Model url="/compressed.glb" />
+              <Caption>{`VISUALISE\nMUSIC\nIN\nA WHOLE NEW\nDIMENSION.`}</Caption>
+            </Rig>
+            <ContactShadows
+              rotation-x={Math.PI / 2}
+              position={[0, -35, 0]}
+              opacity={0.25}
+              width={100}
+              height={100}
+              blur={2}
+              far={50}
+            />
+          </group>
+        </Suspense>
+      </Canvas>
+      {/* <div className={stylesHero.overlay}>
+
+
+        <h2 className={stylesHero.headerSub}>
+          There's not the smallest orb
+          <br />
+          which thou behold'st but in his motion
+          <br />
+          like an angel sings —
+        </h2>
+      </div> */}
+    </>
+  )
+}

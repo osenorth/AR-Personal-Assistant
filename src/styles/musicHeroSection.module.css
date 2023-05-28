@@ -1,0 +1,69 @@
+#root {
+  margin: 0;
+  padding: 0;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+  box-sizing: border-box;
+  font-family: 'Inter var', sans-serif;
+  background: linear-gradient(155deg, #ffffff 20%, #a5a3a3);
+  color: #101015;
+}
+
+.overlay {
+  padding: 40px;
+  height: 100%;
+  width: 100%;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: center;
+}
+
+.headerSub {
+  margin-top: 1em;
+  text-align: center;
+  font-weight: 400;
+  font-size: 0.9em;
+  line-height: 1.4em;
+  letter-spacing: 2px;
+}
+
+
+.button {
+    all: unset;
+    outline: revert;
+    cursor: pointer;
+    color: white;
+    position: absolute;
+    background-color: var(--accent-color, black);
+    border-radius: 9999px;
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    padding: 1rem 2rem;
+    font-size: 1.25rem;
+    transition: all ease 75ms;
+    pointer-events: none;
+    position: absolute;
+    bottom: 100px;
+    right: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: center;
+    z-index: 10;
+  }
+  
+  .button:is(:hover, :focus):not(:disabled, :active) {
+    transform: scale(1.05);
+  }
+  
+  .button:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
