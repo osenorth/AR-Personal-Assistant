@@ -13,7 +13,7 @@ const ServiceCard = ({ title, desc, poster, route, exploreText }) => {
       <p>{desc}</p>
       <div className={styles.serviceButtons}>
         <Link href={route} className={styles.serviceLink}>
-          <button className="primary-btn landing-button">{exploreText}</button>
+          <button className="primary-btn">{exploreText}</button>
         </Link>
       </div>
     </div>

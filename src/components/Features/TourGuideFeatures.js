@@ -4,50 +4,51 @@ import { MdPerson4 } from "react-icons/md";
 import { TbAugmentedReality } from "react-icons/tb";
 import { BiAnalyse } from "react-icons/bi";
 import { MdKeyboardVoice } from "react-icons/md";
-import fitnessHero from "../../assets/fitness-hero.svg";
+import tourEarth from "../../assets/tour-earth.svg";
 import * as styles from "./Features.module.css";
 
 const TourGuideFeatures = () => {
   return (
     <section className={styles.featuresContainer}>
       <div className={styles.featuresImageContainer}>
-        <h1 className={styles.featureHeading}>Empower your Fitness</h1>
+        <h1 className={styles.featureHeading}>Immersive Tour Experience</h1>
         <h4 className={`text-primary ${styles.featureSubheading}`}>
-          Fit smarter, not harder
+          Explore travelling
         </h4>
         <Image
-          src={fitnessHero}
+          src={tourEarth}
           alt="Here are the features of Virtual Fitness Trainer"
           className={styles.featuresAvatar}
         />
       </div>
       <div className={styles.featuresInfo}>
         <p className={styles.featureDes}>
-          Elevate your fitness game with our Virtual Fitness Trainer! Get
-          personalized workout plans and real-time feedback to stay motivated
-          and engaged. Our cutting-edge AR and AI technology keeps you on track
-          to achieve your goals. Join us now and transform your fitness journey
-          today!
+          Embark on extraordinary adventures with our Immersive AR/VR Tour
+          Guide! Experience destinations like never before as our
+          state-of-the-art technology transports you to captivating worlds. With
+          interactive storytelling, virtual exploration, and expert guidance,
+          discover the wonders of the world from the comfort of your own home.
+          Join us now and redefine the way you travel
         </p>
         <div className={styles.featuresRow}>
           <div className={styles.featuresCol}>
             <TbAugmentedReality className={styles.featureIcon} size={50} />
             <h4 className={`${styles.featureLabel} text-heading`}>
-              Augmented Reality Visualization
+              Navigating World
             </h4>
             <p className={styles.featureDesc}>
-              Experience digital information projected onto the real world,
-              creating a unique and immersive experience.
+              Embark on extraordinary adventures and explore the world like
+              never before with our immersive AR/VR Tour Guide
             </p>
           </div>
           <div className={styles.featuresCol}>
             <MdPerson4 className={styles.featureIcon} size={50} />
             <h4 className={`${styles.featureLabel} text-heading`}>
-              Personalized Assistance
+              Immersive AR Bot helping
             </h4>
             <p className={styles.featureDesc}>
-              Customized assistance for every user, with personalized
-              recommendations and suggestions for daily activities.
+              Let our Immersive AR Bot be your guide as it helps you navigate
+              and discover captivating destinations in a whole new way.
             </p>
           </div>
         </div>
@@ -55,11 +56,12 @@ const TourGuideFeatures = () => {
           <div className={styles.featuresCol}>
             <BiAnalyse className={styles.featureIcon} size={50} />
             <h4 className={`${styles.featureLabel} text-heading`}>
-              Real-time Object Recognition
+              Get city overview
             </h4>
             <p className={styles.featureDesc}>
-              AR assistant can recognize objects in real-time, providing instant
-              information and making your tasks more efficient.
+              Experience cities like never before with our virtual exploration
+              and expert guidance, providing you with comprehensive city
+              overviews from the comfort of your own home.
             </p>
           </div>
           <div className={styles.featuresCol}>
@@ -68,8 +70,9 @@ const TourGuideFeatures = () => {
               Voice Recognition
             </h4>
             <p className={styles.featureDesc}>
-              Interact with your personal assistant using voice commands,
-              allowing for hands-free and convenient assistance.
+              Enjoy a seamless and interactive experience as our advanced voice
+              recognition technology ensures a personalized and effortless
+              journey through the wonders of the world.
             </p>
           </div>
         </div>

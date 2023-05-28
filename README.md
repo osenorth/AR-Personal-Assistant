@@ -5,7 +5,7 @@
 </p>
 
 
-## Welcome to the AR Personal Assistant
+## Welcome to the AR Personal Assistant.
 This project aims to make a personal assistant that utilizes Augmented Reality (AR) technology to help users answer their daily queries and perform tasks with a human touch. The AR feature allows users to interact with the assistant in a more immersive and interactive way, making the experience more engaging.
 
 Some of the use-cases for this assistant include:
