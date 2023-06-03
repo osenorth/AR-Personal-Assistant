@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
 
 export default function Model(props) {
-  const { modelName } = props;
+  const { modelName, zRotationMul, scaleMul } = props;
 
   const group = useRef();
 
@@ -20,9 +20,9 @@ export default function Model(props) {
       <group name="Scene">
         <group
           name="Armature"
-          rotation={[Math.PI / 2, 0, 0]}
-          scale={[0.3, 0.3, 0.3]}
-          position={[0, -1.5, 0]}
+          rotation={[Math.PI / 2, 0, -Math.PI * zRotationMul]}
+          scale={[scaleMul, scaleMul, scaleMul]}
+          position={[-0.25, -1.5, 0]}
         >
           <primitive object={nodes.mixamorigHips} />
           <skinnedMesh

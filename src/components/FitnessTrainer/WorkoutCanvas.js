@@ -126,7 +126,7 @@ const WorkoutCanvas = () => {
     // Check for full range of motion for the pushup
     if (status) {
       if (direction === 0) {
-        // Tracking going "Down";
+        // Tracking "Down" movement
         if (elbow <= 90 && hip > 140) {
           reps += 0.5;
           direction = 1;
@@ -137,8 +137,151 @@ const WorkoutCanvas = () => {
     }
 
     if (direction === 1) {
-      // Tracking going "Up";
+      // Tracking "Up" movement
       if (elbow > 160 && shoulder > 40 && hip > 140) {
+        reps += 0.5;
+        direction = 0;
+      } else {
+        setFeedback("Fix Your posture");
+      }
+    }
+
+    if (Number.isInteger(reps)) {
+      setCounter(reps);
+    }
+    return 0;
+  };
+
+  const pikeWalk = (landmarks) => {
+    const leftShoulder = landmarks[POINTS.LEFT_SHOULDER];
+    const leftElbow = landmarks[POINTS.LEFT_ELBOW];
+    const leftWrist = landmarks[POINTS.LEFT_WRIST];
+    const leftHip = landmarks[POINTS.LEFT_HIP];
+    const leftKnee = landmarks[POINTS.LEFT_KNEE];
+
+    let elbow = angleBetweenThreePoints(leftShoulder, leftElbow, leftWrist);
+    let shoulder = angleBetweenThreePoints(leftElbow, leftShoulder, leftHip);
+    let hip = angleBetweenThreePoints(leftShoulder, leftHip, leftKnee);
+
+    // Check to ensure right form before starting the program
+    if (elbow > 160 && shoulder > 40 && hip > 140) {
+      setStatus(true);
+    }
+
+    // Check for full range of motion for the plank walk
+    if (status) {
+      if (direction === 0) {
+        // Tracking movement of going "Behind"
+        if (elbow > 160 && shoulder > 40 && hip < 75) {
+          reps += 0.5;
+          direction = 1;
+        }
+      } else {
+        setFeedback("Fix Your posture");
+      }
+    }
+
+    if (direction === 1) {
+      // Tracking movement of going "Front"
+      if (elbow > 160 && shoulder > 40 && hip > 140) {
+        reps += 0.5;
+        direction = 0;
+      } else {
+        setFeedback("Fix Your posture");
+      }
+    }
+
+    if (Number.isInteger(reps)) {
+      setCounter(reps);
+    }
+    return 0;
+  };
+
+  const burpees = (landmarks) => {
+    const nose = landmarks[POINTS.NOSE];
+    const leftShoulder = landmarks[POINTS.LEFT_SHOULDER];
+    const leftElbow = landmarks[POINTS.LEFT_ELBOW];
+    const leftWrist = landmarks[POINTS.LEFT_WRIST];
+    const leftHip = landmarks[POINTS.LEFT_HIP];
+    const leftKnee = landmarks[POINTS.LEFT_KNEE];
+    const leftAnkle = landmarks[POINTS.LEFT_ANKLE];
+
+    let shoulder = angleBetweenThreePoints(leftElbow, leftShoulder, leftHip);
+    let hip = angleBetweenThreePoints(leftShoulder, leftHip, leftKnee);
+    let knee = angleBetweenThreePoints(leftHip, leftKnee, leftAnkle);
+
+    // Check to ensure right form before starting the program
+    if (shoulder > 160 && hip > 140 && knee > 160 && nose.y >= leftWrist.y) {
+      setStatus(true);
+    }
+
+    // Check for full range of motion for the pushup
+    if (status) {
+      if (direction === 0) {
+        // Tracking "Down" movement
+        if (shoulder > 60 && knee > 160 && hip > 140) {
+          reps += 0.5;
+          direction = 1;
+        }
+      } else {
+        setFeedback("Fix Your posture");
+      }
+    }
+
+    if (direction === 1) {
+      // Tracking "Up" movement
+      if (shoulder < 90 && knee < 90 && hip < 90) {
+        reps += 0.5;
+        direction = 0;
+      } else {
+        setFeedback("Fix Your posture");
+      }
+    }
+
+    if (Number.isInteger(reps)) {
+      setCounter(reps);
+    }
+    return 0;
+  };
+
+  const bicycleCrunches = (landmarks) => {
+    const leftHip = landmarks[POINTS.LEFT_HIP];
+    const leftKnee = landmarks[POINTS.LEFT_KNEE];
+    const leftAnkle = landmarks[POINTS.LEFT_ANKLE];
+
+    const rightHip = landmarks[POINTS.RIGHT_HIP];
+    const rightKnee = landmarks[POINTS.RIGHT_KNEE];
+    const rightAnkle = landmarks[POINTS.RIGHT_ANKLE];
+
+    let leftKneeAngle = angleBetweenThreePoints(leftHip, leftKnee, leftAnkle);
+
+    let rightKneeAngle = angleBetweenThreePoints(
+      rightHip,
+      rightKnee,
+      rightAnkle
+    );
+
+    // Check to ensure right form before starting the program
+    if (leftKneeAngle < 50 || rightKneeAngle < 50) {
+      setStatus(true);
+    }
+
+    // Check for full range of motion for the plank walk
+    if (status) {
+      if (direction === 0) {
+        // Tracking crunch towards Right
+        if (rightKneeAngle > 160 || leftKneeAngle > 160) {
+          reps += 0.5;
+          direction = 1;
+        }
+      } else {
+        setFeedback("Fix Your posture");
+      }
+    }
+
+    if (direction === 1) {
+      // Tracking crunch towards Left
+      if (rightKneeAngle < 50 || leftKneeAngle < 50) {
         reps += 0.5;
         direction = 0;
       } else {
@@ -172,7 +315,7 @@ const WorkoutCanvas = () => {
     // Check for full range of motion for the pullup
     if (status) {
       if (direction === 0) {
-        // Tracking going "Up";
+        // Tracking "Up" movement
         if (elbow > 160 && nose.y >= rightWrist.y) {
           reps += 0.5;
           direction = 1;
@@ -183,7 +326,7 @@ const WorkoutCanvas = () => {
     }
 
     if (direction === 1) {
-      // Tracking going "Down";
+      // Tracking "Down" movement
       if (elbow <= 70 && nose.y < rightWrist.y) {
         reps += 0.5;
         direction = 0;
@@ -225,7 +368,7 @@ const WorkoutCanvas = () => {
     // Check for full range of motion for the pullup
     if (status) {
       if (direction === 0) {
-        // Tracking going "Up";
+        // Tracking "Jump" movement
         if (angleBetweenLegs >= 45 && nose.y > rightWrist.y) {
           reps += 0.5;
           direction = 1;
@@ -236,7 +379,7 @@ const WorkoutCanvas = () => {
     }
 
     if (direction === 1) {
-      // Tracking going "Down";
+      // Tracking "Land" movement
       if (angleBetweenLegs <= 25 && nose.y < rightWrist.y) {
         reps += 0.5;
         direction = 0;
@@ -538,40 +681,43 @@ const WorkoutCanvas = () => {
   }
 
   const sitUps = (landmarks) => {
-    const rightShoulder = landmarks[POINTS.RIGHT_SHOULDER];
     const leftShoulder = landmarks[POINTS.LEFT_SHOULDER];
-    const avgShoulder = {
-      x: (rightShoulder.x + leftShoulder.x) / 2,
-      y: (rightShoulder.y + leftShoulder.y) / 2,
-    };
-
-    const rightHip = landmarks[POINTS.RIGHT_HIP];
     const leftHip = landmarks[POINTS.LEFT_HIP];
-    const avgHip = {
-      x: (rightHip.x + leftHip.x) / 2,
-      y: (rightHip.y + leftHip.y) / 2,
-    };
-
-    const rightKnee = landmarks[POINTS.RIGHT_KNEE];
     const leftKnee = landmarks[POINTS.LEFT_KNEE];
-    const avgKnee = {
-      x: (rightKnee.x + leftKnee.x) / 2,
-      y: (rightKnee.y + leftKnee.y) / 2,
-    };
 
-    const bendAngle = angleBetweenThreePoints(avgShoulder, avgHip, avgKnee);
+    const hip = angleBetweenThreePoints(leftShoulder, leftHip, leftKnee);
+
+    // Check to ensure right form before starting the program
+    if (hip > 120) {
+      setStatus(true);
+    }
+
+    // Tracking "Up" movement
     if (status) {
-      if (bendAngle < 55) {
-        reps += 1;
-        setCounter(reps);
-        // speak(counter + 1);
-        setStatus(false);
-      }
-    } else {
-      if (bendAngle > 105) {
-        setStatus(true);
+      if (direction === 0) {
+        if (hip < 50) {
+          reps += 0.5;
+          direction = 1;
+        }
+      } else {
+        setFeedback("Fix Your Posture");
       }
     }
+
+    // Tracking "Down" movement
+    if (direction === 1) {
+      if (hip > 120) {
+        reps += 0.5;
+        direction = 0;
+      } else {
+        setFeedback("Fix Your Posture");
+      }
+    }
+
+    if (Number.isInteger(reps)) {
+      setCounter(reps);
+    }
+
     return 0;
   };
 
@@ -586,12 +732,18 @@ const WorkoutCanvas = () => {
       bicepCurls(landmarks);
     } else if (currentWorkout === "lungs") {
       lungs(landmarks);
+    } else if (currentWorkout === "bicyclecrunches") {
+      bicycleCrunches(landmarks);
     } else if (currentWorkout === "plank") {
       plank(landmarks);
+    } else if (currentWorkout === "pikewalk") {
+      pikeWalk(landmarks);
+    } else if (currentWorkout === "burpees") {
+      burpees(landmarks);
     } else if (currentWorkout === "jumpingjacks") {
       jumpingJacks(landmarks);
     } else if (currentWorkout === "situps") {
-      // sitUps(landmarks);
+      sitUps(landmarks);
     }
   };
 
@@ -647,7 +799,6 @@ const WorkoutCanvas = () => {
           );
         });
 
-        // sitUps(landmarks); // pending
         calculateExercise(landmarks);
       }
       canvasCtx.restore();
@@ -705,6 +856,7 @@ const WorkoutCanvas = () => {
 
   const stopSession = () => {
     setisStartSession(false);
+    router.reload();
   };
 
   return (
@@ -742,7 +894,11 @@ const WorkoutCanvas = () => {
         </div>
         {currentWorkoutData &&
           (currentWorkoutData.modelAvailable ? (
-            <XrHitModelContainer modelName={currentWorkout} />
+            <XrHitModelContainer
+              modelName={currentWorkout}
+              zRotationMul={currentWorkoutData.zRotationMul}
+              scaleMul={currentWorkoutData.scaleMul}
+            />
           ) : (
             <iframe
               title={currentWorkoutData.name}

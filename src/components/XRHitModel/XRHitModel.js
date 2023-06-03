@@ -4,7 +4,7 @@ import { Interactive, useHitTest, useXR } from "@react-three/xr";
 import { useRef, useState } from "react";
 import Model from "../Model/Model";
 
-const XrHitModel = ({ modelName }) => {
+const XrHitModel = ({ modelName, zRotationMul, scaleMul }) => {
   const reticleRef = useRef();
   const [models, setModels] = useState([]);
 
@@ -38,7 +38,15 @@ const XrHitModel = ({ modelName }) => {
       <ambientLight />
       {isPresenting &&
         models.map(({ position, id }) => {
-          return <Model key={id} position={position} modelName={modelName} />;
+          return (
+            <Model
+              key={id}
+              position={position}
+              modelName={modelName}
+              zRotationMul={zRotationMul}
+              scaleMul={scaleMul / 2}
+            />
+          );
         })}
       {isPresenting && (
         <Interactive onSelect={placeModel}>
@@ -49,7 +57,13 @@ const XrHitModel = ({ modelName }) => {
         </Interactive>
       )}
 
-      {!isPresenting && <Model modelName={modelName} />}
+      {!isPresenting && (
+        <Model
+          modelName={modelName}
+          zRotationMul={zRotationMul}
+          scaleMul={scaleMul}
+        />
+      )}
     </>
   );
 };
