@@ -1,6 +1,5 @@
 .navigationModal {
-  color: white;
-  background-color: black;
+  background-color: white;
   position: absolute;
   border-radius: 10px;
   left: 0;
@@ -12,12 +11,12 @@
   align-items: center;
   padding: 10px;
   top: 5px;
+  border: 1px solid black;
 }
 
 .navigationModal input {
-  font-size: 14px;
-  padding: 6px 8px;
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  font-size: 20px;
+  padding: 2px 2px;
   border-radius: 3px;
   margin: 10px;
 }
@@ -27,11 +26,11 @@
   display: flex;
   justify-content: center;
   text-align: center;
-  margin: 10px;
 }
 
 .info {
   display: flex;
+  flex-direction: column;
 }
 
 .navigate {
@@ -39,20 +38,21 @@
   margin-left: 10px;
   border-radius: 20%;
   padding: 5px;
-  background-color: rgb(69, 69, 69);
-  font-size: 40px;
+  font-size: 70px;
+  border: 1px solid rgb(149, 149, 149);
 }
 
 .navigate:hover {
   cursor: pointer;
-  background-color: #222222;
+  border: 1px solid black;
 }
 
 .panBack {
   position: absolute;
-  font-size: 30px;
+  font-size: 40px;
   bottom: 5px;
   right: 5px;
+  color: rgb(116, 0, 0);
 }
 
 /* Media query for mobile devices */
@@ -74,5 +74,26 @@
     padding: 3px 4px;
     border-radius: 3px;
     margin: 5px;
+  }
+}
+
+/* Media query for mobile devices */
+@media screen and (max-width: 768px) {
+  .navigationModal {
+    width: 90%; /* Adjusted for mobile devices */
+  }
+
+  .navigate {
+    font-size: 50px; /* Adjusted for mobile devices */
+  }
+
+  .panBack {
+    font-size: 20px; /* Adjusted for mobile devices */
+  }
+
+  .navigationModal input {
+    font-size: 16px; /* Adjusted for mobile devices */
+    padding: 5px 6px; /* Adjusted for mobile devices */
+    margin: 5px; /* Adjusted for mobile devices */
   }
 }
