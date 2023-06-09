@@ -2,9 +2,10 @@ import { OrbitControls } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
 import { Interactive, useHitTest, useXR } from "@react-three/xr";
 import { useRef, useState } from "react";
-import Model from "../Model/Model";
+import WorkoutModel from "../Model/WorkoutModel";
+import YogaModel from "../Model/YogaModel";
 
-const XrHitModel = ({ modelName, zRotationMul, scaleMul }) => {
+const XrHitModel = ({ modelName, zRotationMul, scaleMul, type }) => {
   const reticleRef = useRef();
   const [models, setModels] = useState([]);
 
@@ -38,14 +39,20 @@ const XrHitModel = ({ modelName, zRotationMul, scaleMul }) => {
       <ambientLight />
       {isPresenting &&
         models.map(({ position, id }) => {
+          if (type === "workout") {
+            return (
+              <WorkoutModel
+                key={id}
+                position={position}
+                modelName={modelName}
+                zRotationMul={zRotationMul}
+                scaleMul={scaleMul / 2}
+              />
+            );
+          }
+
           return (
-            <Model
-              key={id}
-              position={position}
-              modelName={modelName}
-              zRotationMul={zRotationMul}
-              scaleMul={scaleMul / 2}
-            />
+            <YogaModel key={id} position={position} modelName={modelName} />
           );
         })}
       {isPresenting && (
@@ -57,13 +64,16 @@ const XrHitModel = ({ modelName, zRotationMul, scaleMul }) => {
         </Interactive>
       )}
 
-      {!isPresenting && (
-        <Model
-          modelName={modelName}
-          zRotationMul={zRotationMul}
-          scaleMul={scaleMul}
-        />
-      )}
+      {!isPresenting &&
+        (type === "workout" ? (
+          <WorkoutModel
+            modelName={modelName}
+            zRotationMul={zRotationMul}
+            scaleMul={scaleMul}
+          />
+        ) : (
+          <YogaModel modelName={modelName} />
+        ))}
     </>
   );
 };

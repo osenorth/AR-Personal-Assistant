@@ -898,6 +898,7 @@ const WorkoutCanvas = () => {
               modelName={currentWorkout}
               zRotationMul={currentWorkoutData.zRotationMul}
               scaleMul={currentWorkoutData.scaleMul}
+              type="workout"
             />
           ) : (
             <iframe

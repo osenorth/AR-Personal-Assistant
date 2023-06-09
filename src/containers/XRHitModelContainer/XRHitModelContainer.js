@@ -4,7 +4,12 @@ import { ARButton, XR } from "@react-three/xr";
 import XrHitModel from "../../components/XRHitModel/XRHitModel";
 import * as styles from "./XRHitModelContainer.module.css";
 
-const XrHitModelContainer = ({ modelName, zRotationMul, scaleMul }) => {
+const XrHitModelContainer = ({
+  modelName,
+  zRotationMul = 0.33,
+  scaleMul = 0.3,
+  type,
+}) => {
   const [isARSupported, setISARSupported] = useState(true);
 
   async function browserHasImmersiveArCompatibility() {
@@ -51,6 +56,7 @@ const XrHitModelContainer = ({ modelName, zRotationMul, scaleMul }) => {
             modelName={modelName}
             zRotationMul={zRotationMul}
             scaleMul={scaleMul}
+            type={type}
           />
         </XR>
       </Canvas>

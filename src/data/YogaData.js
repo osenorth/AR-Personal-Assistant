@@ -1,10 +1,10 @@
-import yoga1Img from "../assets/yoga1.jpg";
-import yoga2Img from "../assets/yoga2.jpg";
-import yoga3Img from "../assets/yoga3.jpg";
-import yoga4Img from "../assets/yoga4.jpg";
-import yoga5Img from "../assets/yoga5.jpg";
-import yoga6Img from "../assets/yoga6.jpg";
-import yoga7Img from "../assets/yoga7.jpg";
+import vrikshasanaImg from "../assets/vrikshasana.jpg";
+import utkatasanaImg from "../assets/utkatasana.jpg";
+import bhujangasanaImg from "../assets/bhujangasana.jpg";
+import adhomukhasvanasanaImg from "../assets/adhomukhasvanasana.jpg";
+import trikonasanaImg from "../assets/trikonasana.jpg";
+import virabhadrasana3Img from "../assets/virabhadrasana3.jpg";
+import sarvangasanaImg from "../assets/sarvangasana.jpg";
 
 const yogaData = {
   title: "Yoga",
@@ -16,55 +16,57 @@ const yogaData = {
       id: 1,
       title: "Vrikshasana",
       desc: "Vrikshasana, helps you connect with nature and find balance. This yoga asana strengthens your legs, opens your hips, and enhances focus and endurance.",
-      poster: yoga1Img,
+      poster: vrikshasanaImg,
       route: "/yoga/vrikshasana",
     },
     {
       id: 2,
       title: "Utkatasana",
       desc: "Utkatasana, is a powerful standing posture that strengthens the legs, hips, and back. It promotes stability, concentration, and improved posture.      ",
-      poster: yoga2Img,
+      poster: utkatasanaImg,
       route: "/yoga/utkatasana",
     },
     {
       id: 3,
       title: "Bhujangasana",
       desc: "Bhujangasana or Cobra Pose, stretches the spine, opens the chest, and strengthens the arms and shoulders. It improves flexibility and relieves stress.",
-      poster: yoga3Img,
+      poster: bhujangasanaImg,
       route: "/yoga/bhujangasana",
     },
     {
       id: 4,
       title: "Adho Mukha Svanasana",
       desc: "Adho Mukha Svanasana, is a yoga asana that strengthens the arms, legs, and back, while stretching the hamstrings and calves. It energizes the body and calms the mind.",
-      poster: yoga4Img,
+      poster: adhomukhasvanasanaImg,
       route: "/yoga/adhomukhasvanasana",
     },
     {
       id: 5,
       title: "Trikonasana",
       desc: "Trikonasana, is a yoga posture that stretches and strengthens the legs, hips, and spine. It improves balance, digestion, and mental focus.",
-      poster: yoga5Img,
+      poster: trikonasanaImg,
       route: "/yoga/trikonasana",
     },
     {
       id: 6,
       title: "Virabhadrasana III",
       desc: "Virabhadrasana, is a yoga asana that strengthens the legs, opens the hips, and improves balance. It promotes focus, endurance, and a sense of empowerment.",
-      poster: yoga6Img,
+      poster: virabhadrasana3Img,
       route: "/yoga/virabhadrasana3",
     },
     {
       id: 7,
       title: "Sarvangasana",
       desc: "Sarvangasana, is a yoga asana that improves circulation, balances hormones, and calms the mind. It stimulates the thyroid gland and helps in weight management.",
-      poster: yoga7Img,
+      poster: sarvangasanaImg,
       route: "/yoga/sarvangasana",
     },
   ],
   poseData: {
     Tree: {
       name: "Vrikshasana",
+      label: "vrikshasana",
+      modelAvailable: true,
       modelLink:
         "https://sketchfab.com/models/02d5ac37825241eab18178c7c386f9e7/embed?autostart=1&dnt=1",
       difficulty: "easy",
@@ -78,6 +80,8 @@ const yogaData = {
     },
     Chair: {
       name: "Utkatasana",
+      label: "utkatasana",
+      modelAvailable: true,
       modelLink:
         "https://sketchfab.com/models/a3079780afd24ac7838dc7b1bc571ec0/embed?autostart=1&dnt=1",
       difficulty: "easy",
@@ -90,6 +94,8 @@ const yogaData = {
     },
     Cobra: {
       name: "Bhujangasana",
+      label: "bhujangasana",
+      modelAvailable: true,
       modelLink:
         "https://sketchfab.com/models/88c5e04dda4d414e888bbce9caf8c505/embed?autostart=1&dnt=1",
       difficulty: "easy",
@@ -103,6 +109,8 @@ const yogaData = {
     },
     Dog: {
       name: "Adho mukha svanasana",
+      label: "adhomukhasvanasana",
+      modelAvailable: true,
       modelLink:
         "https://sketchfab.com/models/ae76cb29b8b84c4299d158cf76977c58/embed?autostart=1&dnt=1",
       difficulty: "medium",
@@ -116,6 +124,8 @@ const yogaData = {
     },
     Traingle: {
       name: "Trikonasana",
+      label: "trikonasana",
+      modelAvailable: true,
       modelLink:
         "https://sketchfab.com/models/d918634a622a48518766575ebbc21cec/embed?autostart=1&dnt=1",
       difficulty: "medium",
@@ -128,6 +138,8 @@ const yogaData = {
     },
     Warrior: {
       name: "Virabhadrasana III",
+      label: "virabhadrasana3",
+      modelAvailable: true,
       modelLink:
         "https://sketchfab.com/models/f8c43ce3f94348c388d6812b35a4d535/embed?autostart=1&dnt=1",
       difficulty: "hard",
@@ -140,6 +152,8 @@ const yogaData = {
     },
     Shoulderstand: {
       name: "Sarvangasana",
+      label: "sarvangasana",
+      modelAvailable: true,
       modelLink:
         "https://sketchfab.com/models/bda2c1276d824f2683eb50889b708c98/embed?autostart=1&dnt=1",
       difficulty: "hard",
