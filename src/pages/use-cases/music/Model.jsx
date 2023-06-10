@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import { useFrame } from '@react-three/fiber'
+//import { useFrame } from '@react-three/fiber'
 import { useGLTF } from '@react-three/drei'
 import * as THREE from "three"
 
@@ -10,17 +10,17 @@ export default function Model({ url, ...props }) {
   const group = useRef()
   const [hovered, set] = useState()
   const { nodes, materials } = useGLTF(url)
-  useFrame((state) => {
-    group.current.children[0].children.forEach((child, index) => {
-      child.position.y += Math.sin(index * 1000 + state.clock.elapsedTime) / 50
-      child.rotation.x += (Math.sin(index * 1000 + state.clock.elapsedTime) * Math.PI) / 2000
-      child.rotation.y += (Math.cos(index * 1000 + state.clock.elapsedTime) * Math.PI) / 3000
-      child.rotation.z += (Math.sin(index * 1000 + state.clock.elapsedTime) * Math.PI) / 4000
-    })
-    group.current.children[0].children.forEach((child, index) => {
-      child.material.color.lerp(color.set(hovered === child.name ? "#98FB98" : "white"), hovered ? 1 : 0.05)
-    })
-  })
+  // useFrame((state) => {
+  //   group.current.children[0].children.forEach((child, index) => {
+  //     child.position.y += Math.sin(index * 1000 + state.clock.elapsedTime) / 50
+  //     child.rotation.x += (Math.sin(index * 1000 + state.clock.elapsedTime) * Math.PI) / 2000
+  //     child.rotation.y += (Math.cos(index * 1000 + state.clock.elapsedTime) * Math.PI) / 3000
+  //     child.rotation.z += (Math.sin(index * 1000 + state.clock.elapsedTime) * Math.PI) / 4000
+  //   })
+  //   group.current.children[0].children.forEach((child, index) => {
+  //     child.material.color.lerp(color.set(hovered === child.name ? "#98FB98" : "white"), hovered ? 1 : 0.05)
+  //   })
+  // })
   return (
     <group 
     ref={group} 
