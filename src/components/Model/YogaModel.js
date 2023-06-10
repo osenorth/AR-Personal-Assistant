@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 
 export default function Model(props) {
-  const { modelName } = props;
+  const { modelName, scaleMul } = props;
   const group = useRef();
   const [position, setPosition] = useState([0, 0, 0]);
   const [rotation, setRotation] = useState([0, 0, 0]);
@@ -47,7 +47,7 @@ export default function Model(props) {
         <group
           name="Armature"
           rotation={[Math.PI * 0.1, Math.PI * 0.1, 0]}
-          scale={[0.25, 0.25, 0.25]}
+          scale={[scaleMul, scaleMul, scaleMul]}
           position={[0, -0.5, -0.75]}
         >
           <group
@@ -177,7 +177,7 @@ function TrikonasanaModel({ nodes, materials, group, props }) {
         <group
           name="Armature"
           rotation={[Math.PI * 0.1, Math.PI * 0.1, 0]}
-          scale={[0.25, 0.25, 0.25]}
+          scale={[scaleMul, scaleMul, scaleMul]}
           position={[1.5, -0.5, -0.75]}
         >
           <group {...props} dispose={null}>
@@ -287,7 +287,7 @@ function Virabhadrasana3Model({ nodes, materials, group, props }) {
         <group
           name="Armature"
           rotation={[Math.PI * 0.1, Math.PI * 0.2, 0]}
-          scale={[0.25, 0.25, 0.25]}
+          scale={[scaleMul, scaleMul, scaleMul]}
           position={[0, -0.5, -0.75]}
         >
           <group {...props} dispose={null}>

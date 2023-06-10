@@ -52,7 +52,12 @@ const XrHitModel = ({ modelName, zRotationMul, scaleMul, type }) => {
           }
 
           return (
-            <YogaModel key={id} position={position} modelName={modelName} />
+            <YogaModel
+              key={id}
+              position={position}
+              modelName={modelName}
+              scaleMul={0.1}
+            />
           );
         })}
       {isPresenting && (
@@ -72,7 +77,7 @@ const XrHitModel = ({ modelName, zRotationMul, scaleMul, type }) => {
             scaleMul={scaleMul}
           />
         ) : (
-          <YogaModel modelName={modelName} />
+          <YogaModel modelName={modelName} scaleMul={0.25} />
         ))}
     </>
   );
