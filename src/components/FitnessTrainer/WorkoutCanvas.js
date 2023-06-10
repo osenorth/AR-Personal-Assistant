@@ -856,7 +856,7 @@ const WorkoutCanvas = () => {
 
   const stopSession = () => {
     setisStartSession(false);
-    router.reload();
+    // router.reload();
   };
 
   return (
