@@ -4,7 +4,7 @@ import { Canvas, useThree, useFrame } from '@react-three/fiber'
 import { ContactShadows } from '@react-three/drei'
 import Model from './Model'
 import { Text } from '@react-three/drei'
-import stylesHero from '../../../styles/musicHeroSection.module.css'
+import stylesHero from '../../styles/musicHeroSection.module.css'
 
 function Rig({ children }) {
   const ref = useRef()
@@ -40,7 +40,7 @@ export default function MusicHeroSection() {
         <Suspense fallback={null}>
           <group position={[0, 10, 0]}>
             <Rig>
-              <Model url="/compressed.glb" />
+              <Model url="/compressed-new.glb" />
               <Caption>{`VISUALISE\nMUSIC\nIN\nA WHOLE NEW\nDIMENSION.`}</Caption>
             </Rig>
             <ContactShadows

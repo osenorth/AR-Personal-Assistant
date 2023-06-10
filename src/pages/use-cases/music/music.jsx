@@ -8,7 +8,7 @@ import Lottie from 'react-lottie'
 import Rive from "@rive-app/react-canvas"
 import animationData from '../../../assets/music-animation-lottie.json'
 import { useRive } from '@rive-app/react-canvas';
-import MusicHeroSection from './musicHeroSection'
+import MusicHeroSection from '../../../components/SpotifyHero/musicHeroSection'
 
 function Simple() {
   const { rive, RiveComponent } = useRive({
