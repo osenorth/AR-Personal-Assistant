@@ -1,10 +1,12 @@
 import * as THREE from 'three'
-import React, { Suspense, useRef } from 'react'
+import React, { lazy, Suspense, useRef } from 'react'
 import { Canvas, useThree, useFrame } from '@react-three/fiber'
 import { ContactShadows } from '@react-three/drei'
-import Model from './Model'
+//import Model from './Model'
 import { Text } from '@react-three/drei'
 import stylesHero from '../../styles/musicHeroSection.module.css'
+
+const ModelComponent = lazy(() => import("./Model"));
 
 function Rig({ children }) {
   const ref = useRef()
@@ -40,7 +42,7 @@ export default function MusicHeroSection() {
         <Suspense fallback={"loading"}>
           <group position={[0, 10, 0]}>
             <Rig>
-              {/* <Model url="/compressed-new.glb" /> */}
+              <ModelComponent />
               <Caption>{`VISUALISE\nMUSIC\nIN\nA WHOLE NEW\nDIMENSION.`}</Caption>
             </Rig>
             <ContactShadows
