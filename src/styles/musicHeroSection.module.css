@@ -26,6 +26,15 @@
   align-items: center;
 }
 
+.p {
+    pointer-events: all;
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    color: #101015;
+    text-decoration: none;
+  }
+  
 .headerSub {
   margin-top: 1em;
   text-align: center;
@@ -37,26 +46,15 @@
 
 
 .button {
-    all: unset;
     outline: revert;
     cursor: pointer;
     color: white;
-    position: absolute;
     background-color: var(--accent-color, black);
     border-radius: 9999px;
     box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
     padding: 1rem 2rem;
     font-size: 1.25rem;
-    transition: all ease 75ms;
-    pointer-events: none;
-    position: absolute;
-    bottom: 100px;
-    right: 150px;
-    display: flex;
-    flex-direction: column;
-    justify-content: end;
-    align-items: center;
-    z-index: 10;
+    border: none;
   }
   
   .button:is(:hover, :focus):not(:disabled, :active) {

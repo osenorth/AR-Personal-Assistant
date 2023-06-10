@@ -18,7 +18,7 @@ export default function Model({ url, ...props }) {
       child.rotation.z += (Math.sin(index * 1000 + state.clock.elapsedTime) * Math.PI) / 4000
     })
     group.current.children[0].children.forEach((child, index) => {
-      child.material.color.lerp(color.set(hovered === child.name ? "#1DB954" : "white"), hovered ? 0.08 : 0.05)
+      child.material.color.lerp(color.set(hovered === child.name ? "#98FB98" : "white"), hovered ? 1 : 0.05)
     })
   })
   return (
@@ -28,7 +28,7 @@ export default function Model({ url, ...props }) {
     dispose={null}
     >
       <group
-        onPointerOver={(e) => {(e.stopPropagation(), set(e.object.name)), console.log(e.object)}}
+        onPointerOver={(e) => {(e.stopPropagation(), set(e.object.name))}}
         onPointerOut={(e) => (e.stopPropagation(), set(null))}
       >
       <mesh

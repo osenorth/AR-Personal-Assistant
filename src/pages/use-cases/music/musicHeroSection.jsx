@@ -34,7 +34,7 @@ function Caption({ children }) {
 export default function MusicHeroSection() {
   return (
     <>
-      <Canvas camera={{ position: [0, -10, 65], fov: 50 }} dpr={[1, 2]}>
+      <Canvas camera={{ position: [0, -10, 65], fov: 50 }} dpr={[1, 2]} className={stylesHero.canvas}>
         <pointLight position={[100, 100, 100]} intensity={0.8} />
         <hemisphereLight color="#ffffff" groundColor="#b9b9b9" position={[-7, 25, 13]} intensity={0.85} />
         <Suspense fallback={null}>
@@ -55,17 +55,7 @@ export default function MusicHeroSection() {
           </group>
         </Suspense>
       </Canvas>
-      {/* <div className={stylesHero.overlay}>
 
-
-        <h2 className={stylesHero.headerSub}>
-          There's not the smallest orb
-          <br />
-          which thou behold'st but in his motion
-          <br />
-          like an angel sings —
-        </h2>
-      </div> */}
     </>
   )
 }

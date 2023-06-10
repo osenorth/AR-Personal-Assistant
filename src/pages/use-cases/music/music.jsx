@@ -55,10 +55,13 @@ const SpotifyMusic = () => {
             : 'stranger'}
           !
         </h1>
-        <p>
+      
+        <div className={stylesHero.overlay}>
+
+        <p className={stylesHero.p}>
           {session.status === 'authenticated' ? (
             <button
-              className={styles.button}
+              className={stylesHero.button}
               type="button"
               onClick={() => signOut()}
             >
@@ -69,13 +72,25 @@ const SpotifyMusic = () => {
               className={stylesHero.button}
               type="button"
               style={{ '--accent-color': '#1DB954' }}
-              onClick={() => signIn('spotify')}
+              onClick={() => {
+                signIn('spotify', { callbackUrl: 'http://localhost:3000/spotify' });
+                console.log('clicked');
+              }}
               disabled={session.status === 'loading'}
             >
               Sign in with Spotify
             </button>
           )}
         </p>
+
+        {/* <h2 className={stylesHero.headerSub}>
+          There's not the smallest orb
+          <br />
+          which thou behold'st but in his motion
+          <br />
+          like an angel sings —
+        </h2> */}
+      </div>
     </div>
   )
 }
