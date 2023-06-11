@@ -21,14 +21,14 @@ function Caption({ children }) {
   const { width } = useThree((state) => state.viewport)
   return (
     <Text
-      position={[0, -8, -5]}
-      lineHeight={0.9}
-      fontSize={width / 10}
-      color="#282828"
-      material-toneMapped={false}
-      anchorX="center"
-      anchorY="middle">
-      {children}
+    position={[0, -8, -5]}
+    lineHeight={0.9}
+    fontSize={width / 10}
+    color="#282828"
+    material-toneMapped={false}
+    anchorX="center"
+    anchorY="middle">
+    {children}
     </Text>
   )
 }
@@ -43,7 +43,7 @@ export default function MusicHeroSection() {
           <group position={[0, 10, 0]}>
             <Rig>
               <ModelComponent />
-              <Caption>{`VISUALISE\nMUSIC\nIN\nA WHOLE NEW\nDIMENSION.`}</Caption>
+              {/* <Caption className={stylesHero.header}>{`VISUALISE\nMUSIC\nIN\nA WHOLE NEW\nDIMENSION.`}</Caption> */}
             </Rig>
             <ContactShadows
               rotation-x={Math.PI / 2}
@@ -57,7 +57,13 @@ export default function MusicHeroSection() {
           </group>
         </Suspense>
       </Canvas>
+      <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate3d(-50%,-50%,0)'}}>
+        <h6 className={stylesHero.headerAlt} style={{ margin: 0, padding: 0, fontSize: '10em', fontWeight: 500, letterSpacing: '-0.05em', lineHeight: '18vh' }}>visualise</h6>
+        <h6 className={stylesHero.headerAlt} style={{ margin: 0, padding: 0, fontSize: '10em', fontWeight: 500, letterSpacing: '-0.05em', lineHeight: '18vh' }}>music in a </h6>
+        <h6 className={stylesHero.headerAlt} style={{ margin: 0, padding: 0, fontSize: '10em', fontWeight: 500, letterSpacing: '-0.05em', lineHeight: '18vh' }}>whole new</h6>
+        <h6 className={stylesHero.headerAlt} style={{ margin: 0, padding: 0, fontSize: '10em', fontWeight: 500, letterSpacing: '-0.05em', lineHeight: '18vh' }}>dimension</h6>
 
+      </div>
     </>
   )
 }

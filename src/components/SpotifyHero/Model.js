@@ -18,7 +18,7 @@ export default function Model() {
       child.rotation.z += (Math.sin(index * 1000 + state.clock.elapsedTime) * Math.PI) / 4000
     })
     group.current.children[0].children.forEach((child, index) => {
-      child.material.color.lerp(color.set(hovered === child.name ? "#98FB98" : "white"), hovered ? 1 : 0.05)
+      child.material.color.lerp(color.set(hovered === child.name ? "#98FB98" : "#3A3B3C"), hovered ? 1 : 0.05)
     })
   })
   return (
@@ -40,7 +40,7 @@ export default function Model() {
       <mesh
         material={materials.M_Headphone}
         geometry={nodes.Headphones.geometry}
-        position={[-30.22, 1.99, -11.03]}
+        position={[-40.22, 1.99, -11.03]}
         rotation={[1.55, 0.32, -0.76]}
         name="Headphones"
       />
@@ -61,7 +61,7 @@ export default function Model() {
       <mesh
         material={materials.M_Headset}
         geometry={nodes.VR_Headset.geometry}
-        position={[6.92, -13.17, 27.59]}
+        position={[16.92, -20.17, 27.59]}
         rotation={[1.29, -0.08, -0.64]}
         scale={[5, 5, 5]}
         name="VR Headset"

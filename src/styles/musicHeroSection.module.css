@@ -8,8 +8,8 @@
   position: relative;
   box-sizing: border-box;
   font-family: 'Inter var', sans-serif;
-  background: linear-gradient(155deg, #ffffff 20%, #a5a3a3);
-  color: #101015;
+  background: linear-gradient(155deg, #2C3E50 20%, #000000);
+  color: #070730;
 }
 
 .overlay {
@@ -64,4 +64,11 @@
   .button:disabled {
     cursor: not-allowed;
     opacity: 0.5;
+  }
+
+  .headerAlt{
+    display: inline-block;
+    background: linear-gradient(30deg, #39E5B6, #70B2D9);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }

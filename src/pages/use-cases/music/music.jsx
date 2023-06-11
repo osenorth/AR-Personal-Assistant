@@ -10,6 +10,8 @@ import animationData from '../../../assets/music-animation-lottie.json'
 import { useRive } from '@rive-app/react-canvas';
 import MusicHeroSection from '../../../components/SpotifyHero/musicHeroSection'
 
+import MusicIndex from './musicIndex'
+
 function Simple() {
   const { rive, RiveComponent } = useRive({
     src: '/login_screen_character.riv',
@@ -91,6 +93,7 @@ const SpotifyMusic = () => {
           like an angel sings —
         </h2> */}
       </div>
+      {/* <MusicIndex /> */}
     </div>
   )
 }
