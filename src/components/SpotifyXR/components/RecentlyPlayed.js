@@ -9,10 +9,6 @@ import XrHitModelContainer from "../../../containers/XRHitModelContainer/XRHitMo
 import { Interactive, XR, ARButton, Controllers } from '@react-three/xr';
 import * as THREE from 'three';
 
-import Rive from '@rive-app/react-canvas';
-
-
-const Simple = () => <Rive src="https://cdn.rive.app/animations/vehicles.riv" />;
 
 function Image(props) {
   const { imgSrc, position } = props;
@@ -93,7 +89,7 @@ function Button({track, chooseTrack, ...props}) {
 //   );
 // }
 
-const SpotifyPage = ({track, chooseTrack}) => {
+const SpotifyPanel = ({track, chooseTrack}) => {
 
     console.log(track)
     return (
@@ -144,7 +140,7 @@ function RecentlyPlayed({ track, chooseTrack }) {
         {track.artist}
       </p>
     </div> */}
-    <SpotifyPage
+    <SpotifyPanel
       track={track}
       chooseTrack={chooseTrack}
     />
