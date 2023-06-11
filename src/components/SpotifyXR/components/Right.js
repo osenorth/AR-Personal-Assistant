@@ -3,17 +3,19 @@ import { MdOutlineSettings } from "react-icons/md";
 import { BiBell } from "react-icons/bi";
 import { ViewGridIcon } from "@heroicons/react/solid";
 import Dropdown from "./Dropdown";
-import { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import RecentlyPlayed from "./RecentlyPlayed";
 
-import React, { Suspense, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Canvas, useFrame, useLoader } from "@react-three/fiber";
 import { Sky, OrbitControls, Text } from "@react-three/drei";
 import XrHitModelContainer from "../../../containers/XRHitModelContainer/XRHitModelContainer";
 import { Interactive, XR, ARButton, Controllers } from '@react-three/xr';
 import * as THREE from 'three';
+
+import { useRecoilState } from "recoil";
+import { playingTrackState, playState } from "../../../atoms/playerAtom";
 
 
 function Image(props) {
@@ -85,22 +87,22 @@ function Right({ spotifyApi, chooseTrack }) {
   const [play, setPlay] = useRecoilState(playState);
   const [playingTrack, setPlayingTrack] = useRecoilState(playingTrackState);
 
-  console.log(track)
 
-  const handlePlay = () => {
-    chooseTrack(track);
 
-    if (track.uri === playingTrack.uri) {
-      setPlay(!play);
-    }
-  };
-  const onSelect = () => {
-    setColor((Math.random() * 0xffffff) | 0);
-  };
+  // const handlePlay = () => {
+  //   chooseTrack(track);
 
-  const onImageSelect = () => {
-    setUrl('/Panel_Assets/Adele_Detail_Panel.png');
-  };
+  //   if (track.uri === playingTrack.uri) {
+  //     setPlay(!play);
+  //   }
+  // };
+  // const onSelect = () => {
+  //   setColor((Math.random() * 0xffffff) | 0);
+  // };
+
+  // const onImageSelect = () => {
+  //   setUrl('/Panel_Assets/Adele_Detail_Panel.png');
+  // };
 
   // Recently Played Tracks...
   useEffect(() => {
@@ -130,7 +132,7 @@ function Right({ spotifyApi, chooseTrack }) {
         <ambientLight />
         <pointLight position={[10, 10, 10]} />
         <Box>
-          <Interactive onSelect={onImageSelect}>
+          <Interactive>
             {recentlyPlayed.map((track, index) => (
               // <RecentlyPlayed
               //   key={index}
