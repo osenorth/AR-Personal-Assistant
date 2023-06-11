@@ -87,7 +87,9 @@ function Right({ spotifyApi, chooseTrack }) {
   const [play, setPlay] = useRecoilState(playState);
   const [playingTrack, setPlayingTrack] = useRecoilState(playingTrackState);
 
-
+  const initialX = 0;
+  const initialY = 0;
+  const initialZ = -1;
 
   // const handlePlay = () => {
   //   chooseTrack(track);
@@ -139,8 +141,9 @@ function Right({ spotifyApi, chooseTrack }) {
               //   track={track}
               //   chooseTrack={chooseTrack}
               // />
-              <Image imgSrc={track.albumUrl} position={[0, 0, -1]} />
-            ))}
+              <Image imgSrc={track.albumUrl} position={[initialX+index, initialY+index, initialZ+index]} />
+            ))
+            }
           </Interactive>
        </Box>
        <Controllers />
