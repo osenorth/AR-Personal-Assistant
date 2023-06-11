@@ -1,8 +1,11 @@
 import React from "react";
-import WorkoutCanvas from "../../components/FitnessTrainer/WorkoutCanvas";
+import dynamic from "next/dynamic";
+const WorkoutCanvas = dynamic(
+  () => import("../../components/FitnessTrainer/WorkoutCanvas"),
+  { ssr: false }
+);
 
-const WorkoutPage = () => {
+export default () => {
   return <WorkoutCanvas />;
 };
 
-export default WorkoutPage;

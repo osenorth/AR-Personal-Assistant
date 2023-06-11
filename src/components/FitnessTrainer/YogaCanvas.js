@@ -8,6 +8,7 @@ import { POINTS, keypointConnections } from "../../data/YogaPoints";
 import { drawPoint, drawSegment } from "../../helpers/Utils";
 import Webcam from "react-webcam";
 import Instructions from "../Instructions/Instructions";
+import XrHitModelContainer from "../../containers/XRHitModelContainer/XRHitModelContainer";
 import * as styles from "./FitnessTrainer.module.css";
 
 let flag = false;
@@ -300,21 +301,28 @@ const YogaCanvas = () => {
             {isStartPose ? currentPoseData.name : "View in 3D"}
           </h4>
         </div>
-        {currentPoseData && (
-          <iframe
-            title={currentPoseData.name}
-            allowFullScreen
-            mozallowfullscreen="true"
-            webkitallowfullscreen="true"
-            allow="autoplay; fullscreen; xr-spatial-tracking"
-            xr-spatial-tracking="true"
-            execution-while-out-of-viewport="true"
-            execution-while-not-rendered="true"
-            web-share="true"
-            src={currentPoseData.modelLink}
-            className={styles.modelContrainer}
-          ></iframe>
-        )}
+
+        {currentPoseData &&
+          (currentPoseData.modelAvailable ? (
+            <XrHitModelContainer
+              modelName={currentPoseData.label}
+              type="yoga"
+            />
+          ) : (
+            <iframe
+              title={currentPoseData.name}
+              allowFullScreen
+              mozallowfullscreen="true"
+              webkitallowfullscreen="true"
+              allow="autoplay; fullscreen; xr-spatial-tracking"
+              xr-spatial-tracking="true"
+              execution-while-out-of-viewport="true"
+              execution-while-not-rendered="true"
+              web-share="true"
+              src={currentPoseData.modelLink}
+              className={styles.modelContrainer}
+            ></iframe>
+          ))}
         {isStartPose && (
           <div className={styles.countDisplay}>
             <div>

@@ -143,13 +143,14 @@
   }
   .detectContainer {
     width: 100%;
-    height: 51vh;
+    height: 53vh;
   }
   .infoContainer {
     flex-direction: row-reverse;
     height: 56vh;
   }
-  .workoutWebcam, .workoutCanvas {
+  .workoutWebcam,
+  .workoutCanvas {
     width: auto;
   }
   .resultsContainer {

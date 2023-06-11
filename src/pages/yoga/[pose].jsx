@@ -1,8 +1,10 @@
 import React from "react";
-import YogaCanvas from "../../components/FitnessTrainer/YogaCanvas";
+import dynamic from "next/dynamic";
+const YogaCanvas = dynamic(
+  () => import("../../components/FitnessTrainer/YogaCanvas"),
+  { ssr: false }
+);
 
-const YogaPage = () => {
+export default () => {
   return <YogaCanvas />;
 };
-
-export default YogaPage;
