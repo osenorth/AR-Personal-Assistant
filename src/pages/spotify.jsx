@@ -6,6 +6,9 @@ import XrHitModelContainer from "../containers/XRHitModelContainer/XRHitModelCon
 import { Interactive, XR, ARButton, Controllers } from '@react-three/xr';
 import * as THREE from 'three';
 
+import { useRecoilState } from "recoil";
+import { playingTrackState, playState } from "../atoms/playerAtom";
+
 import Rive from '@rive-app/react-canvas';
 
 const Simple = () => <Rive src="https://cdn.rive.app/animations/vehicles.riv" />;
@@ -38,6 +41,16 @@ function Button(props) {
   const [url, setUrl] = useState('/Panel_Assets/Adele_Spotify_Panel.png');
   const [color, setColor] = useState('blue');
 
+  const [play, setPlay] = useRecoilState(playState);
+  const [playingTrack, setPlayingTrack] = useRecoilState(playingTrackState);
+
+  const handlePlay = () => {
+    chooseTrack(track);
+
+    if (track.uri === playingTrack.uri) {
+      setPlay(!play);
+    }
+  };
   const onSelect = () => {
     setColor((Math.random() * 0xffffff) | 0);
   };
@@ -49,14 +62,14 @@ function Button(props) {
   return (
     <Box>
       <Interactive onSelect={onImageSelect}>
-        <Image imgSrc={url} position={[0, 0, -1]} />
+        <Image imgSrc={track.albumUrl} position={[0, 0, -1]} />
       </Interactive>
-      <Image imgSrc="/Panel_Assets/Piano_Ballads_Panel.png" position={[-1.2, 0, -1]} />
+      {/* <Image imgSrc="/Panel_Assets/Piano_Ballads_Panel.png" position={[-1.2, 0, -1]} />
       <Image imgSrc="/Panel_Assets/Piano_Ballads_Panel.png" position={[-1.2, 0, -1]} />
       <Image imgSrc="/Panel_Assets/Safar_Mix_Panel.png" position={[1.2, 0, -1]} />
       <Image imgSrc="/Panel_Assets/On_Repeat_Panel.png" position={[-1.5, 1, -1]} />
       <Image imgSrc="/Panel_Assets/Time_Capsule_Panel.png" position={[0, 1, -1]} />
-      <Image imgSrc="/Panel_Assets/Repeat_Rewind_Panel.png" position={[1.5, 1, -1]} />
+      <Image imgSrc="/Panel_Assets/Repeat_Rewind_Panel.png" position={[1.5, 1, -1]} /> */}
     </Box>
   );
 }
@@ -81,7 +94,6 @@ const SpotifyPage = () => {
     return (
         <>
             <div>Hello</div>
-            <XrHitModelContainer /> 
             <ARButton />
             <Canvas>
                 <XR referenceSpace="local">
