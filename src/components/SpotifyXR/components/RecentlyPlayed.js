@@ -65,7 +65,7 @@ function Button({track, chooseTrack, ...props}) {
   return (
     <Box>
       <Interactive onSelect={onImageSelect}>
-        <Image imgSrc={url} position={[0, 0, -1]} />
+        <Image imgSrc={track.albumUrl} position={[0, 0, -1]} />
       </Interactive>
       {/* <Image imgSrc="/Panel_Assets/Piano_Ballads_Panel.png" position={[-1.2, 0, -1]} />
       <Image imgSrc="/Panel_Assets/Piano_Ballads_Panel.png" position={[-1.2, 0, -1]} />
