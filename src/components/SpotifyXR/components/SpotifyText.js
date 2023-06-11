@@ -13,7 +13,7 @@ import {
   MeshTransmissionMaterial
 } from '@react-three/drei'
 import { useControls, button } from 'leva'
-import { EffectComposer, HueSaturation, BrightnessContrast } from '@react-three/postprocessing'
+//import { EffectComposer, HueSaturation, BrightnessContrast } from '@react-three/postprocessing'
 
 export default function SpotifyText() {
   const { autoRotate, text, shadow, ...config } = useControls({
