@@ -17,6 +17,7 @@ import * as THREE from 'three';
 import { useRecoilState } from "recoil";
 import { playingTrackState, playState } from "../../../atoms/playerAtom";
 
+import SpotifyText from "./SpotifyText";
 
 function Image(props) {
   const { imgSrc, position } = props;
@@ -146,6 +147,7 @@ function Right({ spotifyApi, chooseTrack }) {
             }
           </Interactive>
        </Box>
+       <SpotifyText />
        <Controllers />
               </XR>
           </Canvas>
