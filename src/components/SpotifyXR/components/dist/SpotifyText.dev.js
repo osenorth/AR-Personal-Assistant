@@ -14,7 +14,6 @@
 // } from '@react-three/drei'
 // import { useControls, button } from 'leva'
 // //import { EffectComposer, HueSaturation, BrightnessContrast } from '@react-three/postprocessing'
-
 // export default function SpotifyText() {
 //   const { autoRotate, text, shadow, ...config } = useControls({
 //     text: 'Inter',
@@ -81,7 +80,6 @@
 //     </Canvas>
 //   )
 // }
-
 // const Grid = ({ number = 23, lineWidth = 0.026, height = 0.5 }) => (
 //   // Renders a grid and crosses as instances
 //   <Instances position={[0, -1.02, 0]}>
@@ -98,7 +96,6 @@
 //     <gridHelper args={[100, 100, '#bbb', '#bbb']} position={[0, -0.01, 0]} />
 //   </Instances>
 // )
-
 // function Text({ children, config, font = '/Inter_Medium_Regular.json', ...props }) {
 //   const texture = useLoader(RGBELoader, 'https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/aerodynamics_workshop_1k.hdr')
 //   return (
@@ -125,3 +122,4 @@
 //     </>
 //   )
 // }
+"use strict";
