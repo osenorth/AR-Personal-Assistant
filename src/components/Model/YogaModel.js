@@ -24,6 +24,7 @@ export default function Model(props) {
   if (modelName === "trikonasana")
     return (
       <TrikonasanaModel
+        scaleMul={scaleMul}
         nodes={nodes}
         materials={materials}
         group={group}
@@ -34,6 +35,7 @@ export default function Model(props) {
   if (modelName === "virabhadrasana3")
     return (
       <Virabhadrasana3Model
+        scaleMul={scaleMul}
         nodes={nodes}
         materials={materials}
         group={group}
@@ -46,7 +48,7 @@ export default function Model(props) {
       <group name="Scene">
         <group
           name="Armature"
-          rotation={[Math.PI * 0.1, Math.PI * 0.1, 0]}
+          rotation={[Math.PI * 0.1, Math.PI * 0.125, 0]}
           scale={[scaleMul, scaleMul, scaleMul]}
           position={[0, -0.5, -0.75]}
         >
@@ -170,7 +172,7 @@ export default function Model(props) {
   );
 }
 
-function TrikonasanaModel({ nodes, materials, group, props }) {
+function TrikonasanaModel({ scaleMul, nodes, materials, group, props }) {
   return (
     <group ref={group} {...props} dispose={null}>
       <group name="Scene">
@@ -280,13 +282,13 @@ function TrikonasanaModel({ nodes, materials, group, props }) {
   );
 }
 
-function Virabhadrasana3Model({ nodes, materials, group, props }) {
+function Virabhadrasana3Model({ scaleMul, nodes, materials, group, props }) {
   return (
     <group ref={group} {...props} dispose={null}>
       <group name="Scene">
         <group
           name="Armature"
-          rotation={[Math.PI * 0.1, Math.PI * 0.2, 0]}
+          rotation={[Math.PI * 0.1, Math.PI * 0.3, 0]}
           scale={[scaleMul, scaleMul, scaleMul]}
           position={[0, -0.5, -0.75]}
         >

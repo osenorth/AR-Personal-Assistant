@@ -56,7 +56,7 @@ const XrHitModel = ({ modelName, zRotationMul, scaleMul, type }) => {
               key={id}
               position={position}
               modelName={modelName}
-              scaleMul={0.1}
+              scaleMul={0.15}
             />
           );
         })}
