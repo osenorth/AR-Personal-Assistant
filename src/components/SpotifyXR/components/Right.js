@@ -3,12 +3,12 @@ import { MdOutlineSettings } from "react-icons/md";
 import { BiBell } from "react-icons/bi";
 import { ViewGridIcon } from "@heroicons/react/solid";
 import Dropdown from "./Dropdown";
-import React, { Suspense, useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState, useRef, useMemo} from "react";
 import { useSession } from "next-auth/react";
 import RecentlyPlayed from "./RecentlyPlayed";
 
 import { createRoot } from 'react-dom/client';
-import { Canvas, useFrame, useLoader } from "@react-three/fiber";
+import { Canvas, useFrame, useLoader, useThree} from "@react-three/fiber";
 import { Sky, OrbitControls, Text } from "@react-three/drei";
 import XrHitModelContainer from "../../../containers/XRHitModelContainer/XRHitModelContainer";
 import { Interactive, XR, ARButton, Controllers } from '@react-three/xr';
@@ -52,6 +52,55 @@ function Box({ color, size, scale, children, ...rest }) {
       {children}
     </mesh>
   );
+}
+
+function Scene({ margin = 0.5 }) {
+  const { width, height } = useThree((state) => state.viewport)
+  return (
+    <>
+      <Center bottom right position={[-width / 5 + margin, height / 3 - margin, 0]}>
+        <Text3D letterSpacing={-0.06} size={0.5} font="/Inter_Medium_Regular.json">
+          top left
+          <meshStandardMaterial color="white" />
+        </Text3D>
+      </Center>
+      <Center top left position={[width / 10 - margin, -height / 5 + margin, 0]}>
+        <Text3D letterSpacing={-0.06} size={0.5} font="/Inter_Medium_Regular.json">
+          bottom right
+          <meshStandardMaterial color="white" />
+        </Text3D>
+      </Center>
+      <Center rotation={[-0.5, -0.25, 0]}>
+        <Text3D
+          curveSegments={32}
+          bevelEnabled
+          bevelSize={0.04}
+          bevelThickness={0.1}
+          height={0.5}
+          lineHeight={0.5}
+          letterSpacing={-0.06}
+          size={1.5}
+          font="/Inter_Medium_Regular.json">
+          {`Spotify`}
+          <meshNormalMaterial />
+        </Text3D>
+        
+      </Center>
+    </>
+  )
+}
+
+
+function Jumbo() {
+  const ref = useRef()
+  useFrame(({ clock }) => (ref.current.rotation.x = ref.current.rotation.y = ref.current.rotation.z = Math.sin(clock.getElapsedTime()) * 0.3))
+  return (
+    <group ref={ref}>
+      <Text hAlign="right" position={[-12, 6.5, 0]} children="THREE" />
+      <Text hAlign="right" position={[-12, 0, 0]} children="TRES" />
+      <Text hAlign="right" position={[-12, -6.5, 0]} children="TROIS" />
+    </group>
+  )
 }
 
 // function Button({track, chooseTrack, ...props}) {
@@ -100,35 +149,10 @@ function Right({ spotifyApi, chooseTrack }) {
   const [play, setPlay] = useRecoilState(playState);
   const [playingTrack, setPlayingTrack] = useRecoilState(playingTrackState);
 
-  const { autoRotate, text, shadow, ...config } = {
-    text: 'Inter',
-    backside: true,
-    backsideThickness: { value: 0.3, min: 0, max: 2 },
-    samples: { value: 16, min: 1, max: 32, step: 1 },
-    resolution: { value: 1024, min: 64, max: 2048, step: 64 },
-    transmission: { value: 1, min: 0, max: 1 },
-    clearcoat: { value: 0, min: 0.1, max: 1 },
-    clearcoatRoughness: { value: 0.0, min: 0, max: 1 },
-    thickness: { value: 0.3, min: 0, max: 5 },
-    chromaticAberration: { value: 5, min: 0, max: 5 },
-    anisotropy: { value: 0.3, min: 0, max: 1, step: 0.01 },
-    roughness: { value: 0, min: 0, max: 1, step: 0.01 },
-    distortion: { value: 0.5, min: 0, max: 4, step: 0.01 },
-    distortionScale: { value: 0.1, min: 0.01, max: 1, step: 0.01 },
-    temporalDistortion: { value: 0, min: 0, max: 1, step: 0.01 },
-    ior: { value: 1.5, min: 0, max: 2, step: 0.01 },
-    color: '#ff9cf5',
-    gColor: '#ff7eb3',
-    shadow: '#750d57',
-    autoRotate: false,
-    screenshot: button(() => {
-      // Save the canvas as a *.png
-      const link = document.createElement('a')
-      link.setAttribute('download', 'canvas.png')
-      link.setAttribute('href', document.querySelector('canvas').toDataURL('image/png').replace('image/png', 'image/octet-stream'))
-      link.click()
-    })
-  }
+  const config = useMemo(
+    () => ({ size: 40, height: 30, curveSegments: 32, bevelEnabled: true, bevelThickness: 6, bevelSize: 2.5, bevelOffset: 0, bevelSegments: 8 }),
+    []
+  )
 
   const initialX = 0;
   const initialY = 0;
@@ -188,22 +212,11 @@ function Right({ spotifyApi, chooseTrack }) {
             }
           </Interactive>
        </Box>
-       <Text config={config} rotation={[0, 0, 0]} position={[0, -1, 2.25]}>
-        {text}
-      </Text>
-      <Environment resolution={32}>
-        <group rotation={[-Math.PI / 4, -0.3, 0]}>
-          <Lightformer intensity={20} rotation-x={Math.PI / 2} position={[0, 5, -9]} scale={[10, 10, 1]} />
-          <Lightformer intensity={2} rotation-y={Math.PI / 2} position={[-5, 1, -1]} scale={[10, 2, 1]} />
-          <Lightformer intensity={2} rotation-y={Math.PI / 2} position={[-5, -1, -1]} scale={[10, 2, 1]} />
-          <Lightformer intensity={2} rotation-y={-Math.PI / 2} position={[10, 1, 0]} scale={[20, 2, 1]} />
-          <Lightformer type="ring" intensity={2} rotation-y={Math.PI / 2} position={[-0.1, -1, -5]} scale={10} />
-        </group>
-      </Environment>
-      {/** Soft shadows */}
-      <AccumulativeShadows frames={100} color={shadow} colorBlend={5} toneMapped={true} alphaTest={0.9} opacity={1} scale={30} position={[0, -1.01, 0]}>
-        <RandomizedLight amount={4} radius={10} ambient={0.5} intensity={1} position={[0, 10, -10]} size={15} mapSize={1024} bias={0.0001} />
-      </AccumulativeShadows>
+        <Scene />
+       {/* <Text3D font="/Inter_Medium_Regular.json">
+            Spotify
+            <meshNormalMaterial />
+        </Text3D> */}
        <Controllers />
               </XR>
           </Canvas>
@@ -212,32 +225,6 @@ function Right({ spotifyApi, chooseTrack }) {
   );
 }
 
-function TextCustom({ children, config, font = '/Inter_Medium_Regular.json', ...props }) {
-  const texture = useLoader(RGBELoader, 'https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/aerodynamics_workshop_1k.hdr')
-  return (
-    <>
-      <group>
-        <Center scale={[0.8, 1, 1]} front top {...props}>
-          <Text3D
-            castShadow
-            bevelEnabled
-            font={font}
-            scale={5}
-            letterSpacing={-0.03}
-            height={0.25}
-            bevelSize={0.01}
-            bevelSegments={10}
-            curveSegments={128}
-            bevelThickness={0.01}>
-            {children}
-            <MeshTransmissionMaterial {...config} background={texture} />
-          </Text3D>
-        </Center>
-        {/* <Grid /> */}
-      </group>
-    </>
-  )
-}
 
 // const SpotifyPanel = ({track, chooseTrack}) => {
 
