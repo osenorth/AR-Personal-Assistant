@@ -59,13 +59,13 @@ function Scene({ margin = 0.5 }) {
   return (
     <>
       <Center bottom right position={[-width / 5 + margin, height / 3 - margin, 0]}>
-        <Text3D letterSpacing={-0.06} size={0.5} font="/Inter_Medium_Regular.json">
+        <Text3D letterSpacing={-0.06} size={0.1} font="/Inter_Medium_Regular.json">
           top left
           <meshStandardMaterial color="white" />
         </Text3D>
       </Center>
       <Center top left position={[width / 10 - margin, -height / 5 + margin, 0]}>
-        <Text3D letterSpacing={-0.06} size={0.5} font="/Inter_Medium_Regular.json">
+        <Text3D letterSpacing={-0.06} size={0.1} font="/Inter_Medium_Regular.json">
           bottom right
           <meshStandardMaterial color="white" />
         </Text3D>
@@ -79,7 +79,7 @@ function Scene({ margin = 0.5 }) {
           height={0.5}
           lineHeight={0.5}
           letterSpacing={-0.06}
-          size={1.5}
+          size={0.3}
           font="/Inter_Medium_Regular.json">
           {`Spotify`}
           <meshNormalMaterial />
@@ -90,18 +90,6 @@ function Scene({ margin = 0.5 }) {
   )
 }
 
-
-function Jumbo() {
-  const ref = useRef()
-  useFrame(({ clock }) => (ref.current.rotation.x = ref.current.rotation.y = ref.current.rotation.z = Math.sin(clock.getElapsedTime()) * 0.3))
-  return (
-    <group ref={ref}>
-      <Text hAlign="right" position={[-12, 6.5, 0]} children="THREE" />
-      <Text hAlign="right" position={[-12, 0, 0]} children="TRES" />
-      <Text hAlign="right" position={[-12, -6.5, 0]} children="TROIS" />
-    </group>
-  )
-}
 
 // function Button({track, chooseTrack, ...props}) {
 //   const [hover, setHover] = useState(false);
