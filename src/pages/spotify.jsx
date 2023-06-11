@@ -11,6 +11,8 @@ import { playingTrackState, playState } from "../atoms/playerAtom";
 
 import Rive from '@rive-app/react-canvas';
 
+import MusicIndex from './use-cases/music/musicIndex';
+
 const Simple = () => <Rive src="https://cdn.rive.app/animations/vehicles.riv" />;
 
 function Image(props) {
@@ -36,13 +38,15 @@ function Box({ color, size, scale, children, ...rest }) {
   );
 }
 
-function Button(props) {
+function Button({track, chooseTrack, ...props}) {
   const [hover, setHover] = useState(false);
   const [url, setUrl] = useState('/Panel_Assets/Adele_Spotify_Panel.png');
   const [color, setColor] = useState('blue');
 
   const [play, setPlay] = useRecoilState(playState);
   const [playingTrack, setPlayingTrack] = useRecoilState(playingTrackState);
+
+  console.log(track)
 
   const handlePlay = () => {
     chooseTrack(track);
@@ -62,7 +66,7 @@ function Button(props) {
   return (
     <Box>
       <Interactive onSelect={onImageSelect}>
-        <Image imgSrc={track.albumUrl} position={[0, 0, -1]} />
+        <Image imgSrc={url} position={[0, 0, -1]} />
       </Interactive>
       {/* <Image imgSrc="/Panel_Assets/Piano_Ballads_Panel.png" position={[-1.2, 0, -1]} />
       <Image imgSrc="/Panel_Assets/Piano_Ballads_Panel.png" position={[-1.2, 0, -1]} />
@@ -91,18 +95,20 @@ function Button(props) {
 // }
 
 const SpotifyPage = () => {
+
     return (
         <>
-            <div>Hello</div>
-            <ARButton />
+            {/* <div>Hello</div> */}
+            <MusicIndex />
+            {/* <ARButton />
             <Canvas>
                 <XR referenceSpace="local">
                 <ambientLight />
                 <pointLight position={[10, 10, 10]} />
-                <Button position={[0, 0.1, -0.2]} />
+                <Button position={[0, 0.1, -0.2]} track={track} chooseTrack={chooseTrack}/>
                 <Controllers />
                 </XR>
-            </Canvas>
+            </Canvas> */}
         </>
         
     )

@@ -35,13 +35,13 @@ function Right({ spotifyApi, chooseTrack }) {
     <section style={{ padding: "1rem", gap: "2rem" }} className="p-4 space-y-8 pr-8">
     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }} className="flex space-x-2 items-center justify-between">
       {/* Icons */}
-      <div style={{ display: "flex", alignItems: "center", gap: "1rem", borderWidth: "2px", borderColor: "#262626", borderRadius: "9999px", height: "3rem", padding: "0.75rem", paddingLeft: "1rem", paddingRight: "1rem" }} className="flex items-center space-x-4 border-2 border-[#262626] rounded-full h-12 py-3 px-4">
+      {/* <div style={{ display: "flex", alignItems: "center", gap: "1rem", borderWidth: "2px", borderColor: "#262626", borderRadius: "9999px", height: "3rem", padding: "0.75rem", paddingLeft: "1rem", paddingRight: "1rem" }} className="flex items-center space-x-4 border-2 border-[#262626] rounded-full h-12 py-3 px-4">
         <HiOutlineShieldCheck style={{ color: "#ccc", fontSize: "1.5rem" }} className="text-[#ccc] text-xl" />
         <MdOutlineSettings style={{ color: "#ccc", fontSize: "1.5rem" }} className="text-[#ccc] text-xl" />
         <BiBell style={{ color: "#ccc", fontSize: "1.5rem" }} className="text-[#ccc] text-xl" />
-      </div>
+      </div> */}
       {/* Profile */}
-      <Dropdown />
+      {/* <Dropdown /> */}
     </div>
   
     {/* Recently Played Tracks */}

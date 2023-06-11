@@ -58,7 +58,7 @@ function Body({ spotifyApi, chooseTrack }) {
 
   return (
     <section style={{ backgroundColor: 'black', marginLeft: '24px', paddingTop: '1rem', paddingBottom: '6rem' }}>
-    <Search search={search} setSearch={setSearch} />
+    {/* <Search search={search} setSearch={setSearch} />
   
     <div style={{ display: 'grid', overflowY: 'scroll', scrollbarWidth: 'thin', scrollbarColor: 'gray', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gridGap: '2rem', padding: '1rem' }}>
       {searchResults.length === 0
@@ -83,7 +83,7 @@ function Body({ spotifyApi, chooseTrack }) {
     </div>
   
     <div style={{ display: 'flex', gap: '2rem', position: 'absolute', minWidth: '100%', marginLeft: '1.5rem' }}>
-      {/* Genres */}
+ 
       <div className="max-w-[270px] xl:inline-block">
         <h2 style={{ color: 'white', fontWeight: 'bold', marginBottom: '0.75rem' }}>Genres</h2>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem 1rem', marginBottom: '0.75rem' }}>
@@ -100,7 +100,7 @@ function Body({ spotifyApi, chooseTrack }) {
         <button className="btn">All Genres</button>
       </div>
   
-      {/* Tracks */}
+     
       <div>
         <h2 style={{ color: 'white', fontWeight: 'bold', marginBottom: '0.75rem' }}>
           {searchResults.length === 0 ? "New Releases" : "Tracks"}
@@ -110,11 +110,13 @@ function Body({ spotifyApi, chooseTrack }) {
             ? newReleases
                 .slice(4, newReleases.length)
                 .map((track) => (
+                  <>
                   <Track
                     key={track.id}
                     track={track}
                     chooseTrack={chooseTrack}
                   />
+                  </>
                 ))
             : searchResults
                 .slice(4, searchResults.length)
@@ -127,7 +129,7 @@ function Body({ spotifyApi, chooseTrack }) {
                 ))}
         </div>
       </div>
-    </div>
+    </div> */}
   </section>
   
   );
