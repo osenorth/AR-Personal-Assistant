@@ -19,13 +19,15 @@ export default function MusicIndex() {
   }
 
   return (
-    <div className="">
-      <Head>
-        <title>Spotify - Dashboard</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    // <div className="">
+    //   <Head>
+    //     <title>Spotify - Dashboard</title>
+    //     <link rel="icon" href="/favicon.ico" />
+    //   </Head>
 
-      <Dashboard />
-    </div>
+    //   <Dashboard />
+    // </div>
+
+    <Dashboard />
   );
 }

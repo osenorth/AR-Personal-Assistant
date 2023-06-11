@@ -57,7 +57,8 @@ function Body({ spotifyApi, chooseTrack }) {
   }, [accessToken]);
 
   return (
-    <section style={{ backgroundColor: 'black', marginLeft: '24px', paddingTop: '1rem', paddingBottom: '6rem' }}>
+    // <section style={{ backgroundColor: 'black', marginLeft: '24px', paddingTop: '1rem', paddingBottom: '6rem' }}>
+    <section>
     {/* <Search search={search} setSearch={setSearch} />
   
     <div style={{ display: 'grid', overflowY: 'scroll', scrollbarWidth: 'thin', scrollbarColor: 'gray', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gridGap: '2rem', padding: '1rem' }}>
