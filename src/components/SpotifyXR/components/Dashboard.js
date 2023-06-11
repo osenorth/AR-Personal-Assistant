@@ -9,7 +9,7 @@ import Right from "./Right";
 import Sidebar from "./Sidebar";
 
 const spotifyApi = new SpotifyWebApi({
-  clientId: process.env.SPOTIFY_CLIENT_ID,
+  clientId: process.env.NEXT_SPOTIFY_CLIENT_ID,
 });
 
 function Dashboard() {
@@ -27,7 +27,7 @@ function Dashboard() {
     setPlayingTrack(track);
   };
 
-  console.log(process.env.SPOTIFY_CLIENT_ID)
+  console.log(process.env.NEXT_SPOTIFY_CLIENT_ID)
 
   return (
     <main style={{ display: 'flex', minHeight: '100vh', minWidth: 'max-content', backgroundColor: 'black', paddingBottom: '6rem' }}>
