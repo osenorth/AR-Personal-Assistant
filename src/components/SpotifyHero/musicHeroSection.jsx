@@ -58,10 +58,10 @@ export default function MusicHeroSection() {
         </Suspense>
       </Canvas>
       <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate3d(-50%,-50%,0)'}}>
-        <h6 className={stylesHero.headerAlt} style={{ margin: 0, padding: 0, fontSize: '10em', fontWeight: 500, letterSpacing: '-0.05em', lineHeight: '18vh' }}>visualise</h6>
-        <h6 className={stylesHero.headerAlt} style={{ margin: 0, padding: 0, fontSize: '10em', fontWeight: 500, letterSpacing: '-0.05em', lineHeight: '18vh' }}>music in a </h6>
-        <h6 className={stylesHero.headerAlt} style={{ margin: 0, padding: 0, fontSize: '10em', fontWeight: 500, letterSpacing: '-0.05em', lineHeight: '18vh' }}>whole new</h6>
-        <h6 className={stylesHero.headerAlt} style={{ margin: 0, padding: 0, fontSize: '10em', fontWeight: 500, letterSpacing: '-0.05em', lineHeight: '18vh' }}>dimension</h6>
+        <h6 className={stylesHero.headerAlt} style={{ margin: 0, padding: 0, fontWeight: 500, letterSpacing: '-0.05em'}}>visualise</h6>
+        <h6 className={stylesHero.headerAlt} style={{ margin: 0, padding: 0, fontWeight: 500, letterSpacing: '-0.05em'}}>music in a </h6>
+        <h6 className={stylesHero.headerAlt} style={{ margin: 0, padding: 0, fontWeight: 500, letterSpacing: '-0.05em'}}>whole new</h6>
+        <h6 className={stylesHero.headerAlt} style={{ margin: 0, padding: 0, fontWeight: 500, letterSpacing: '-0.05em'}}>dimension</h6>
 
       </div>
     </>

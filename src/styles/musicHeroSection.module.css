@@ -71,4 +71,23 @@
     background: linear-gradient(30deg, #39E5B6, #70B2D9);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    font-size: 10em;
+    line-height: 18vh;
   }
+
+  @media (max-width: 780px) {
+    /* CSS rules for reducing text size */
+    .headerAlt {
+      font-size: 5em;
+      line-height: 10vh;
+    }
+  }
+
+  @media (max-width: 400px) {
+    /* CSS rules for reducing text size */
+    .headerAlt {
+      font-size: 3em;
+      line-height: 8vh;
+    }
+  }
+  

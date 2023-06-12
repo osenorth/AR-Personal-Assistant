@@ -85,13 +85,6 @@ const SpotifyMusic = () => {
           )}
         </p>
 
-        {/* <h2 className={stylesHero.headerSub}>
-          There's not the smallest orb
-          <br />
-          which thou behold'st but in his motion
-          <br />
-          like an angel sings —
-        </h2> */}
       </div>
       {/* <MusicIndex /> */}
     </div>
