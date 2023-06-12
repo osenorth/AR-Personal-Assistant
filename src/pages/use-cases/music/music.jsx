@@ -75,7 +75,7 @@ const SpotifyMusic = () => {
               type="button"
               style={{ '--accent-color': '#1DB954' }}
               onClick={() => {
-                signIn('spotify', { callbackUrl: 'http://localhost:3000/spotify' });
+                signIn('spotify', { callbackUrl: '/spotify' });
                 console.log('clicked');
               }}
               disabled={session.status === 'loading'}
