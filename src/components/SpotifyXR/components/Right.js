@@ -58,33 +58,33 @@ function Scene({ margin = 0.5 }) {
   const { width, height } = useThree((state) => state.viewport)
   return (
     <>
-      <Center position={[0, 0, -5]}>
+      {/* <Center position={[0, 0, -5]}>
         <Text3D letterSpacing={-0.06} size={0.1} font="/Inter_Medium_Regular.json">
           welcome to
           <meshStandardMaterial color="white" />
         </Text3D>
-      </Center>
-      <Center position={[0, 2, -3]}>
+      </Center> */}
+      <Center position={[0, 2, -3]} rotation={[-0.5, -0.25, 0]}>
         <Text3D
           curveSegments={32}
           bevelEnabled
           bevelSize={0.04}
           bevelThickness={0.1}
           height={0.5}
-          lineHeight={0.2}
+          lineHeight={1}
           letterSpacing={-0.02}
-          size={0.5}
+          size={1}
           font="/Inter_Medium_Regular.json">
-          {`SPOTIFY XR`}
+          {`WELCOME TO \n SPOTIFY XR`}
           <meshNormalMaterial />
         </Text3D>
       </Center>
-      <Center position={[0, 0, -5]}>
+      {/* <Center position={[0, 0, -5]}>
         <Text3D letterSpacing={-0.06} size={0.1} font="/Inter_Medium_Regular.json">
           osenorth.
           <meshStandardMaterial color="white" />
         </Text3D>
-      </Center>
+      </Center> */}
     </>
   )
 }
@@ -142,8 +142,8 @@ function Right({ spotifyApi, chooseTrack }) {
   )
 
   const initialX = -1;
-  const initialY = -1;
-  const initialZ = -1;
+  const initialY = 0;
+  const initialZ = -2;
 
   // const handlePlay = () => {
   //   chooseTrack(track);
@@ -194,8 +194,11 @@ function Right({ spotifyApi, chooseTrack }) {
               //   track={track}
               //   chooseTrack={chooseTrack}
               // />
+              <>
               <Image imgSrc={track.albumUrl} position={[initialX+(2*index), initialY, initialZ]} />
-            ))
+              <Text color={'black'}>{track.artist}</Text>
+              </>
+              ))
             }
           </Interactive>
        </Box>
