@@ -11,7 +11,7 @@ function Signin({ providers }) {
 
   useEffect(() => {
     if (session) {
-      router.push("/");
+      router.push("/spotify");
     }
   }, [session]);
 
