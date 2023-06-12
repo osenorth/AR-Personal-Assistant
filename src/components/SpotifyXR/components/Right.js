@@ -196,7 +196,7 @@ function Right({ spotifyApi, chooseTrack }) {
               // />
               <>
               <Image imgSrc={track.albumUrl} position={[initialX+(2*index), initialY, initialZ]} />
-              <Text color={'black'}>{track.artist}</Text>
+              <Text color={'black'} font="/Inter_Medium_Regular.json" fontSize={1} position={[initialX+(2*index), initialY, initialZ]}>{track.artist}</Text>
               </>
               ))
             }
