@@ -70,7 +70,7 @@ function Scene({ margin = 0.5 }) {
           <meshStandardMaterial color="white" />
         </Text3D>
       </Center> */}
-      <Center position={[0, 5, -2]}>
+      <Center position={[0, 2, -3]}>
         <Text3D
           curveSegments={32}
           bevelEnabled
@@ -78,10 +78,11 @@ function Scene({ margin = 0.5 }) {
           bevelThickness={0.1}
           height={0.3}
           lineHeight={0.2}
-          letterSpacing={-0.06}
+          letterSpacing={-0.02}
           size={0.3}
           font="/Inter_Medium_Regular.json">
-          {`Spotify`}
+          {`SPOTIFY
+                XR`}
           <meshNormalMaterial />
         </Text3D>
         
@@ -143,7 +144,7 @@ function Right({ spotifyApi, chooseTrack }) {
   )
 
   const initialX = -1;
-  const initialY = 2;
+  const initialY = 0;
   const initialZ = -1;
 
   // const handlePlay = () => {
