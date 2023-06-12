@@ -58,7 +58,7 @@ function Scene({ margin = 0.5 }) {
   const { width, height } = useThree((state) => state.viewport)
   return (
     <>
-      <Center position={[0, 0, -5]}>
+      {/* <Center position={[0, 0, -5]}>
         <Text3D letterSpacing={-0.06} size={0.1} font="/Inter_Medium_Regular.json">
           top left
           <meshStandardMaterial color="white" />
@@ -69,8 +69,8 @@ function Scene({ margin = 0.5 }) {
           bottom right
           <meshStandardMaterial color="white" />
         </Text3D>
-      </Center>
-      <Center position={[0, 0, -5]}>
+      </Center> */}
+      <Center position={[0, 5, -2]}>
         <Text3D
           curveSegments={32}
           bevelEnabled
@@ -142,8 +142,8 @@ function Right({ spotifyApi, chooseTrack }) {
     []
   )
 
-  const initialX = 0;
-  const initialY = 0;
+  const initialX = -1;
+  const initialY = 2;
   const initialZ = -1;
 
   // const handlePlay = () => {
@@ -195,7 +195,7 @@ function Right({ spotifyApi, chooseTrack }) {
               //   track={track}
               //   chooseTrack={chooseTrack}
               // />
-              <Image imgSrc={track.albumUrl} position={[initialX+index, initialY+index, initialZ+index]} />
+              <Image imgSrc={track.albumUrl} position={[initialX+index, initialY, initialZ]} />
             ))
             }
           </Interactive>
