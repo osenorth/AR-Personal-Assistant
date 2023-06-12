@@ -58,19 +58,19 @@ function Scene({ margin = 0.5 }) {
   const { width, height } = useThree((state) => state.viewport)
   return (
     <>
-      <Center>
+      <Center position={[0, 0, -5]}>
         <Text3D letterSpacing={-0.06} size={0.1} font="/Inter_Medium_Regular.json">
           top left
           <meshStandardMaterial color="white" />
         </Text3D>
       </Center>
-      <Center>
+      <Center position={[0, 0, -5]}>
         <Text3D letterSpacing={-0.06} size={0.1} font="/Inter_Medium_Regular.json">
           bottom right
           <meshStandardMaterial color="white" />
         </Text3D>
       </Center>
-      <Center>
+      <Center position={[0, 0, -5]}>
         <Text3D
           curveSegments={32}
           bevelEnabled
