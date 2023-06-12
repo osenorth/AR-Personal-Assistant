@@ -64,7 +64,7 @@ function Scene({ margin = 0.5 }) {
           <meshStandardMaterial color="white" />
         </Text3D>
       </Center> */}
-      <Center position={[0, 2, -3]} rotation={[0, 0, 0]}>
+      <Center position={[0, 3, -3]} rotation={[0, 0, 0]}>
         <Text3D
           curveSegments={32}
           bevelEnabled
@@ -195,9 +195,9 @@ function Right({ spotifyApi, chooseTrack }) {
               //   chooseTrack={chooseTrack}
               // />
               <>
-              <Text color={'#39E5B6'} font="/Inter_Medium_Regular.json" fontSize={0.2} position={[initialX+(2*index), initialY+0.2, initialZ]}>{track.title}</Text>
+              <Text color={'black'} font="/Inter_Medium_Regular.json" fontSize={0.2} position={[initialX+(2*index), initialY+1, initialZ]}>{track.title}</Text>
               <Image imgSrc={track.albumUrl} position={[initialX+(2*index), initialY, initialZ]} />
-              <Text color={'#39E5B6'} font="/Inter_Medium_Regular.json" fontSize={0.2} position={[initialX+(2*index), initialY-0.2, initialZ]}>{track.artist}</Text>
+              <Text color={'black'} font="/Inter_Medium_Regular.json" fontSize={0.2} position={[initialX+(2*index), initialY-1, initialZ]}>{track.artist}</Text>
               </>
               ))
             }
