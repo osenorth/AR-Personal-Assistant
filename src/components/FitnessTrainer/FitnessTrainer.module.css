@@ -42,14 +42,14 @@
 }
 
 .yogaWebcam {
-  transform: rotateY(180deg);
   position: absolute;
+  transform: scale(1.5) rotateY(180deg);
 }
 
 .yogaCanvas {
-  transform: rotateY(180deg);
   z-index: 1;
   position: absolute;
+  transform: scale(1.5) rotateY(180deg);
 }
 
 .resultsContainer {
@@ -152,6 +152,10 @@
   .workoutWebcam,
   .workoutCanvas {
     width: auto;
+  }
+  .yogaWebcam,
+  .yogaCanvas {
+    transform: rotateY(180deg);
   }
   .resultsContainer {
     width: 100%;
