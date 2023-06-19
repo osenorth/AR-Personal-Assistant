@@ -6,11 +6,14 @@ import {
   Autocomplete,
   DirectionsRenderer,
 } from "@react-google-maps/api";
+import MapAI from "./MapAI";
 import * as styles from "./Direction.module.css";
 import { GiPathDistance } from "react-icons/gi";
 import { ImLocation } from "react-icons/im";
 import { MdOutlineClear } from "react-icons/md";
 import { Box, ButtonGroup, Button, TextField } from "@mui/material";
+import AssistantDirectionIcon from "@mui/icons-material/AssistantDirection";
+
 const containerStyle = {
   width: "100%",
   height: "100vh",
@@ -21,14 +24,8 @@ const center = {
   lng: 77.19824676484188,
 };
 
-export default function ({ mapState, updateMapState }) {
-  const {
-    travelMode,
-    direction,
-    distance,
-    duration,
-    message,
-  } = mapState;
+export default function ({ mapState, updateMapState, toggleComponent }) {
+  const { travelMode, direction, distance, duration, message } = mapState;
   const originRef = useRef();
   const destinationRef = useRef();
   const [map, setMap] = useState(null);
@@ -52,7 +49,6 @@ export default function ({ mapState, updateMapState }) {
       start: originRef.current.value,
       destination: destinationRef.current.value,
     });
-    console.log("Harshil", mapState);
     if (originRef.current.value == "" || destinationRef.current.value == "") {
       updateMapState({
         message: "No Possible Route from Location and Destination.",
@@ -118,6 +114,7 @@ export default function ({ mapState, updateMapState }) {
                 label={"start"}
                 inputRef={originRef}
                 placeholder="Your Location"
+                defaultValue={mapState.start}
                 sx={{
                   margin: "5px",
                 }}
@@ -128,6 +125,7 @@ export default function ({ mapState, updateMapState }) {
                 label="end"
                 inputRef={destinationRef}
                 placeholder="Your Destination"
+                defaultValue={mapState.destination}
                 sx={{
                   margin: "5px",
                 }}
@@ -146,9 +144,6 @@ export default function ({ mapState, updateMapState }) {
             </div>
           )}
         </div>
-        {/* <button onClick={() => ({ text: `${promptGPT.locationGPT(start)}` })}>
-          mic
-        </button> */}
         {direction ? (
           <div className={styles.info}>
             <div>Distance : {distance}</div>
@@ -196,6 +191,21 @@ export default function ({ mapState, updateMapState }) {
           )}
         </Box>
       </Box>
+      {mapState.start != "" && mapState.destination != "" ? (
+        <>
+          <Box
+            className={styles.navigateAR}
+            sx={{
+              fontSize: 64,
+            }}
+          >
+            <AssistantDirectionIcon onClick={toggleComponent} />
+          </Box>
+          <MapAI mapState={mapState} />
+        </>
+      ) : (
+        <></>
+      )}
     </GoogleMap>
   ) : (
     <>Loading</>

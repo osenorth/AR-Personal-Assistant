@@ -97,3 +97,20 @@
     margin: 5px; /* Adjusted for mobile devices */
   }
 }
+
+.navigateAR {
+  position: fixed;
+  bottom: 75px;
+  left: 5px;
+  background-color: aliceblue;
+  color: rgb(31, 0, 116);
+  border-radius: 20%;
+  border: 1px solid rgb(33, 31, 31);
+  height: 60px;
+  width: 60px;
+  align-content: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+}
