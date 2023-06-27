@@ -77,6 +77,17 @@
   }
 }
 
+.card {
+  margin: 3em auto;
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+  height: 400px;
+  border-radius: 6px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+}
+
 /* Media query for mobile devices */
 @media screen and (max-width: 768px) {
   .navigationModal {
@@ -96,21 +107,4 @@
     padding: 5px 6px; /* Adjusted for mobile devices */
     margin: 5px; /* Adjusted for mobile devices */
   }
-}
-
-.navigateAR {
-  position: fixed;
-  bottom: 75px;
-  left: 5px;
-  background-color: aliceblue;
-  color: rgb(31, 0, 116);
-  border-radius: 20%;
-  border: 1px solid rgb(33, 31, 31);
-  height: 60px;
-  width: 60px;
-  align-content: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
 }

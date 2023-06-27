@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import * as promptGPT from "./prompts";
 import Fab from "@mui/material/Fab";
 import Modal from "@mui/material/Modal";
@@ -18,9 +18,23 @@ export default function ({ mapState, updateMapState }) {
   const [endDesc, setEndDesc] = useState("Loading...");
   const [journeyDesc, setJourneyDesc] = useState("Loading...");
   const router = useRouter();
+  const [speech, setSpeech] = useState(window.speechSynthesis);
+
+  useEffect(() => {
+    if (router.isReady) {
+      setSpeech(window.speechSynthesis);
+    }
+  }, [router.isReady]);
+
   const handleClose = () => {
     setOpen(false);
   };
+
+  // const speak = (speechText) => {
+  //   const object = new SpeechSynthesisUtterance(speechText);
+  //   object.lang = "en-US";
+  //   speech.speak(object);
+  // };
 
   const askGPT = async (start, end) => {
     setOpen(true);
@@ -36,6 +50,9 @@ export default function ({ mapState, updateMapState }) {
     router.push("/chat"); // Redirect to '/other-page'
   };
 
+  // const AccordianChange = () => {
+  //   speak(endDesc);
+  // };
   return (
     <>
       <Box

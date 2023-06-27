@@ -10,6 +10,14 @@ import {
   CardContent,
 } from "@mui/material";
 import ReactHtmlParser from "react-html-parser";
+import dynamic from "next/dynamic";
+import { Fab } from "@mui/material";
+import MapIcon from "@mui/icons-material/Map";
+
+const Left = dynamic(() => import("./ModelViews/left"), { ssr: false });
+const Right = dynamic(() => import("./ModelViews/right"), { ssr: false });
+const Stop = dynamic(() => import("./ModelViews/stop"), { ssr: false });
+const Straight = dynamic(() => import("./ModelViews/straight"), { ssr: false });
 
 export default function ({ mapState, toggleComponent }) {
   const [directions, setDirections] = useState(null);
@@ -19,7 +27,6 @@ export default function ({ mapState, toggleComponent }) {
 
   useEffect(() => {
     const calculateDirections = async () => {
-      console.log(mapState);
       const response = await fetch(`/api/direction`, {
         method: "POST",
         headers: {
@@ -34,7 +41,6 @@ export default function ({ mapState, toggleComponent }) {
       const map_directions = data?.direction;
       setDirections(map_directions.routes[0].legs[0]);
     };
-
     calculateDirections();
   }, []);
 
@@ -79,13 +85,13 @@ export default function ({ mapState, toggleComponent }) {
     const doc = parser.parseFromString(instructions, "text/html");
     const textContent = doc.body.textContent || "";
     const words = textContent.trim().split(" ");
-    for (let i = 0; i < words.length; i++) {
+    for (let i = 0; i < words.length - 1; i++) {
       const value = words[i].trim();
       if (directions.includes(value)) {
         return value;
       }
     }
-    return "Keep Going";
+    return "stop";
   };
 
   return (
@@ -143,6 +149,35 @@ export default function ({ mapState, toggleComponent }) {
               </Typography>
             ) : (
               <>
+                <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
+                  <Box
+                    sx={{
+                      width: "100%",
+                      height: "50vh",
+                    }}
+                  >
+                    {/* Here instead of left, right, straight etc. Show the models. */}
+                    {extractFirstDirection(
+                      directions.steps[activeStep].html_instructions
+                    ) === "left" ? (
+                      <Left />
+                    ) : extractFirstDirection(
+                        directions.steps[activeStep].html_instructions
+                      ) === "right" ? (
+                      <Right />
+                    ) : extractFirstDirection(
+                        directions.steps[activeStep].html_instructions
+                      ) === "straight" ? (
+                      <Straight />
+                    ) : extractFirstDirection(
+                        directions.steps[activeStep].html_instructions
+                      ) === "stop" ? (
+                      <Stop />
+                    ) : (
+                      <></>
+                    )}
+                  </Box>
+                </Box>
                 <Typography sx={{ mt: 2, mb: 1, py: 1 }}>
                   Step {activeStep + 1}/{directions.steps.length}
                 </Typography>
@@ -165,28 +200,30 @@ export default function ({ mapState, toggleComponent }) {
                     Next
                   </Button>
                 </Box>
-                <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
-                  <Box
-                    sx={{
-                      width: "100px",
-                      height: "100px",
-                      backgroundColor: "#f50057",
-                      color: "#fff",
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      marginRight: "8px",
-                    }}
-                  >
-                    {/* Here instead of left, right, straight etc. Show the models. */}
-                    {extractFirstDirection(
-                      directions.steps[activeStep].html_instructions
-                    )}
-                  </Box>
-                </Box>
               </>
             )}
-            <button onClick={toggleComponent}>Map</button>
+            {/* <v?o></video> */}
+            <Box
+              sx={{
+                border: "1px solid black",
+                alignContent: "center",
+                borderRadius: "10%",
+                position: "fixed",
+                bottom: 20,
+                right: 5,
+                width: 60,
+                height: 60,
+                backgroundColor: "white",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                zIndex: 9999, // Ensure the button stays on top of other content
+              }}
+            >
+              <Fab aria-label="add" color="success" onClick={toggleComponent}>
+                <MapIcon />
+              </Fab>
+            </Box>
           </React.Fragment>
         ) : (
           <p>Loading directions...</p>

@@ -12,7 +12,8 @@ import { GiPathDistance } from "react-icons/gi";
 import { ImLocation } from "react-icons/im";
 import { MdOutlineClear } from "react-icons/md";
 import { Box, ButtonGroup, Button, TextField } from "@mui/material";
-import AssistantDirectionIcon from "@mui/icons-material/AssistantDirection";
+import Fab from "@mui/material/Fab";
+import ViewInArIcon from "@mui/icons-material/ViewInAr";
 
 const containerStyle = {
   width: "100%",
@@ -168,6 +169,7 @@ export default function ({ mapState, updateMapState, toggleComponent }) {
                     backgroundColor: "blue",
                     color: "white",
                     "&:hover": { color: "blue" },
+                    fontSize: 11,
                   }}
                   key={mode}
                   onClick={() => handleTravelModeChange(mode)}
@@ -183,6 +185,7 @@ export default function ({ mapState, updateMapState, toggleComponent }) {
                 backgroundColor: "blue",
                 color: "white",
                 "&:hover": { color: "blue" },
+                fontSize: 11,
               }}
               onClick={() => setShowOptions(!showOptions)}
             >
@@ -194,12 +197,25 @@ export default function ({ mapState, updateMapState, toggleComponent }) {
       {mapState.start != "" && mapState.destination != "" ? (
         <>
           <Box
-            className={styles.navigateAR}
             sx={{
-              fontSize: 64,
+              border: "1px solid black",
+              alignContent: "center",
+              borderRadius: "10%",
+              position: "fixed",
+              bottom: 80,
+              left: 5,
+              width: 60,
+              height: 60,
+              backgroundColor: "white",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              zIndex: 9999, // Ensure the button stays on top of other content
             }}
           >
-            <AssistantDirectionIcon onClick={toggleComponent} />
+            <Fab aria-label="add" color="success" onClick={toggleComponent}>
+              <ViewInArIcon />
+            </Fab>
           </Box>
           <MapAI mapState={mapState} />
         </>
