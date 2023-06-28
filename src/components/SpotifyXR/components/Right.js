@@ -32,12 +32,12 @@ import {
 import { useControls, button } from 'leva'
 
 function Image(props) {
-  const { imgSrc, position } = props;
+  const { imgSrc, position, scale } = props;
   const texture = useLoader(THREE.TextureLoader, imgSrc);
   const vectorPosition = new THREE.Vector3().fromArray(position);
 
   return (
-    <mesh position={vectorPosition}>
+    <mesh position={vectorPosition} scale={scale}>
       <planeBufferGeometry attach="geometry" args={[1, 1]} />
       <meshBasicMaterial attach="material" map={texture} transparent={true} />
     </mesh>
@@ -196,7 +196,8 @@ function Right({ spotifyApi, chooseTrack }) {
               // />
               <>
               <Text color={'black'} font="/Inter_Medium_Regular.json" fontSize={0.2} position={[initialX+(2*index), initialY+1, initialZ]}>{track.title}</Text>
-              <Image imgSrc={track.albumUrl} position={[initialX+(2*index), initialY, initialZ]} />
+              <Image imgSrc={'/Transparent_Panel.png'} scale={[2,2,1]} position={[initialX+(2*index), initialY, initialZ-1]} />
+              <Image imgSrc={track.albumUrl} scale={[1,1,1]} position={[initialX+(2*index), initialY, initialZ]} />
               <Text color={'black'} font="/Inter_Medium_Regular.json" fontSize={0.2} position={[initialX+(2*index), initialY-1, initialZ]}>{track.artist}</Text>
               </>
               ))
