@@ -196,7 +196,7 @@ function Right({ spotifyApi, chooseTrack }) {
               // />
               <>
               <Text color={'black'} font="/Inter_Medium_Regular.json" fontSize={0.2} position={[initialX+(2*index), initialY+1, initialZ]}>{track.title}</Text>
-              <Image imgSrc={'/Transparent_Panel.png'} scale={[2,2,1]} position={[initialX+(2*index), initialY, initialZ-1]} />
+              <Image imgSrc={'/Transparent_Panel.png'} scale={[1.5,2,1]} position={[initialX+(2*index)-(0.5), initialY, initialZ-1]} />
               <Image imgSrc={track.albumUrl} scale={[1,1,1]} position={[initialX+(2*index), initialY, initialZ]} />
               <Text color={'black'} font="/Inter_Medium_Regular.json" fontSize={0.2} position={[initialX+(2*index), initialY-1, initialZ]}>{track.artist}</Text>
               </>
