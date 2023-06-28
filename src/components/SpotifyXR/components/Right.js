@@ -186,7 +186,13 @@ function Right({ spotifyApi, chooseTrack }) {
         <XR referenceSpace="local">
         <ambientLight />
         <pointLight position={[10, 10, 10]} />
-        <Image imgSrc={'/Group_19.png'} scale={[1, 0.5, 0.5]} position={[-3, 3, -2]} />
+        <Image imgSrc={'/Group_16.png'} scale={[1, 0.5, 0.5]} position={[-5, 3, -2]} />
+        <Image imgSrc={'/Group_17.png'} scale={[1, 0.5, 0.5]} position={[-3, 3, -2]} />
+        <Image imgSrc={'/Group_18.png'} scale={[1, 0.5, 0.5]} position={[-1, 3, -2]} />
+        <Image imgSrc={'/Group_19.png'} scale={[1, 0.5, 0.5]} position={[1, 3, -2]} />
+        <Image imgSrc={'/Group_20.png'} scale={[1, 0.5, 0.5]} position={[3, 3, -2]} />
+        <Image imgSrc={'/Group_21.png'} scale={[1, 0.5, 0.5]} position={[5, 3, -2]} />
+
         <Box>
           <Interactive>
             {recentlyPlayed.map((track, index) => (
