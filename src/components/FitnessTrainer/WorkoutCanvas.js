@@ -23,6 +23,7 @@ const WorkoutCanvas = () => {
   const [feedback, setFeedback] = useState("");
   const [status, setStatus] = useState(true);
   const [speech, setSpeech] = useState(null);
+  const [modelGender, setModelGender] = useState("female");
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
   const router = useRouter();
@@ -882,7 +883,7 @@ const WorkoutCanvas = () => {
         )}
       </div>
       <div className={styles.resultsContainer}>
-        <div>
+        <div className={styles.viewerTop}>
           {isStartSession && (
             <h4 className={`text-subheading ${styles.workoutTitle}`}>
               Try to mimic this workout
@@ -891,11 +892,34 @@ const WorkoutCanvas = () => {
           <h4 className={`text-primary ${styles.workoutTitle}`}>
             {isStartSession ? currentWorkoutData.name : "View in 3D"}
           </h4>
+          {currentWorkoutData?.modelAvailable && (
+            <div className={styles.genderContainer}>
+              <button
+                className={
+                  modelGender === "female" ? "primary-btn" : "secondary-btn"
+                }
+                onClick={() => {
+                  setModelGender("female");
+                }}
+              >
+                Female
+              </button>
+              <button
+                className={
+                  modelGender === "male" ? "primary-btn" : "secondary-btn"
+                }
+                onClick={() => setModelGender("male")}
+              >
+                Male
+              </button>
+            </div>
+          )}
         </div>
         {currentWorkoutData &&
           (currentWorkoutData.modelAvailable ? (
             <XrHitModelContainer
               modelName={currentWorkout}
+              modelGender={modelGender}
               zRotationMul={currentWorkoutData.zRotationMul}
               scaleMul={currentWorkoutData.scaleMul}
               type="workout"

@@ -23,6 +23,7 @@ const YogaCanvas = () => {
   const [poseTime, setPoseTime] = useState(0);
   const [bestPerform, setBestPerform] = useState(0);
   const [isStartPose, setIsStartPose] = useState(false);
+  const [modelGender, setModelGender] = useState("female");
 
   const router = useRouter();
   const [currentPose, setCurrentPose] = useState(null);
@@ -295,7 +296,7 @@ const YogaCanvas = () => {
         )}
       </div>
       <div className={styles.resultsContainer}>
-        <div>
+        <div className={styles.viewerTop}>
           {isStartPose && (
             <h4 className={`text-subheading ${styles.workoutTitle}`}>
               Try to mimic this posture to perform
@@ -304,12 +305,33 @@ const YogaCanvas = () => {
           <h4 className={`text-primary ${styles.workoutTitle}`}>
             {isStartPose ? currentPoseData.name : "View in 3D"}
           </h4>
+          <div className={styles.genderContainer}>
+            <button
+              className={
+                modelGender === "female" ? "primary-btn" : "secondary-btn"
+              }
+              onClick={() => {
+                setModelGender("female");
+              }}
+            >
+              Female
+            </button>
+            <button
+              className={
+                modelGender === "male" ? "primary-btn" : "secondary-btn"
+              }
+              onClick={() => setModelGender("male")}
+            >
+              Male
+            </button>
+          </div>
         </div>
 
         {currentPoseData &&
           (currentPoseData.modelAvailable ? (
             <XrHitModelContainer
               modelName={currentPoseData.label}
+              modelGender={modelGender}
               type="yoga"
             />
           ) : (

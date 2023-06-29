@@ -6,6 +6,7 @@ import * as styles from "./XRHitModelContainer.module.css";
 
 const XrHitModelContainer = ({
   modelName,
+  modelGender = "female",
   zRotationMul = 0.33,
   scaleMul = 0.3,
   type,
@@ -54,6 +55,7 @@ const XrHitModelContainer = ({
         <XR>
           <XrHitModel
             modelName={modelName}
+            modelGender={modelGender}
             zRotationMul={zRotationMul}
             scaleMul={scaleMul}
             type={type}

@@ -2,18 +2,40 @@ import { OrbitControls } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
 import { Interactive, useHitTest, useXR } from "@react-three/xr";
 import { useRef, useState } from "react";
-import WorkoutModel from "../Model/WorkoutModel";
-import YogaModel from "../Model/YogaModel";
+import MaleWorkoutModel from "../Model/MaleWorkoutModel";
+import FemaleWorkoutModel from "../Model/FemaleWorkoutModel";
+import MaleYogaModel from "../Model/MaleYogaModel";
+import FemaleYogaModel from "../Model/FemaleYogaModel";
 
-const XrHitModel = ({ modelName, zRotationMul, scaleMul, type }) => {
+const XrHitModel = ({
+  modelName,
+  modelGender,
+  zRotationMul,
+  scaleMul,
+  type,
+}) => {
   const reticleRef = useRef();
   const [models, setModels] = useState([]);
 
   const { isPresenting } = useXR();
 
+  const workoutComponents = {
+    male: MaleWorkoutModel,
+    female: FemaleWorkoutModel,
+  };
+
+  const yogaComponents = {
+    male: MaleYogaModel,
+    female: FemaleYogaModel,
+  };
+
   useThree(({ camera }) => {
     if (!isPresenting) {
-      camera.position.z = 4;
+      if (modelGender === "female") {
+        camera.position.z = 4;
+      } else {
+        camera.position.z = 0;
+      }
     }
   });
 
@@ -33,6 +55,16 @@ const XrHitModel = ({ modelName, zRotationMul, scaleMul, type }) => {
     setModels([{ position, id }]);
   };
 
+  const WorkoutModel = (props) => {
+    const WorkoutModel = workoutComponents[modelGender];
+    return <WorkoutModel {...props} />;
+  };
+
+  const YogaModel = (props) => {
+    const YogaModel = yogaComponents[modelGender];
+    return <YogaModel {...props} />;
+  };
+
   return (
     <>
       <OrbitControls />
@@ -46,7 +78,7 @@ const XrHitModel = ({ modelName, zRotationMul, scaleMul, type }) => {
                 position={position}
                 modelName={modelName}
                 zRotationMul={zRotationMul}
-                scaleMul={scaleMul / 2}
+                scaleMul={modelGender === "female" ? scaleMul / 2 : scaleMul}
               />
             );
           }
