@@ -1,8 +1,5 @@
 import { useState } from "react";
 import { FaMicrophone, FaPaperPlane, FaMicrophoneSlash } from "react-icons/fa";
-import { HiOutlineEllipsisHorizontal } from "react-icons/hi2";
-import { TbRobot } from "react-icons/tb";
-import Link from "next/link";
 import { useWhisper } from "@chengsokdara/use-whisper";
 import { KeyboardAlt } from "@mui/icons-material";
 import Fab from "@mui/material/Fab";

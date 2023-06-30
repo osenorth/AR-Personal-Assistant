@@ -8,11 +8,14 @@ import { POINTS, keypointConnections } from "../../data/YogaPoints";
 import { drawPoint, drawSegment } from "../../helpers/Utils";
 import Webcam from "react-webcam";
 import Instructions from "../Instructions/Instructions";
+import XrHitModelContainer from "../../containers/XRHitModelContainer/XRHitModelContainer";
 import * as styles from "./FitnessTrainer.module.css";
 
-let flag = false;
+let flag = false,
+  reps = 0,
+  newBest = false;
 let skeletonColor = "rgb(255,0,0)";
-let interval;
+let interval = null;
 
 const YogaCanvas = () => {
   const [startingTime, setStartingTime] = useState(0);
@@ -62,21 +65,6 @@ const YogaCanvas = () => {
 
   useEffect(
     () => {
-      const timeDiff = (currentTime - startingTime) / 1000;
-      if (flag) {
-        setPoseTime(timeDiff);
-        speak(timeDiff);
-      }
-      if ((currentTime - startingTime) / 1000 > bestPerform) {
-        setBestPerform(timeDiff);
-      }
-    },
-    // eslint-disable-next-line
-    [currentTime]
-  );
-
-  useEffect(
-    () => {
       setCurrentTime(0);
       setPoseTime(0);
       setBestPerform(0);
@@ -85,6 +73,16 @@ const YogaCanvas = () => {
     // eslint-disable-next-line
     [currentPose]
   );
+
+  useEffect(() => {
+    if (speech) {
+      if (flag && poseTime > 0) speak(poseTime);
+      if (poseTime > bestPerform) {
+        setBestPerform(poseTime);
+        newBest = true;
+      }
+    }
+  }, [poseTime]);
 
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
@@ -174,7 +172,7 @@ const YogaCanvas = () => {
     );
     interval = setInterval(() => {
       detectPose(detector, poseClassifier);
-    }, 100);
+    }, 1500);
   };
 
   const detectPose = async (detector, poseClassifier) => {
@@ -230,14 +228,21 @@ const YogaCanvas = () => {
         classification.array().then((data) => {
           const classNo = CLASS_NO[currentPose];
           if (data[0][classNo] > 0.97) {
-            if (!flag) {
-              setStartingTime(new Date(Date()).getTime());
-              flag = true;
-            }
-            setCurrentTime(new Date(Date()).getTime());
+            flag = true;
+            reps += 1;
+            setPoseTime(reps);
             skeletonColor = "rgb(0,255,0)";
           } else {
             flag = false;
+            if (reps > 0) {
+              speak("You holded for" + reps + "seconds last time!");
+            }
+            if (newBest) {
+              speak("Congrats ! You've got your new best !");
+            }
+            reps = 0;
+            setPoseTime(0);
+            newBest = false;
             skeletonColor = "rgb(255,0,0)";
           }
         });
@@ -300,21 +305,28 @@ const YogaCanvas = () => {
             {isStartPose ? currentPoseData.name : "View in 3D"}
           </h4>
         </div>
-        {currentPoseData && (
-          <iframe
-            title={currentPoseData.name}
-            allowFullScreen
-            mozallowfullscreen="true"
-            webkitallowfullscreen="true"
-            allow="autoplay; fullscreen; xr-spatial-tracking"
-            xr-spatial-tracking="true"
-            execution-while-out-of-viewport="true"
-            execution-while-not-rendered="true"
-            web-share="true"
-            src={currentPoseData.modelLink}
-            className={styles.modelContrainer}
-          ></iframe>
-        )}
+
+        {currentPoseData &&
+          (currentPoseData.modelAvailable ? (
+            <XrHitModelContainer
+              modelName={currentPoseData.label}
+              type="yoga"
+            />
+          ) : (
+            <iframe
+              title={currentPoseData.name}
+              allowFullScreen
+              mozallowfullscreen="true"
+              webkitallowfullscreen="true"
+              allow="autoplay; fullscreen; xr-spatial-tracking"
+              xr-spatial-tracking="true"
+              execution-while-out-of-viewport="true"
+              execution-while-not-rendered="true"
+              web-share="true"
+              src={currentPoseData.modelLink}
+              className={styles.modelContrainer}
+            ></iframe>
+          ))}
         {isStartPose && (
           <div className={styles.countDisplay}>
             <div>

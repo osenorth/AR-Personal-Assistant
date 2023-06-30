@@ -1,22 +1,66 @@
+import React, { useState, useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
 import { ARButton, XR } from "@react-three/xr";
 import XrHitModel from "../../components/XRHitModel/XRHitModel";
-import "./XRHitModelContainer.module.css";
+import * as styles from "./XRHitModelContainer.module.css";
 
-const XrHitModelContainer = () => {
+const XrHitModelContainer = ({
+  modelName,
+  zRotationMul = 0.33,
+  scaleMul = 0.3,
+  type,
+}) => {
+  const [isARSupported, setISARSupported] = useState(true);
+
+  async function browserHasImmersiveArCompatibility() {
+    if (window.navigator.xr) {
+      const isSupported = await navigator.xr.isSessionSupported("immersive-ar");
+      console.info(
+        `[AR-Support] ${
+          isSupported
+            ? "Browser supports immersive-ar"
+            : "Browser does not support immersive-ar"
+        }`
+      );
+      return isSupported;
+    }
+    return false;
+  }
+
+  async function start() {
+    const immersiveArSupported = await browserHasImmersiveArCompatibility();
+    setISARSupported(immersiveArSupported);
+  }
+
+  useEffect(() => {
+    start();
+  }, []);
+
   return (
-    <>
-      <ARButton
-        sessionInit={{
-          requiredFeatures: ["hit-test"],
-        }}
-      />
+    <div className={styles.XRContainer}>
+      {isARSupported ? (
+        <ARButton
+          sessionInit={{
+            requiredFeatures: ["hit-test"],
+          }}
+          className={styles.arButton}
+        />
+      ) : (
+        <button className={styles.arButton}>
+          Try AR mode on mobile using chrome
+        </button>
+      )}
       <Canvas>
         <XR>
-          <XrHitModel />
+          <XrHitModel
+            modelName={modelName}
+            zRotationMul={zRotationMul}
+            scaleMul={scaleMul}
+            type={type}
+          />
         </XR>
       </Canvas>
-    </>
+    </div>
   );
 };
 
