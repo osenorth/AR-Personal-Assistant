@@ -3,8 +3,9 @@ import { useGLTF, useAnimations } from "@react-three/drei";
 
 export default function MaleWorkoutModel(props) {
   const { modelName, zRotationMul, scaleMul } = props;
-
-  const [zPosition, setZPosition] = useState(0);
+  const [yPosition, setYPosition] = useState(-4);
+  const [isRotated, setIsRotated] = useState(false);
+  const [factor, setFactor] = useState(0.75);
 
   const group = useRef();
 
@@ -23,28 +24,37 @@ export default function MaleWorkoutModel(props) {
   useEffect(() => {
     switch (modelName) {
       case "burpees":
-        setZPosition(-3);
-        break;
-      case "squats":
-        setZPosition(-3.1);
-        break;
-      case "pikewalk":
-        setZPosition(-4);
-        break;
-      case "pushups":
-        setZPosition(-5);
+        setFactor(0.65);
+        setYPosition(-5);
         break;
       case "bicyclecrunches":
-        setZPosition(-4.25);
+        setYPosition(-8);
         break;
       case "plank":
-        setZPosition(-4.2);
+        setFactor(5.75);
+        setYPosition(-4);
+        setIsRotated(true);
+        break;
+      case "pushups":
+        setFactor(5.75);
+        setYPosition(-4);
+        setIsRotated(true);
+        break;
+      case "pikewalk":
+        setFactor(5.75);
+        setYPosition(-4);
+        setIsRotated(true);
+        break;
+      case "situps":
+        setFactor(5.75);
+        setYPosition(-4);
+        setIsRotated(true);
         break;
       case "jumpingjacks":
-        setZPosition(-2.7);
+        setFactor(5.75);
+        setYPosition(-4);
         break;
       default:
-        setZPosition(-2.7);
         break;
     }
   }, []);
@@ -54,9 +64,13 @@ export default function MaleWorkoutModel(props) {
       <group name="Scene">
         <group
           name="Armature"
-          rotation={[0, 0, -Math.PI * zRotationMul]}
-          scale={scaleMul}
-          position={[-0.25, zPosition, 0.5]}
+          rotation={[
+            isRotated ? Math.PI / 2 : 0,
+            isRotated ? 0 : Math.PI * zRotationMul,
+            isRotated ? -Math.PI * zRotationMul : 0,
+          ]}
+          scale={scaleMul * factor}
+          position={[-1, yPosition, 0]}
         >
           <primitive object={nodes.mixamorigHips} />
           <skinnedMesh

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Canvas } from "@react-three/fiber";
 import { ARButton, XR } from "@react-three/xr";
 import XrHitModel from "../../components/XRHitModel/XRHitModel";
@@ -12,6 +12,8 @@ const XrHitModelContainer = ({
   type,
 }) => {
   const [isARSupported, setISARSupported] = useState(true);
+  const canvasRef = useRef(null);
+  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 
   async function browserHasImmersiveArCompatibility() {
     if (window.navigator.xr) {
@@ -35,10 +37,14 @@ const XrHitModelContainer = ({
 
   useEffect(() => {
     start();
+    setDimensions({
+      width: canvasRef.current?.offsetWidth,
+      height: canvasRef.current?.offsetHeight,
+    });
   }, []);
 
   return (
-    <div className={styles.XRContainer}>
+    <div className={styles.XRContainer} ref={canvasRef}>
       {isARSupported ? (
         <ARButton
           sessionInit={{
@@ -57,7 +63,7 @@ const XrHitModelContainer = ({
             modelName={modelName}
             modelGender={modelGender}
             zRotationMul={zRotationMul}
-            scaleMul={scaleMul}
+            scaleMul={(scaleMul * dimensions.height) / 500}
             type={type}
           />
         </XR>

@@ -34,7 +34,7 @@ const XrHitModel = ({
       if (modelGender === "female") {
         camera.position.z = 4;
       } else {
-        camera.position.z = 0;
+        camera.position.z = 12;
       }
     }
   });

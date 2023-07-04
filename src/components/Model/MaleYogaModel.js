@@ -16,18 +16,19 @@ export default function FemaleYogaModel(props) {
     if (modelName === "utkatasana") {
       setPosition([0, 0, 1]);
     } else if (modelName === "bhujangasana") {
-      setPosition([0, -3, 0]);
+      setPosition([0, -3, -0.4]);
       setRotation([Math.PI / 2, 0, 0]);
     } else if (modelName === "adhomukhasvanasana") {
-      setRotation([Math.PI / 4, 0, 0]);
-      setPosition([0, -2, -0.5]);
+      setRotation([Math.PI / 4.4, 0, 0]);
+      setPosition([0, -2, -0.1]);
     } else if (modelName === "sarvangasana") {
-      setPosition([0, 0, -6]);
+      setPosition([0, 0, -5.6]);
       setRotation([Math.PI, 0, Math.PI]);
     } else if (modelName === "trikonasana") {
-      setPosition([0, 0, 0.5]);
+      setPosition([0, 0, 0.75]);
       setMatRotated(true);
     } else if (modelName === "virabhadrasana3") {
+      setPosition([0, 0, 0.15]);
       setRotation([0, 0, -Math.PI / 8]);
     }
   }, []);
@@ -36,8 +37,8 @@ export default function FemaleYogaModel(props) {
     <group ref={group} {...props} dispose={null}>
       <group
         position={[0, -2, 0.25]}
-        rotation={[Math.PI / 12, 0, -Math.PI / 8]}
-        scale={scaleMul}
+        rotation={[Math.PI / 2, 0, -Math.PI / 8]}
+        scale={scaleMul * 7}
       >
         <group
           {...props}
@@ -107,7 +108,7 @@ export default function FemaleYogaModel(props) {
           <mesh
             geometry={nodes.Cube001.geometry}
             material={materials["Material.002"]}
-            position={[0, -1, -1]}
+            position={[0, -1, -0.5]}
             rotation={[0, 0, 0]}
             scale={[0.75, 0.75, 0.5]}
           />

@@ -15,9 +15,9 @@ const AdvancedModel = ({
       <group name="Scene">
         <group
           name="Armature"
-          rotation={[Math.PI * 0.1, Math.PI * 0.125, 0]}
+          rotation={[0, Math.PI * 0.125, 0]}
           scale={[scaleMul, scaleMul, scaleMul]}
-          position={[0, -0.5, -0.75]}
+          position={[0, -0.75, 0]}
         >
           <group
             {...props}

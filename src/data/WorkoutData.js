@@ -99,6 +99,7 @@ const workoutData = {
       name: "Bicep Curls",
       modelAvailable: false,
       zRotationMul: 0,
+      scaleMul: 0.3,
       modelLink:
         "https://sketchfab.com/models/4e958ee159fe46128b044b6e63d0ec69/embed?autostart=1&dnt=1",
       difficulty: "easy",
@@ -195,7 +196,7 @@ const workoutData = {
       name: "Bicycle Crunches",
       modelAvailable: true,
       zRotationMul: 0.33,
-      scaleMul: 0.4,
+      scaleMul: 0.3,
       modelLink:
         "https://sketchfab.com/models/c24d18ab0e194c629eb5df4ded145b15/embed?autostart=1&dnt=1",
       difficulty: "medium",
@@ -212,7 +213,7 @@ const workoutData = {
       name: "Plank",
       modelAvailable: true,
       zRotationMul: 0.33,
-      scaleMul: 0.4,
+      scaleMul: 0.3,
       modelLink:
         "https://sketchfab.com/models/1643f24070c34e6ca82b59a5145b949a/embed?autostart=1&dnt=1",
       difficulty: "medium",
@@ -227,7 +228,7 @@ const workoutData = {
       name: "Pike Walk",
       modelAvailable: true,
       zRotationMul: 0.33,
-      scaleMul: 0.4,
+      scaleMul: 0.3,
       modelLink:
         "https://sketchfab.com/models/78bb64dbb876415fa50f8544a2afa7d8/embed?autostart=1&dnt=1",
       difficulty: "medium",
@@ -262,7 +263,7 @@ const workoutData = {
       name: "Push Ups",
       modelAvailable: true,
       zRotationMul: 0.33,
-      scaleMul: 0.4,
+      scaleMul: 0.3,
       modelLink:
         "https://sketchfab.com/models/6c7bc2c57c8648f3a70488155b326a16/embed?autostart=1&dnt=1",
       difficulty: "hard",

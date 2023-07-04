@@ -36,7 +36,7 @@ const drawPoint = (ctx, x, y, r, color) => {
 const getParamsForYoga = (modelName) => {
   const triParams = {
     body: {
-      position: [4, 0.5, 0],
+      position: [5, 0.5, 0],
       rotation: [0, 0, 0],
     },
     hair: {
