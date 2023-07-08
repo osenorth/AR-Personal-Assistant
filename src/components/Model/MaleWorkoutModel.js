@@ -6,6 +6,8 @@ export default function MaleWorkoutModel(props) {
   const [yPosition, setYPosition] = useState(-4);
   const [isRotated, setIsRotated] = useState(false);
   const [factor, setFactor] = useState(0.75);
+  // const tshirtArr = [];
+  // let arrNodes = "";
 
   const group = useRef();
 
@@ -17,7 +19,10 @@ export default function MaleWorkoutModel(props) {
   useEffect(() => {
     if (actions) {
       const action = actions["Armature|mixamo.com|Layer0"];
-      action.play();
+      action?.play();
+
+      const pullup = actions["Armature|pull up|Anima_Layer"];
+      pullup.play();
     }
   });
 
@@ -58,6 +63,24 @@ export default function MaleWorkoutModel(props) {
         break;
     }
   }, []);
+
+  // useEffect(() => {
+  //   for (let no = 34; no <= 53; no++) {
+  //     tshirtArr.push(no);
+  //   }
+
+  //   tshirtArr.forEach((no) => {
+  //     const newnode = `tshirt0${no}`;
+  //     console.log(nodes?.newnode?.geometry);
+  //     arrNodes += `<skinnedMesh
+  //       name="${newnode}"
+  //       geometry={${nodes?.newnode?.geometry}}
+  //       material={${nodes?.newnode?.material}}
+  //       skeleton={${nodes?.newnode?.skeleton}}
+  //     />`;
+  //   });
+  //   console.log(arrNodes);
+  // }, [nodes]);
 
   return (
     <group ref={group} {...props} dispose={null}>

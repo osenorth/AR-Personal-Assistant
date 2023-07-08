@@ -77,7 +77,7 @@
 @media (max-width: 767px) {
   .XRContainer {
     width: 100vw;
-    height: 50vh;
+    height: 75vh;
   }
   .arButton {
     left: 10%;

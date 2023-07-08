@@ -8,7 +8,8 @@ import { POINTS, keypointConnections } from "../../data/YogaPoints";
 import { drawPoint, drawSegment } from "../../helpers/Utils";
 import Webcam from "react-webcam";
 import Instructions from "../Instructions/Instructions";
-import XrHitModelContainer from "../../containers/XRHitModelContainer/XRHitModelContainer";
+// import XrHitModelContainer from "../../containers/XRHitModelContainer/XRHitModelContainer";
+import ModelViewer from "../ModelViewer/ModelViewer";
 import * as styles from "./FitnessTrainer.module.css";
 
 let flag = false,
@@ -23,7 +24,7 @@ const YogaCanvas = () => {
   const [poseTime, setPoseTime] = useState(0);
   const [bestPerform, setBestPerform] = useState(0);
   const [isStartPose, setIsStartPose] = useState(false);
-  const [modelGender, setModelGender] = useState("female");
+  const [modelGender, setModelGender] = useState("male");
 
   const router = useRouter();
   const [currentPose, setCurrentPose] = useState(null);
@@ -308,6 +309,14 @@ const YogaCanvas = () => {
           <div className={styles.genderContainer}>
             <button
               className={
+                modelGender === "male" ? "primary-btn" : "secondary-btn"
+              }
+              onClick={() => setModelGender("male")}
+            >
+              Male
+            </button>
+            <button
+              className={
                 modelGender === "female" ? "primary-btn" : "secondary-btn"
               }
               onClick={() => {
@@ -316,18 +325,16 @@ const YogaCanvas = () => {
             >
               Female
             </button>
-            <button
-              className={
-                modelGender === "male" ? "primary-btn" : "secondary-btn"
-              }
-              onClick={() => setModelGender("male")}
-            >
-              Male
-            </button>
           </div>
         </div>
 
-        {currentPoseData &&
+        <ModelViewer
+          modelName={currentPoseData.label}
+          modelGender={modelGender}
+          rotatedModel={false}
+          type="yoga"
+        />
+        {/* {currentPoseData &&
           (currentPoseData.modelAvailable ? (
             <XrHitModelContainer
               modelName={currentPoseData.label}
@@ -348,7 +355,7 @@ const YogaCanvas = () => {
               src={currentPoseData.modelLink}
               className={styles.modelContrainer}
             ></iframe>
-          ))}
+          ))} */}
         {isStartPose && (
           <div className={styles.countDisplay}>
             <div>

@@ -97,7 +97,9 @@ const workoutData = {
   exerciseData: {
     bicepcurls: {
       name: "Bicep Curls",
-      modelAvailable: false,
+      modelAvailable: true,
+      rotatedModel: false,
+      scaledModel: true,
       zRotationMul: 0,
       scaleMul: 0.3,
       modelLink:
@@ -113,6 +115,8 @@ const workoutData = {
     jumpingjacks: {
       name: "Jumping Jacks",
       modelAvailable: true,
+      rotatedModel: false,
+      scaledModel: false,
       zRotationMul: 0,
       scaleMul: 0.3,
       modelLink:
@@ -130,7 +134,9 @@ const workoutData = {
     },
     pullups: {
       name: "Pull Ups",
-      modelAvailable: false,
+      modelAvailable: true,
+      rotatedModel: false,
+      scaledModel: true,
       zRotationMul: 0,
       scaleMul: 0.3,
       modelLink:
@@ -149,6 +155,8 @@ const workoutData = {
     squats: {
       name: "Squats",
       modelAvailable: true,
+      rotatedModel: false,
+      scaledModel: false,
       zRotationMul: 0,
       scaleMul: 0.3,
       modelLink:
@@ -163,7 +171,9 @@ const workoutData = {
     },
     lungs: {
       name: "Lungs",
-      modelAvailable: false,
+      modelAvailable: true,
+      rotatedModel: true,
+      scaledModel: true,
       zRotationMul: 0.33,
       scaleMul: 0.3,
       modelLink:
@@ -178,7 +188,9 @@ const workoutData = {
     },
     situps: {
       name: "Sit Ups",
-      modelAvailable: false,
+      modelAvailable: true,
+      rotatedModel: true,
+      scaledModel: true,
       zRotationMul: 0.33,
       scaleMul: 0.3,
       modelLink:
@@ -195,6 +207,8 @@ const workoutData = {
     bicyclecrunches: {
       name: "Bicycle Crunches",
       modelAvailable: true,
+      rotatedModel: true,
+      scaledModel: false,
       zRotationMul: 0.33,
       scaleMul: 0.3,
       modelLink:
@@ -212,6 +226,8 @@ const workoutData = {
     plank: {
       name: "Plank",
       modelAvailable: true,
+      rotatedModel: true,
+      scaledModel: true,
       zRotationMul: 0.33,
       scaleMul: 0.3,
       modelLink:
@@ -227,6 +243,8 @@ const workoutData = {
     pikewalk: {
       name: "Pike Walk",
       modelAvailable: true,
+      rotatedModel: true,
+      scaledModel: true,
       zRotationMul: 0.33,
       scaleMul: 0.3,
       modelLink:
@@ -244,6 +262,8 @@ const workoutData = {
     burpees: {
       name: "Burpees",
       modelAvailable: true,
+      rotatedModel: true,
+      scaledModel: false,
       zRotationMul: 0.33,
       scaleMul: 0.3,
       modelLink:
@@ -262,6 +282,8 @@ const workoutData = {
     pushups: {
       name: "Push Ups",
       modelAvailable: true,
+      rotatedModel: true,
+      scaledModel: true,
       zRotationMul: 0.33,
       scaleMul: 0.3,
       modelLink:
