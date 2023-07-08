@@ -9,8 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@chengsokdara/use-whisper": "^0.2.0",
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
+    "@ffmpeg/core": "^0.11.0",
     "@google/model-viewer": "^3.1.1",
     "@mediapipe/camera_utils": "^0.3.1675466862",
     "@mediapipe/pose": "^0.5.1675469404",
@@ -26,7 +28,7 @@
     "@tensorflow/tfjs": "^3.10.0",
     "next": "13.2.4",
     "nextjs-cors": "^2.1.2",
-    "openai": "^3.2.1",
+    "openai": "^3.3.0",
     "prop-types": "^15.8.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",

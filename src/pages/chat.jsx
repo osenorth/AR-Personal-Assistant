@@ -1,25 +1,47 @@
-import { ChangeEvent, useState } from "react";
-import SpeechRecognition, {
-  useSpeechRecognition,
-} from "react-speech-recognition";
-import { FaMicrophone, FaPaperPlane } from "react-icons/fa";
-import { HiOutlineEllipsisHorizontal } from "react-icons/hi2";
-import { TbRobot } from "react-icons/tb";
-import Link from "next/link";
+import { useState } from "react";
+import { FaMicrophone, FaPaperPlane, FaMicrophoneSlash } from "react-icons/fa";
+import { useWhisper } from "@chengsokdara/use-whisper";
+import { KeyboardAlt } from "@mui/icons-material";
+import Fab from "@mui/material/Fab";
+import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
+import MusicNoteIcon from "@mui/icons-material/MusicNote";
+import NearMeIcon from "@mui/icons-material/NearMe";
+import { useRouter } from "next/router";
 
 export default function () {
   const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState("");
-  const [showPalette, setShowPalette] = useState(false);
+  const [micState, setMicState] = useState(false);
+  const [writingMode, setWritingMode] = useState(true);
+  const router = useRouter();
+  const { transcript, startRecording, stopRecording } = useWhisper({
+    apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY,
+  });
+
+  const handleMode = () => {
+    // setListening(!listening);
+    setWritingMode(!writingMode);
+    // startRecording();
+  };
+
+  const handleMicState = async () => {
+    if (!micState) {
+      startRecording();
+    } else {
+      stopRecording();
+    }
+    setMicState(!micState);
+    console.log(micState);
+  };
 
   const handleInputChange = (event) => {
-    console.log("handled");
     setInputValue(event.target.value);
   };
 
   const handleGPT = async (event) => {
+    setInputValue("");
     event.preventDefault();
-    const content = showPalette ? transcript : inputValue;
+    const content = inputValue;
     const response = await fetch("/api/chat", {
       method: "POST",
       headers: {
@@ -33,26 +55,24 @@ export default function () {
       { sender: "User", content },
       { sender: "AI", content: data.text.content },
     ]);
-    setInputValue("");
-    resetTranscript();
   };
 
-  // Speech Recognition
-  const { transcript, listening, resetTranscript } = useSpeechRecognition();
-
-  const handleMicButtonClick = () => {
-    setShowPalette(!showPalette);
-    if (!listening) {
-      SpeechRecognition.startListening();
-    } else {
-      SpeechRecognition.stopListening();
-    }
+  const handleMicGPT = async () => {
+    const content = transcript.text;
+    const response = await fetch("/api/chat", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ text: transcript.text }),
+    });
+    const data = await response.json();
+    setMessages((prevMessages) => [
+      ...prevMessages,
+      { sender: "User", content },
+      { sender: "AI", content: data.text.content },
+    ]);
   };
-
-  const handlePopup = () => {
-    console.log("clicked");
-  };
-
   return (
     <div className="chat-container">
       <div className="chat-window">
@@ -69,33 +89,53 @@ export default function () {
             </p>
           ))}
         </div>
-        <div className="input-container">
-          {listening ? (
-            <button onClick={handleMicButtonClick} className="mic-button">
-              <HiOutlineEllipsisHorizontal />
-            </button>
-          ) : (
-            <button onClick={handleMicButtonClick} className="mic-button">
-              <FaMicrophone />
-            </button>
-          )}
-          <textarea
-            value={showPalette ? transcript : inputValue}
-            onChange={handleInputChange}
-            placeholder="Type your message"
-            className="chat-input"
-            rows={1}
-          />
-          <div className="icons-container">
-            <button onClick={handleGPT} className="submit-button">
-              <FaPaperPlane />
-            </button>
+        <div>
+          <div>
+            {writingMode ? (
+              <div className="input-container">
+                <FaMicrophone onClick={handleMode} className="mic-button" />
+                <input
+                  value={inputValue}
+                  onChange={handleInputChange}
+                  placeholder="Type your message"
+                  className="chat-input"
+                  rows={1}
+                />
+                <button onClick={handleGPT} className="submit-button">
+                  <FaPaperPlane />
+                </button>
+              </div>
+            ) : (
+              <div className="input-container">
+                <KeyboardAlt onClick={handleMode} className="mic-button" />
+                <button onClick={handleMicState} className="mic-button whisper">
+                  {micState ? "Stop" : "Speak"}
+                </button>
+                <input
+                  disabled
+                  value={transcript.text}
+                  className="chat-input"
+                />
+                <button onClick={handleMicGPT} className="submit-button">
+                  <FaPaperPlane />
+                </button>
+              </div>
+            )}
           </div>
+          <div className="icons-container"></div>
         </div>
       </div>
-      <Link className="rounded-popup" href={"test"}>
-        <TbRobot />
-      </Link>
+      <div>
+        <Fab aria-label="add" color="primary" sx={{ margin: "10px" }} onClick={() => router.push('/fitnesstrainer')}>
+          <FitnessCenterIcon />
+        </Fab>
+        <Fab aria-label="add" color="secondary" sx={{ margin: "10px" }} onClick={() => router.push('/use-cases/music')}>
+          <MusicNoteIcon />
+        </Fab>
+        <Fab aria-label="add" color="success" sx={{ margin: "10px" }} onClick={() => router.push('/use-cases/directions')}>
+          <NearMeIcon />
+        </Fab>
+      </div>
     </div>
   );
 }
