@@ -919,8 +919,11 @@ const WorkoutCanvas = () => {
         <ModelViewer
           modelName={currentWorkout}
           modelGender={modelGender}
-          zRotationMul={currentWorkoutData.zRotationMul}
-          scaleMul={currentWorkoutData.scaleMul}
+          position={
+            modelGender === "female" || currentWorkoutData.scaledModel
+              ? "0m 100m 0m"
+              : "0m 1000m 0m"
+          }
           rotatedModel={currentWorkoutData.rotatedModel}
           scaledModel={currentWorkoutData.scaledModel}
           type="workout"

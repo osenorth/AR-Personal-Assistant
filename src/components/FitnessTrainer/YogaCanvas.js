@@ -331,6 +331,7 @@ const YogaCanvas = () => {
         <ModelViewer
           modelName={currentPoseData.label}
           modelGender={modelGender}
+          position={"0m 100m 0m"}
           rotatedModel={false}
           type="yoga"
         />
