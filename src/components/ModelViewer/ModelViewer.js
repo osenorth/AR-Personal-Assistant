@@ -32,7 +32,7 @@ const ModelViewer = ({
         }
         src={`/models/${modelGender}/${modelName}.glb`}
       >
-        <div
+        {/* <div
           className={`${styles.progressBar}${styles.hide}`}
           slot="progress-bar"
         >
@@ -44,7 +44,7 @@ const ModelViewer = ({
 
         <div id="ar-prompt">
           <img src="https://modelviewer.dev/shared-assets/icons/hand.png" />
-        </div>
+        </div> */}
       </model-viewer>
     </div>
   );
