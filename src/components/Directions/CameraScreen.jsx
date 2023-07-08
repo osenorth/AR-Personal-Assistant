@@ -94,8 +94,8 @@ export default function ({ mapState, toggleComponent }) {
         sx={{
           width: "100%",
           overflow: "auto",
-          marginBottom: "20px",
-          height: "300px",
+          marginBottom: "40px",
+          height: "70vh",
         }}
       >
         <style>
@@ -168,7 +168,7 @@ export default function ({ mapState, toggleComponent }) {
               </>
             )}
             {/* <v?o></video> */}
-            <Box
+            {/* <Box
               sx={{
                 border: "1px solid black",
                 alignContent: "center",
@@ -188,7 +188,7 @@ export default function ({ mapState, toggleComponent }) {
               <Fab aria-label="add" color="success" onClick={toggleComponent}>
                 <MapIcon />
               </Fab>
-            </Box>
+            </Box> */}
           </React.Fragment>
         ) : (
           <p>Loading directions...</p>

@@ -46,8 +46,6 @@ const XrHitMap = () => {
           </mesh>
         </Interactive>
       )}
-
-      {!isPresenting && <Model  position={[0,-2,-5]} />}
     </>
   );
 };

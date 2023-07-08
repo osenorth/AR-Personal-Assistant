@@ -205,7 +205,7 @@ canvas {
 
 .dom-container{
   position: absolute;
-  bottom: 8vh;
+  top: 2vh;
   width: 100%;
 }
 
