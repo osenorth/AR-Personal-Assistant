@@ -10,14 +10,8 @@ import {
   CardContent,
 } from "@mui/material";
 import ReactHtmlParser from "react-html-parser";
-import dynamic from "next/dynamic";
 import { Fab } from "@mui/material";
 import MapIcon from "@mui/icons-material/Map";
-
-const Left = dynamic(() => import("./ModelViews/left"), { ssr: false });
-const Right = dynamic(() => import("./ModelViews/right"), { ssr: false });
-const Stop = dynamic(() => import("./ModelViews/stop"), { ssr: false });
-const Straight = dynamic(() => import("./ModelViews/straight"), { ssr: false });
 
 export default function ({ mapState, toggleComponent }) {
   const [directions, setDirections] = useState(null);
@@ -100,8 +94,8 @@ export default function ({ mapState, toggleComponent }) {
         sx={{
           width: "100%",
           overflow: "auto",
-          marginBottom: "20px",
-          height: "300px",
+          marginBottom: "40px",
+          height: "70vh",
         }}
       >
         <style>
@@ -149,35 +143,6 @@ export default function ({ mapState, toggleComponent }) {
               </Typography>
             ) : (
               <>
-                <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
-                  <Box
-                    sx={{
-                      width: "100%",
-                      height: "50vh",
-                    }}
-                  >
-                    {/* Here instead of left, right, straight etc. Show the models. */}
-                    {extractFirstDirection(
-                      directions.steps[activeStep].html_instructions
-                    ) === "left" ? (
-                      <Left />
-                    ) : extractFirstDirection(
-                        directions.steps[activeStep].html_instructions
-                      ) === "right" ? (
-                      <Right />
-                    ) : extractFirstDirection(
-                        directions.steps[activeStep].html_instructions
-                      ) === "straight" ? (
-                      <Straight />
-                    ) : extractFirstDirection(
-                        directions.steps[activeStep].html_instructions
-                      ) === "stop" ? (
-                      <Stop />
-                    ) : (
-                      <></>
-                    )}
-                  </Box>
-                </Box>
                 <Typography sx={{ mt: 2, mb: 1, py: 1 }}>
                   Step {activeStep + 1}/{directions.steps.length}
                 </Typography>

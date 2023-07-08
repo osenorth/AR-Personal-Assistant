@@ -167,6 +167,39 @@ model-viewer {
   --poster-color: #ffffff00;
 }
 
+canvas {
+  background-color: #000000;
+  height: 100vh; 
+  width: 100vw; 
+  display: block;
+}
+
+#overlay-content{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  bottom: 5rem;
+  pointer-events: none;
+}
+
+.dom-container{
+  position: absolute;
+  top: 10vh;
+  width: 100%;
+}
+
+.web-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 0;
+  gap: 1rem;
+  padding: 1rem;
+  overflow: auto;
+  pointer-events: auto;
+}
+
 .whisper {
   border: 1px solid black;
   border-radius: 10%;
