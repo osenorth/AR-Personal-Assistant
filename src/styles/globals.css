@@ -220,3 +220,11 @@ canvas {
   overflow: auto;
   pointer-events: auto;
 }
+
+.whisper {
+  border: 1px solid black;
+  border-radius: 10%;
+  font-size: medium;
+  padding: 2px;
+  margin-left: 1px;
+}
