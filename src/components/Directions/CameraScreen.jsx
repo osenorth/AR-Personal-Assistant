@@ -149,35 +149,6 @@ export default function ({ mapState, toggleComponent }) {
               </Typography>
             ) : (
               <>
-                <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
-                  <Box
-                    sx={{
-                      width: "100%",
-                      height: "50vh",
-                    }}
-                  >
-                    {/* Here instead of left, right, straight etc. Show the models. */}
-                    {extractFirstDirection(
-                      directions.steps[activeStep].html_instructions
-                    ) === "left" ? (
-                      <Left />
-                    ) : extractFirstDirection(
-                        directions.steps[activeStep].html_instructions
-                      ) === "right" ? (
-                      <Right />
-                    ) : extractFirstDirection(
-                        directions.steps[activeStep].html_instructions
-                      ) === "straight" ? (
-                      <Straight />
-                    ) : extractFirstDirection(
-                        directions.steps[activeStep].html_instructions
-                      ) === "stop" ? (
-                      <Stop />
-                    ) : (
-                      <></>
-                    )}
-                  </Box>
-                </Box>
                 <Typography sx={{ mt: 2, mb: 1, py: 1 }}>
                   Step {activeStep + 1}/{directions.steps.length}
                 </Typography>
