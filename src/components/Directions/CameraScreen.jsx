@@ -10,14 +10,8 @@ import {
   CardContent,
 } from "@mui/material";
 import ReactHtmlParser from "react-html-parser";
-import dynamic from "next/dynamic";
 import { Fab } from "@mui/material";
 import MapIcon from "@mui/icons-material/Map";
-
-const Left = dynamic(() => import("./ModelViews/left"), { ssr: false });
-const Right = dynamic(() => import("./ModelViews/right"), { ssr: false });
-const Stop = dynamic(() => import("./ModelViews/stop"), { ssr: false });
-const Straight = dynamic(() => import("./ModelViews/straight"), { ssr: false });
 
 export default function ({ mapState, toggleComponent }) {
   const [directions, setDirections] = useState(null);

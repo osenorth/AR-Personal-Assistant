@@ -1,6 +1,11 @@
 import { useState, useEffect } from "react";
 import Map from "../../components/Directions/Map";
-import CameraScreen from "../../components/Directions/CameraScreen";
+import { useRef, useCallback } from "react";
+import { Canvas } from "@react-three/fiber";
+import { ARButton, XR } from "@react-three/xr";
+import { CharacterAnimationsProvider } from "./direction/Animations";
+import XrHitMap from "./direction/xrhitmap";
+import Interface from "../../components/Directions/Interface";
 
 export default function () {
   const [mapState, setMapState] = useState({
@@ -25,12 +30,44 @@ export default function () {
     );
   };
 
+  const [overlayContent, setOverlayContent] = useState(null);
+  const interfaceRef = useCallback((node) => {
+    if (node != null) {
+      setOverlayContent(node);
+    }
+  });
+
   return (
     <div>
       {activeComponent === "map" ? (
-        <Map mapState={mapState} updateMapState={updateMapState} toggleComponent={toggleComponent} />
+        <Map
+          mapState={mapState}
+          updateMapState={updateMapState}
+          toggleComponent={toggleComponent}
+        />
       ) : (
-        <CameraScreen mapState={mapState} toggleComponent={toggleComponent}/>
+        // <CameraScreen mapState={mapState} toggleComponent={toggleComponent}/>
+        <>
+          <CharacterAnimationsProvider>
+            <ARButton
+              sessionInit={{
+                requiredFeatures: ["hit-test"],
+                optionalFeatures: ["dom-overlay"],
+                domOverlay: { root: overlayContent },
+              }}
+            />
+            <Canvas className="map-canvas">
+              <XR>
+                <XrHitMap />
+              </XR>
+            </Canvas>
+            <Interface
+              ref={interfaceRef}
+              mapState={mapState}
+              toggleComponent={toggleComponent}
+            />
+          </CharacterAnimationsProvider>
+        </>
       )}
     </div>
   );

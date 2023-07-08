@@ -2,7 +2,7 @@ import { createContext, useContext, useState } from "react";
 
 const CharacterAnimationsContext = createContext({});
 
-export default CharacterAnimationsProvider = (props) => {
+export const CharacterAnimationsProvider = (props) => {
   const [animations, setAnimations] = useState([]);
   const [animationIndex, setAnimationIndex] = useState(0);
 

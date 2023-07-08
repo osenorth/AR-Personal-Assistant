@@ -11,15 +11,8 @@ const Interface = forwardRef((props, ref) => {
         <div className="web-container">
           {/* <button className="batoon">Click Here</button> */}
           <CameraScreen
-            mapState={{
-              start: "Mumbai",
-              destination: "Delhi",
-              travelMode: "DRIVING",
-              direction: null,
-              distance: "",
-              duration: "",
-              message: "Please Enter Your Location and Destination to Navigate",
-            }}
+            mapState={props.mapState}
+            toggleComponent={props.toggleComponent}
           />
         </div>
       </div>
