@@ -1,4 +1,4 @@
-import { useCharacterAnimations } from "../../pages/use-cases/direction/Animations";
+import { useCharacterAnimations } from "../../helpers/Animations";
 import CameraScreen from "./CameraScreen";
 import { forwardRef } from "react";
 

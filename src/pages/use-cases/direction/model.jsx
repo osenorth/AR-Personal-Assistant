@@ -1,24 +1,25 @@
 import React, { useEffect, useRef } from "react";
 import { useGLTF, useAnimations, OrbitControls } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import { useCharacterAnimations } from "./Animations";
+import { useCharacterAnimations } from "../../../helpers/Animations";
 const Model = (props) => {
   const group = useRef();
+  useGLTF.preload(`/models/left.glb`);
   const { nodes, materials, animations } = useGLTF("/models/left.glb");
   const { actions, names } = useAnimations(animations, group);
   console.log({ actions, names });
   const { setAnimations, animationIndex } = useCharacterAnimations();
-    useEffect(() => {
-      setAnimations(names);
-    });
+  useEffect(() => {
+    setAnimations(names);
+  });
 
-    useEffect(() => {
-        actions[names[animationIndex]].reset().fadeIn(0.5).play();
+  useEffect(() => {
+    actions[names[animationIndex]].reset().fadeIn(0.5).play();
 
-        return () => {
-          actions[names[animationIndex]]?.fadeOut(0.5);
-        }
-    })
+    return () => {
+      actions[names[animationIndex]]?.fadeOut(0.5);
+    };
+  });
   useFrame((state, delta) => {
     // If any autorotation is needed use it.
   });

@@ -3,7 +3,7 @@ import Map from "../../components/Directions/Map";
 import { useRef, useCallback } from "react";
 import { Canvas } from "@react-three/fiber";
 import { ARButton, XR } from "@react-three/xr";
-import { CharacterAnimationsProvider } from "./direction/Animations";
+import { CharacterAnimationsProvider } from "../../helpers/Animations";
 import XrHitMap from "./direction/xrhitmap";
 import Interface from "../../components/Directions/Interface";
 
@@ -48,7 +48,7 @@ export default function () {
       ) : (
         // <CameraScreen mapState={mapState} toggleComponent={toggleComponent}/>
         <>
-          <CharacterAnimationsProvider>
+          {/* <CharacterAnimationsProvider> */}
             <ARButton
               sessionInit={{
                 requiredFeatures: ["hit-test"],
@@ -66,7 +66,7 @@ export default function () {
               mapState={mapState}
               toggleComponent={toggleComponent}
             />
-          </CharacterAnimationsProvider>
+          {/* </CharacterAnimationsProvider> */}
         </>
       )}
     </div>
