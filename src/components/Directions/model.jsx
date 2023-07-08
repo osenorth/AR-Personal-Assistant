@@ -1,11 +1,11 @@
 import React, { useEffect, useRef } from "react";
 import { useGLTF, useAnimations, OrbitControls } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import { useCharacterAnimations } from "../../../helpers/Animations";
-const Model = (props) => {
+import { useCharacterAnimations } from "../../helpers/Animations";
+const Model = async (props) => {
   const group = useRef();
-  useGLTF.preload(`/models/left.glb`);
-  const { nodes, materials, animations } = useGLTF("/models/left.glb");
+  useGLTF.preload(`/models/left.glb/`);
+  const { nodes, materials, animations } = useGLTF("/models/left.glb/");
   const { actions, names } = useAnimations(animations, group);
   console.log({ actions, names });
   const { setAnimations, animationIndex } = useCharacterAnimations();

@@ -4,7 +4,7 @@ import { useRef, useCallback } from "react";
 import { Canvas } from "@react-three/fiber";
 import { ARButton, XR } from "@react-three/xr";
 import { CharacterAnimationsProvider } from "../../helpers/Animations";
-import XrHitMap from "./direction/xrhitmap";
+import XrHitMap from "../../components/Directions/xrhitmap";
 import Interface from "../../components/Directions/Interface";
 
 export default function () {
