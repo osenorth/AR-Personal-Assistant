@@ -61,6 +61,12 @@ const ModelViewer = ({
         value={z}
         onChange={(event) => setZ(event.target.value)}
       />
+      scale
+      <input
+        type="number"
+        value={scale}
+        onChange={(event) => setScale(event.target.value)}
+      />
       <model-viewer
         orientation={
           rotatedModel ? "0 0 50deg" : type === "yoga" ? "0 0 25deg" : "0 0 0"
