@@ -52,7 +52,8 @@ const ModelViewer = ({
         poster="poster.webp"
         shadow-intensity={type === "yoga" ? "0" : "1"}
         autoplay
-        camera-target="0m -1m -1m"
+        // camera-target="0m -1m -1m" // female
+        camera-target="0m -3m -3m" // male
         // camera-target={cameraTarget}
         src={`/models/${modelGender}/${modelName}.glb`}
         // skybox-image="/src/assets/gym_4k.hdr"
