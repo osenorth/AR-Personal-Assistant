@@ -44,7 +44,7 @@ const ModelViewer = ({
         orientation={
           rotatedModel ? "0 0 50deg" : type === "yoga" ? "0 0 25deg" : "0 0 0"
         }
-        scale={scale}
+        // scale={scale}
         ref={modelRef}
         ar
         ar-modes="webxr scene-viewer quick-look"
@@ -52,7 +52,8 @@ const ModelViewer = ({
         poster="poster.webp"
         shadow-intensity={type === "yoga" ? "0" : "1"}
         autoplay
-        camera-target={cameraTarget}
+        // camera-target="0m 0m 0m"
+        // camera-target={cameraTarget}
         src={`/models/${modelGender}/${modelName}.glb`}
         // skybox-image="/src/assets/gym_4k.hdr"
       >
