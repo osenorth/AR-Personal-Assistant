@@ -13,33 +13,32 @@ const ModelViewer = ({
   console.log("top-position", position);
   const modelRef = useRef(null);
   let cameraTarget = position;
-  const [scale, setScale] = useState(1);
+  const [scale, setScale] = useState(40);
   const [x, setX] = useState(0);
   const [y, setY] = useState(0);
   const [z, setZ] = useState(0);
 
-  useEffect(() => {
-    if (modelRef?.current) {
-      const status = modelRef.current.getAttribute("ar-status");
-      console.log(status);
+  // useEffect(() => {
+  //   if (modelRef?.current) {
+  //     const status = modelRef.current.getAttribute("ar-status");
+  //     console.log(status);
 
-      if (status === "not-presenting") {
-        cameraTarget = position;
-        setScale("40 40 40");
-      } else {
-        // console.log("ar");
-        cameraTarget = "0.00001545m -10m -10m";
-        setScale("1 1 1");
-      }
-    }
-  }, [modelRef?.current]);
+  //     if (status === "not-presenting") {
+  //       cameraTarget = position;
+  //     } else {
+  //       // console.log("ar");
+  //       cameraTarget = "0.00001545m -10m -10m";
+  //       setScale("1 1 1");
+  //     }
+  //   }
+  // }, [modelRef?.current]);
 
   const handleARParams = () => {
     // cameraTarget = "0.00001545m -10m -10m";
     // setScale("1 1 1");
   };
 
-  console.log(cameraTarget, scale);
+  // console.log(cameraTarget, scale);
 
   return (
     <div className={styles.XRContainer}>
