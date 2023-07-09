@@ -14,6 +14,9 @@ const ModelViewer = ({
   const modelRef = useRef(null);
   let cameraTarget = position;
   const [scale, setScale] = useState("40 40 40");
+  const [x, setX] = useState(0);
+  const [y, setY] = useState(0);
+  const [z, setZ] = useState(0);
 
   useEffect(() => {
     if (modelRef?.current) {
@@ -40,6 +43,24 @@ const ModelViewer = ({
 
   return (
     <div className={styles.XRContainer}>
+      X
+      <input
+        type="number"
+        value={x}
+        onChange={(event) => setX(event.target.value)}
+      />
+      Y
+      <input
+        type="number"
+        value={y}
+        onChange={(event) => setY(event.target.value)}
+      />
+      Z
+      <input
+        type="number"
+        value={z}
+        onChange={(event) => setZ(event.target.value)}
+      />
       <model-viewer
         orientation={
           rotatedModel ? "0 0 50deg" : type === "yoga" ? "0 0 25deg" : "0 0 0"
@@ -53,7 +74,7 @@ const ModelViewer = ({
         shadow-intensity={type === "yoga" ? "0" : "1"}
         autoplay
         // camera-target="0m -3m -3m" // female
-        camera-target="0m 3m 3m" // male
+        camera-target={`${x}m ${y}m ${z}m`} // male
         // camera-target={cameraTarget}
         src={`/models/${modelGender}/${modelName}.glb`}
         // skybox-image="/src/assets/gym_4k.hdr"
