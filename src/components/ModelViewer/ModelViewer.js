@@ -13,7 +13,7 @@ const ModelViewer = ({
   console.log("top-position", position);
   const modelRef = useRef(null);
   let cameraTarget = position;
-  const [scale, setScale] = useState("40 40 40");
+  const [scale, setScale] = useState(1);
   const [x, setX] = useState(0);
   const [y, setY] = useState(0);
   const [z, setZ] = useState(0);
@@ -65,7 +65,7 @@ const ModelViewer = ({
         orientation={
           rotatedModel ? "0 0 50deg" : type === "yoga" ? "0 0 25deg" : "0 0 0"
         }
-        // scale={scale}
+        scale={`${scale} ${scale} ${scale}`}
         ref={modelRef}
         ar
         ar-modes="webxr scene-viewer quick-look"
