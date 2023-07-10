@@ -8,81 +8,42 @@ const ModelViewer = ({
   type,
   position,
   rotatedModel,
-  // scaledModel,
 }) => {
-  console.log("top-position", position);
   const modelRef = useRef(null);
-  let cameraTarget = position;
-  const [scale, setScale] = useState(40);
-  const [x, setX] = useState(0);
-  const [y, setY] = useState(0);
-  const [z, setZ] = useState(0);
+  // let cameraTarget = position;
 
   // useEffect(() => {
   //   if (modelRef?.current) {
   //     const status = modelRef.current.getAttribute("ar-status");
-  //     console.log(status);
 
   //     if (status === "not-presenting") {
   //       cameraTarget = position;
-  //     } else {
-  //       // console.log("ar");
-  //       cameraTarget = "0.00001545m -10m -10m";
-  //       setScale("1 1 1");
   //     }
   //   }
   // }, [modelRef?.current]);
 
-  const handleARParams = () => {
-    // cameraTarget = "0.00001545m -10m -10m";
-    // setScale("1 1 1");
-  };
-
-  // console.log(cameraTarget, scale);
-
   return (
     <div className={styles.XRContainer}>
-      X
-      <input
-        type="number"
-        value={x}
-        onChange={(event) => setX(event.target.value)}
-      />
-      Y
-      <input
-        type="number"
-        value={y}
-        onChange={(event) => setY(event.target.value)}
-      />
-      Z
-      <input
-        type="number"
-        value={z}
-        onChange={(event) => setZ(event.target.value)}
-      />
-      scale
-      <input
-        type="number"
-        value={scale}
-        onChange={(event) => setScale(event.target.value)}
-      />
       <model-viewer
         orientation={
           rotatedModel ? "0 0 50deg" : type === "yoga" ? "0 0 25deg" : "0 0 0"
         }
-        scale={`${scale} ${scale} ${scale}`}
         ref={modelRef}
         ar
         ar-modes="webxr scene-viewer quick-look"
         camera-controls
         poster="poster.webp"
+        exposure="2"
+        environment-image={
+          "https://cdn.polyhaven.com/asset_img/primary/wrestling_gym.png?height=780"
+        }
+        skybox-image={
+          "https://cdn.polyhaven.com/asset_img/primary/wrestling_gym.png?height=780"
+        }
         shadow-intensity={type === "yoga" ? "0" : "1"}
         autoplay
-        // camera-target="0m -3m -3m" // female
-        camera-target={`${x}m ${y}m ${z}m`} // male
-        // camera-target={cameraTarget}
+        // cameraTarget={cameraTarget}
         src={`/models/${modelGender}/${modelName}.glb`}
-        // skybox-image="/src/assets/gym_4k.hdr"
       >
         <div
           className={`${styles.progressBar}${styles.hide}`}
