@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaMicrophone, FaPaperPlane, FaMicrophoneSlash } from "react-icons/fa";
 import { useWhisper } from "@chengsokdara/use-whisper";
 import { KeyboardAlt } from "@mui/icons-material";
@@ -23,7 +23,17 @@ export default function () {
     setWritingMode(!writingMode);
     // startRecording();
   };
-
+  useEffect(() => {
+    if (transcript.text?.includes("navigate")) {
+      router.push("/use-cases/directions");
+    }
+    if (transcript.text?.includes("music")) {
+      router.push("/use-cases/music");
+    }
+    if (transcript.text?.includes("exercise")) {
+      router.push("/fitnesstrainer");
+    }
+  }, [transcript]);
   const handleMicState = async () => {
     if (!micState) {
       startRecording();
@@ -31,7 +41,6 @@ export default function () {
       stopRecording();
     }
     setMicState(!micState);
-    console.log(micState);
   };
 
   const handleInputChange = (event) => {
@@ -126,13 +135,28 @@ export default function () {
         </div>
       </div>
       <div>
-        <Fab aria-label="add" color="primary" sx={{ margin: "10px" }} onClick={() => router.push('/fitnesstrainer')}>
+        <Fab
+          aria-label="add"
+          color="primary"
+          sx={{ margin: "10px" }}
+          onClick={() => router.push("/fitnesstrainer")}
+        >
           <FitnessCenterIcon />
         </Fab>
-        <Fab aria-label="add" color="secondary" sx={{ margin: "10px" }} onClick={() => router.push('/use-cases/music')}>
+        <Fab
+          aria-label="add"
+          color="secondary"
+          sx={{ margin: "10px" }}
+          onClick={() => router.push("/use-cases/music")}
+        >
           <MusicNoteIcon />
         </Fab>
-        <Fab aria-label="add" color="success" sx={{ margin: "10px" }} onClick={() => router.push('/use-cases/directions')}>
+        <Fab
+          aria-label="add"
+          color="success"
+          sx={{ margin: "10px" }}
+          onClick={() => router.push("/use-cases/directions")}
+        >
           <NearMeIcon />
         </Fab>
       </div>
