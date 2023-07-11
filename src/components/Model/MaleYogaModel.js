@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useGLTF } from "@react-three/drei";
-import AdvancedModel from "./AdvancedModel";
 
 export default function FemaleYogaModel(props) {
   const { modelName, scaleMul } = props;

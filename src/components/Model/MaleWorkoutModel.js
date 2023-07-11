@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
+import AdvancedWorkoutModel from "./AdvancedWorkoutModel";
 
 export default function MaleWorkoutModel(props) {
   const { modelName, zRotationMul, scaleMul } = props;
   const [yPosition, setYPosition] = useState(-4);
   const [isRotated, setIsRotated] = useState(false);
-  const [factor, setFactor] = useState(0.75);
-  // const tshirtArr = [];
-  // let arrNodes = "";
+  const [factor, setFactor] = useState(0.8);
+  const isJumpingJacks = modelName === "jumpingjacks";
 
   const group = useRef();
 
@@ -18,11 +18,14 @@ export default function MaleWorkoutModel(props) {
   const { actions } = useAnimations(animations, group);
   useEffect(() => {
     if (actions) {
-      const action = actions["Armature|mixamo.com|Layer0"];
+      const action =
+        (modelName === "lungs" &&
+          actions["Armature|lunge animation|Anima_Layer"]) ||
+        (modelName === "bicepcurls" &&
+          actions["Armature|bicep both hands|Anima_Layer"]) ||
+        (modelName === "pullups" && actions["Armature|pull up|Anima_Layer"]) ||
+        actions["Armature|mixamo.com|Layer0"];
       action?.play();
-
-      const pullup = actions["Armature|pull up|Anima_Layer"];
-      pullup.play();
     }
   });
 
@@ -33,54 +36,55 @@ export default function MaleWorkoutModel(props) {
         setYPosition(-5);
         break;
       case "bicyclecrunches":
-        setYPosition(-8);
+        setFactor(0.65);
+        setYPosition(-9);
         break;
       case "plank":
-        setFactor(5.75);
+        setFactor(4.5);
         setYPosition(-4);
         setIsRotated(true);
         break;
       case "pushups":
-        setFactor(5.75);
+        setFactor(4);
         setYPosition(-4);
         setIsRotated(true);
         break;
       case "pikewalk":
-        setFactor(5.75);
+        setFactor(4.8);
         setYPosition(-4);
         setIsRotated(true);
         break;
       case "situps":
-        setFactor(5.75);
+        setFactor(425);
         setYPosition(-4);
         setIsRotated(true);
         break;
       case "jumpingjacks":
-        setFactor(5.75);
+        setFactor(6);
         setYPosition(-4);
+        setIsRotated(true);
         break;
       default:
         break;
     }
   }, []);
 
-  // useEffect(() => {
-  //   for (let no = 34; no <= 53; no++) {
-  //     tshirtArr.push(no);
-  //   }
-
-  //   tshirtArr.forEach((no) => {
-  //     const newnode = `tshirt0${no}`;
-  //     console.log(nodes?.newnode?.geometry);
-  //     arrNodes += `<skinnedMesh
-  //       name="${newnode}"
-  //       geometry={${nodes?.newnode?.geometry}}
-  //       material={${nodes?.newnode?.material}}
-  //       skeleton={${nodes?.newnode?.skeleton}}
-  //     />`;
-  //   });
-  //   console.log(arrNodes);
-  // }, [nodes]);
+  if (
+    modelName === "pullups" ||
+    modelName === "lungs" ||
+    modelName === "bicepcurls"
+  )
+    return (
+      <AdvancedWorkoutModel
+        modelName={modelName}
+        scaleMul={scaleMul}
+        zRotationMul={zRotationMul}
+        nodes={nodes}
+        materials={materials}
+        group={group}
+        props={props}
+      />
+    );
 
   return (
     <group ref={group} {...props} dispose={null}>
@@ -93,7 +97,7 @@ export default function MaleWorkoutModel(props) {
             isRotated ? -Math.PI * zRotationMul : 0,
           ]}
           scale={scaleMul * factor}
-          position={[-1, yPosition, 0]}
+          position={[0, yPosition, 0]}
         >
           <primitive object={nodes.mixamorigHips} />
           <skinnedMesh
@@ -101,6 +105,7 @@ export default function MaleWorkoutModel(props) {
             geometry={nodes.tshirt.geometry}
             material={materials.tshirt}
             skeleton={nodes.tshirt.skeleton}
+            rotation={isJumpingJacks ? [Math.PI, 0, 0] : [0, 0, 0]}
           />
           {nodes?.tshirt002 && (
             <skinnedMesh
@@ -108,6 +113,7 @@ export default function MaleWorkoutModel(props) {
               geometry={nodes.tshirt002.geometry}
               material={materials["Hair Black.001"]}
               skeleton={nodes.tshirt002.skeleton}
+              rotation={isJumpingJacks ? [Math.PI, 0, 0] : [0, 0, 0]}
             />
           )}
           {nodes?.tshirt003 && (
@@ -130,6 +136,7 @@ export default function MaleWorkoutModel(props) {
               geometry={nodes.tshirt005.geometry}
               material={materials["Hair Black.001"]}
               skeleton={nodes.tshirt005.skeleton}
+              rotation={isJumpingJacks ? [Math.PI, 0, 0] : [0, 0, 0]}
             />
           )}
           <skinnedMesh
@@ -154,6 +161,7 @@ export default function MaleWorkoutModel(props) {
               skeleton={
                 nodes.tshirtmesh008?.skeleton || nodes.tshirtmesh007.skeleton
               }
+              rotation={isJumpingJacks ? [Math.PI, 0, 0] : [0, 0, 0]}
             />
             {nodes.tshirtmesh008_1 && (
               <skinnedMesh
@@ -161,6 +169,7 @@ export default function MaleWorkoutModel(props) {
                 geometry={nodes.tshirtmesh008_1?.geometry}
                 material={materials["eye pinnk.001"]}
                 skeleton={nodes.tshirtmesh008_1?.skeleton}
+                rotation={isJumpingJacks ? [Math.PI, 0, 0] : [0, 0, 0]}
               />
             )}
             <skinnedMesh
@@ -174,6 +183,7 @@ export default function MaleWorkoutModel(props) {
                 nodes.tshirtmesh008_2?.skeleton ||
                 nodes.tshirtmesh007_2.skeleton
               }
+              rotation={isJumpingJacks ? [Math.PI, 0, 0] : [0, 0, 0]}
             />
           </group>
           <skinnedMesh
@@ -181,18 +191,21 @@ export default function MaleWorkoutModel(props) {
             geometry={nodes.tshirt010.geometry}
             material={materials.face}
             skeleton={nodes.tshirt010.skeleton}
+            rotation={isJumpingJacks ? [Math.PI, 0, 0] : [0, 0, 0]}
           />
           <skinnedMesh
             name="tshirt011"
             geometry={nodes.tshirt011.geometry}
             material={materials.hands}
             skeleton={nodes.tshirt011.skeleton}
+            rotation={isJumpingJacks ? [Math.PI, 0, 0] : [0, 0, 0]}
           />
           <skinnedMesh
             name="tshirt012"
             geometry={nodes.tshirt012.geometry}
             material={materials.hands}
             skeleton={nodes.tshirt012.skeleton}
+            rotation={isJumpingJacks ? [Math.PI, 0, 0] : [0, 0, 0]}
           />
           <skinnedMesh
             name="tshirt013"
@@ -301,6 +314,7 @@ export default function MaleWorkoutModel(props) {
             geometry={nodes.tshirt030.geometry}
             material={materials["shirt black"]}
             skeleton={nodes.tshirt030.skeleton}
+            rotation={isJumpingJacks ? [Math.PI, 0, 0] : [0, 0, 0]}
           />
           {nodes?.tshirt031 && (
             <skinnedMesh
@@ -308,6 +322,7 @@ export default function MaleWorkoutModel(props) {
               geometry={nodes.tshirt031.geometry}
               material={materials["hair black"]}
               skeleton={nodes.tshirt031.skeleton}
+              rotation={isJumpingJacks ? [Math.PI, 0, 0] : [0, 0, 0]}
             />
           )}
           {nodes?.tshirt032 && (
@@ -316,6 +331,7 @@ export default function MaleWorkoutModel(props) {
               geometry={nodes.tshirt032.geometry}
               material={materials["hair black"]}
               skeleton={nodes.tshirt032.skeleton}
+              rotation={isJumpingJacks ? [Math.PI, 0, 0] : [0, 0, 0]}
             />
           )}
           {nodes?.tshirt033 && (
@@ -324,6 +340,7 @@ export default function MaleWorkoutModel(props) {
               geometry={nodes.tshirt033.geometry}
               material={materials["Hair Black.001"]}
               skeleton={nodes.tshirt033.skeleton}
+              rotation={isJumpingJacks ? [Math.PI, 0, 0] : [0, 0, 0]}
             />
           )}
           <skinnedMesh
@@ -331,36 +348,42 @@ export default function MaleWorkoutModel(props) {
             geometry={nodes.tshirt034.geometry}
             material={nodes.tshirt034.material}
             skeleton={nodes.tshirt034.skeleton}
+            rotation={isJumpingJacks ? [Math.PI, 0, 0] : [0, 0, 0]}
           />
           <skinnedMesh
             name="tshirt035"
             geometry={nodes.tshirt035.geometry}
             material={nodes.tshirt035.material}
             skeleton={nodes.tshirt035.skeleton}
+            rotation={isJumpingJacks ? [Math.PI, 0, 0] : [0, 0, 0]}
           />
           <skinnedMesh
             name="tshirt037"
             geometry={nodes.tshirt037.geometry}
             material={nodes.tshirt037.material}
             skeleton={nodes.tshirt037.skeleton}
+            rotation={isJumpingJacks ? [Math.PI, 0, 0] : [0, 0, 0]}
           />
           <skinnedMesh
             name="tshirt038"
             geometry={nodes.tshirt038.geometry}
             material={nodes.tshirt038.material}
             skeleton={nodes.tshirt038.skeleton}
+            rotation={isJumpingJacks ? [Math.PI, 0, 0] : [0, 0, 0]}
           />
           <skinnedMesh
             name="tshirt040"
             geometry={nodes.tshirt040.geometry}
             material={nodes.tshirt040.material}
             skeleton={nodes.tshirt040.skeleton}
+            rotation={isJumpingJacks ? [Math.PI, 0, 0] : [0, 0, 0]}
           />
           <skinnedMesh
             name="tshirt041"
             geometry={nodes.tshirt041.geometry}
             material={nodes.tshirt041.material}
             skeleton={nodes.tshirt041.skeleton}
+            rotation={isJumpingJacks ? [Math.PI, 0, 0] : [0, 0, 0]}
           />
           {nodes?.tshirt042 && (
             <skinnedMesh
@@ -375,24 +398,28 @@ export default function MaleWorkoutModel(props) {
             geometry={nodes.tshirt043.geometry}
             material={nodes.tshirt043.material}
             skeleton={nodes.tshirt043.skeleton}
+            rotation={isJumpingJacks ? [Math.PI, 0, 0] : [0, 0, 0]}
           />
           <skinnedMesh
             name="tshirt044"
             geometry={nodes.tshirt044.geometry}
             material={nodes.tshirt044.material}
             skeleton={nodes.tshirt044.skeleton}
+            rotation={isJumpingJacks ? [Math.PI, 0, 0] : [0, 0, 0]}
           />
           <skinnedMesh
             name="tshirt046"
             geometry={nodes.tshirt046.geometry}
             material={nodes.tshirt046.material}
             skeleton={nodes.tshirt046.skeleton}
+            rotation={isJumpingJacks ? [Math.PI, 0, 0] : [0, 0, 0]}
           />
           <skinnedMesh
             name="tshirt047"
             geometry={nodes.tshirt047.geometry}
             material={nodes.tshirt047.material}
             skeleton={nodes.tshirt047.skeleton}
+            rotation={isJumpingJacks ? [Math.PI, 0, 0] : [0, 0, 0]}
           />
           {nodes?.tshirt048 && (
             <skinnedMesh
@@ -407,24 +434,28 @@ export default function MaleWorkoutModel(props) {
             geometry={nodes.tshirt049.geometry}
             material={nodes.tshirt049.material}
             skeleton={nodes.tshirt049.skeleton}
+            rotation={isJumpingJacks ? [Math.PI, 0, 0] : [0, 0, 0]}
           />
           <skinnedMesh
             name="tshirt050"
             geometry={nodes.tshirt050.geometry}
             material={nodes.tshirt050.material}
             skeleton={nodes.tshirt050.skeleton}
+            rotation={isJumpingJacks ? [Math.PI, 0, 0] : [0, 0, 0]}
           />
           <skinnedMesh
             name="tshirt052"
             geometry={nodes.tshirt052.geometry}
             material={nodes.tshirt052.material}
             skeleton={nodes.tshirt052.skeleton}
+            rotation={isJumpingJacks ? [Math.PI, 0, 0] : [0, 0, 0]}
           />
           <skinnedMesh
             name="tshirt053"
             geometry={nodes.tshirt053.geometry}
             material={nodes.tshirt053.material}
             skeleton={nodes.tshirt053.skeleton}
+            rotation={isJumpingJacks ? [Math.PI, 0, 0] : [0, 0, 0]}
           />
         </group>
       </group>

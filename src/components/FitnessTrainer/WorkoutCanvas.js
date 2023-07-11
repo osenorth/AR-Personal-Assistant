@@ -12,8 +12,8 @@ import {
 import { POINTS, LINES } from "../../data/WorkoutPoints";
 import workoutData from "../../data/WorkoutData";
 import Instructions from "../Instructions/Instructions";
-// import XrHitModelContainer from "../../containers/XRHitModelContainer/XRHitModelContainer";
-import ModelViewer from "../ModelViewer/ModelViewer";
+import XrHitModelContainer from "../../containers/XRHitModelContainer/XRHitModelContainer";
+// import ModelViewer from "../ModelViewer/ModelViewer";
 import * as styles from "./FitnessTrainer.module.css";
 
 const WorkoutCanvas = () => {
@@ -24,7 +24,7 @@ const WorkoutCanvas = () => {
   const [feedback, setFeedback] = useState("");
   const [status, setStatus] = useState(true);
   const [speech, setSpeech] = useState(null);
-  const [modelGender, setModelGender] = useState("male");
+  const [modelGender, setModelGender] = useState("female");
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
   const router = useRouter();
@@ -897,14 +897,6 @@ const WorkoutCanvas = () => {
             <div className={styles.genderContainer}>
               <button
                 className={
-                  modelGender === "male" ? "primary-btn" : "secondary-btn"
-                }
-                onClick={() => setModelGender("male")}
-              >
-                Male
-              </button>
-              <button
-                className={
                   modelGender === "female" ? "primary-btn" : "secondary-btn"
                 }
                 onClick={() => {
@@ -913,10 +905,18 @@ const WorkoutCanvas = () => {
               >
                 Female
               </button>
+              <button
+                className={
+                  modelGender === "male" ? "primary-btn" : "secondary-btn"
+                }
+                onClick={() => setModelGender("male")}
+              >
+                Male
+              </button>
             </div>
           )}
         </div>
-        <ModelViewer
+        {/* <ModelViewer
           modelName={currentWorkout}
           modelGender={modelGender}
           position={
@@ -927,8 +927,8 @@ const WorkoutCanvas = () => {
           rotatedModel={currentWorkoutData.rotatedModel}
           scaledModel={currentWorkoutData.scaledModel}
           type="workout"
-        />
-        {/* {currentWorkoutData &&
+        /> */}
+        {currentWorkoutData &&
           (currentWorkoutData.modelAvailable ? (
             <XrHitModelContainer
               modelName={currentWorkout}
@@ -951,7 +951,7 @@ const WorkoutCanvas = () => {
               src={currentWorkoutData.modelLink}
               className={styles.modelContrainer}
             ></iframe>
-          ))} */}
+          ))}
         {isStartSession && (
           <div className={styles.countDisplay}>
             <p className="text-subheading">Count</p>

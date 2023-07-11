@@ -78,7 +78,7 @@ const XrHitModel = ({
                 position={position}
                 modelName={modelName}
                 zRotationMul={zRotationMul}
-                scaleMul={modelGender === "female" ? scaleMul / 2 : scaleMul}
+                scaleMul={scaleMul / 1.5}
               />
             );
           }

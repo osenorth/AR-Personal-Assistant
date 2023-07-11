@@ -63,7 +63,9 @@ const XrHitModelContainer = ({
             modelName={modelName}
             modelGender={modelGender}
             zRotationMul={zRotationMul}
-            scaleMul={(scaleMul * dimensions.height) / 500}
+            scaleMul={
+              (scaleMul * Math.max(dimensions.width, dimensions.height)) / 600
+            }
             type={type}
           />
         </XR>

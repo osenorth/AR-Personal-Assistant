@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useGLTF } from "@react-three/drei";
-import AdvancedModel from "./AdvancedModel";
+import AdvancedYogaModel from "./AdvancedYogaModel";
 
 export default function FemaleYogaModel(props) {
   const { modelName, scaleMul } = props;
@@ -24,7 +24,7 @@ export default function FemaleYogaModel(props) {
 
   if (modelName === "trikonasana" || modelName === "virabhadrasana3")
     return (
-      <AdvancedModel
+      <AdvancedYogaModel
         modelName={modelName}
         scaleMul={scaleMul}
         nodes={nodes}
