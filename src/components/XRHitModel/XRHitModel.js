@@ -36,13 +36,11 @@ const XrHitModel = ({
       } else {
         camera.position.z = 12;
       }
-    } else {
-      camera.position.z = 0;
     }
   });
 
   useHitTest((hitMatrix, hit) => {
-    console.log(reticleRef.position);
+    console.log(reticleRef.current.position);
     // reticleRef.current.position.z = 0;
     hitMatrix.decompose(
       reticleRef.current.position,
