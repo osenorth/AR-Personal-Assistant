@@ -6,10 +6,14 @@ import {
   Autocomplete,
   DirectionsRenderer,
 } from "@react-google-maps/api";
+import MapAI from "./MapAI";
 import * as styles from "./Direction.module.css";
 import { GiPathDistance } from "react-icons/gi";
-import { MdOutlineClear } from "react-icons/md";
 import { ImLocation } from "react-icons/im";
+import { MdOutlineClear } from "react-icons/md";
+import { Box, ButtonGroup, Button, TextField } from "@mui/material";
+import Fab from "@mui/material/Fab";
+import ViewInArIcon from "@mui/icons-material/ViewInAr";
 
 const containerStyle = {
   width: "100%",
@@ -21,18 +25,17 @@ const center = {
   lng: 77.19824676484188,
 };
 
-export default function ({ mapState, updateMapState }) {
-  const { start, destination, direction, distance, duration, message } =
-    mapState;
+export default function ({ mapState, updateMapState, toggleComponent }) {
+  const { travelMode, direction, distance, duration, message } = mapState;
   const originRef = useRef();
   const destinationRef = useRef();
-  const [map,setMap] = useState(null); 
+  const [map, setMap] = useState(null);
+  const [showOptions, setShowOptions] = useState(false);
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_CLOUD_API_KEY,
     libraries: ["places"],
   });
-
   const onLoad = useCallback((map) => {
     setMap(map);
     map.setZoom(15);
@@ -43,6 +46,10 @@ export default function ({ mapState, updateMapState }) {
   }, []);
 
   const calculateRoute = async () => {
+    updateMapState({
+      start: originRef.current.value,
+      destination: destinationRef.current.value,
+    });
     if (originRef.current.value == "" || destinationRef.current.value == "") {
       updateMapState({
         message: "No Possible Route from Location and Destination.",
@@ -54,7 +61,7 @@ export default function ({ mapState, updateMapState }) {
       const results = await directionService.route({
         origin: originRef.current.value,
         destination: destinationRef.current.value,
-        travelMode: google.maps.TravelMode.DRIVING,
+        travelMode: google.maps.TravelMode[`${travelMode}`],
       });
       updateMapState({
         direction: results,
@@ -62,7 +69,9 @@ export default function ({ mapState, updateMapState }) {
         duration: results.routes[0].legs[0].duration.text,
       });
     } catch (e) {
-      setMessage("No Possible Route from Location and Destination.");
+      updateMapState({
+        message: "No Possible Route from Location and Destination.",
+      });
       console.log(e);
     }
   };
@@ -76,43 +85,60 @@ export default function ({ mapState, updateMapState }) {
     originRef.current.value = "";
     destinationRef.current.value = "";
   };
+
+  const handleTravelModeChange = (mode) => {
+    updateMapState({
+      travelMode: mode,
+    });
+    setShowOptions(false);
+  };
+
   return isLoaded ? (
     <GoogleMap
       mapContainerStyle={containerStyle}
       center={center}
       onLoad={onLoad}
       onUnmount={onUnmount}
+      options={{
+        zoomControl: false,
+        mapTypeControl: false,
+        fullscreenControl: false,
+      }}
     >
       <Marker position={center} />
       {direction && <DirectionsRenderer directions={direction} />}
-      <div className={styles.navigationModal}>
+      <Box className={styles.navigationModal}>
         <div className={styles.inputs}>
-          <Autocomplete>
-            <input
-              type="text"
-              value={start}
-              onChange={(e) => updateMapState({
-                start: e.target.value 
-              })}
-              ref={originRef}
-              placeholder={"Your Location"}
-            />
-          </Autocomplete>
-          <Autocomplete>
-            <input
-              type="text"
-              value={destination}
-              onChange={(e) => updateMapState({
-                destination: e.target.value 
-              })}
-              ref={destinationRef}
-              placeholder={"Your Destination"}
-            />
-          </Autocomplete>
+          <div className={styles.textinput}>
+            <Autocomplete>
+              <TextField
+                label={"start"}
+                inputRef={originRef}
+                placeholder="Your Location"
+                defaultValue={mapState.start}
+                sx={{
+                  margin: "5px",
+                }}
+              />
+            </Autocomplete>
+            <Autocomplete>
+              <TextField
+                label="end"
+                inputRef={destinationRef}
+                placeholder="Your Destination"
+                defaultValue={mapState.destination}
+                sx={{
+                  margin: "5px",
+                }}
+              />
+            </Autocomplete>
+          </div>
           {direction ? (
-            <div onClick={clearRoute}>
-              <MdOutlineClear className={styles.navigate} />
-            </div>
+            <>
+              <div onClick={clearRoute}>
+                <MdOutlineClear className={styles.navigate} />
+              </div>
+            </>
           ) : (
             <div onClick={calculateRoute}>
               <GiPathDistance className={styles.navigate} />
@@ -134,7 +160,68 @@ export default function ({ mapState, updateMapState }) {
             map.setZoom(15);
           }}
         />
-      </div>
+        <Box>
+          {showOptions && (
+            <ButtonGroup>
+              {["DRIVING", "TRANSIT", "WALKING", "BICYCLING"].map((mode) => (
+                <Button
+                  sx={{
+                    backgroundColor: "blue",
+                    color: "white",
+                    "&:hover": { color: "blue" },
+                    fontSize: 11,
+                  }}
+                  key={mode}
+                  onClick={() => handleTravelModeChange(mode)}
+                >
+                  {mode}
+                </Button>
+              ))}
+            </ButtonGroup>
+          )}
+          {!showOptions && (
+            <Button
+              sx={{
+                backgroundColor: "blue",
+                color: "white",
+                "&:hover": { color: "blue" },
+                fontSize: 11,
+              }}
+              onClick={() => setShowOptions(!showOptions)}
+            >
+              {travelMode}
+            </Button>
+          )}
+        </Box>
+      </Box>
+      {mapState.start != "" && mapState.destination != "" ? (
+        <>
+          <Box
+            sx={{
+              border: "1px solid black",
+              alignContent: "center",
+              borderRadius: "10%",
+              position: "fixed",
+              bottom: 80,
+              left: 5,
+              width: 60,
+              height: 60,
+              backgroundColor: "white",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              zIndex: 9999, // Ensure the button stays on top of other content
+            }}
+          >
+            <Fab aria-label="add" color="success" onClick={toggleComponent}>
+              <ViewInArIcon />
+            </Fab>
+          </Box>
+          <MapAI mapState={mapState} />
+        </>
+      ) : (
+        <></>
+      )}
     </GoogleMap>
   ) : (
     <>Loading</>
