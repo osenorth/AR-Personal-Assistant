@@ -36,10 +36,14 @@ const XrHitModel = ({
       } else {
         camera.position.z = 12;
       }
+    } else {
+      camera.position.z = 0;
     }
   });
 
   useHitTest((hitMatrix, hit) => {
+    console.log(reticleRef.position);
+    // reticleRef.current.position.z = 0;
     hitMatrix.decompose(
       reticleRef.current.position,
       reticleRef.current.quaternion,
@@ -90,7 +94,7 @@ const XrHitModel = ({
               key={id}
               position={position}
               modelName={modelName}
-              scaleMul={modelGender === "female" ? 0.15 : 0.05}
+              scaleMul={modelGender === "female" ? 0.15 : 0.075}
             />
           );
         })}
