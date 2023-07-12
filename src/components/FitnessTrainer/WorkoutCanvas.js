@@ -13,7 +13,7 @@ import { POINTS, LINES } from "../../data/WorkoutPoints";
 import workoutData from "../../data/WorkoutData";
 import Instructions from "../Instructions/Instructions";
 import XrHitModelContainer from "../../containers/XRHitModelContainer/XRHitModelContainer";
-// import ModelViewer from "../ModelViewer/ModelViewer";
+import ModelViewer from "../ModelViewer/ModelViewer";
 import * as styles from "./FitnessTrainer.module.css";
 
 const WorkoutCanvas = () => {
@@ -916,18 +916,20 @@ const WorkoutCanvas = () => {
             </div>
           )}
         </div>
-        {/* <ModelViewer
-          modelName={currentWorkout}
-          modelGender={modelGender}
-          position={
-            modelGender === "female" || currentWorkoutData.scaledModel
-              ? "0m 100m 0m"
-              : "0m 1000m 0m"
-          }
-          rotatedModel={currentWorkoutData.rotatedModel}
-          scaledModel={currentWorkoutData.scaledModel}
-          type="workout"
-        /> */}
+        {currentWorkoutData && !currentWorkoutData.modelAvailable && (
+          <ModelViewer
+            modelName={currentWorkout}
+            modelGender={modelGender}
+            position={
+              modelGender === "female" || currentWorkoutData.scaledModel
+                ? "0m 100m 0m"
+                : "0m 1000m 0m"
+            }
+            rotatedModel={currentWorkoutData.rotatedModel}
+            scaledModel={currentWorkoutData.scaledModel}
+            type="workout"
+          />
+        )}
         {currentWorkoutData &&
           (currentWorkoutData.modelAvailable ? (
             <XrHitModelContainer
