@@ -9,7 +9,6 @@ import { drawPoint, drawSegment } from "../../helpers/Utils";
 import Webcam from "react-webcam";
 import Instructions from "../Instructions/Instructions";
 import XrHitModelContainer from "../../containers/XRHitModelContainer/XRHitModelContainer";
-import ModelViewer from "../ModelViewer/ModelViewer";
 import * as styles from "./FitnessTrainer.module.css";
 
 let flag = false,
@@ -327,15 +326,6 @@ const YogaCanvas = () => {
             </button>
           </div>
         </div>
-        {currentPoseData && !currentPoseData.modelAvailable && (
-          <ModelViewer
-            modelName={currentPoseData.label}
-            modelGender={modelGender}
-            position={"0m 100m 0m"}
-            rotatedModel={false}
-            type="yoga"
-          />
-        )}
         {currentPoseData &&
           (currentPoseData.modelAvailable ? (
             <XrHitModelContainer
