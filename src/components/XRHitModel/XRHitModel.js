@@ -78,7 +78,9 @@ const XrHitModel = ({
                 position={position}
                 modelName={modelName}
                 zRotationMul={zRotationMul}
-                scaleMul={scaleMul / 1.5}
+                scaleMul={
+                  modelGender === "female" ? scaleMul / 1.25 : scaleMul / 2.5
+                }
               />
             );
           }
@@ -88,7 +90,7 @@ const XrHitModel = ({
               key={id}
               position={position}
               modelName={modelName}
-              scaleMul={0.15}
+              scaleMul={modelGender === "female" ? 0.15 : 0.05}
             />
           );
         })}
