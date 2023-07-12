@@ -12,12 +12,19 @@ import { playingTrackState, playState } from "../atoms/playerAtom";
 
 import MusicIndex from './use-cases/music/musicIndex';
 
-import { ChickenDance } from '../components/SpotifyAnimations/ChickenDance';
-import { HipHopDance1 } from '../components/SpotifyAnimations/HipHopDance1';
-import { HipHopDance2 } from '../components/SpotifyAnimations/HipHopDance2';
-import { MacarenaDance } from '../components/SpotifyAnimations/MacarenaDance';
-import { SalsaDance } from '../components/SpotifyAnimations/SalsaDance';
-import { StepHipHopDance } from '../components/SpotifyAnimations/StepHipHopDance';
+import { ChickenDanceF } from '../components/SpotifyAnimations/ChickenDanceF';
+import { HipHopDance1F } from '../components/SpotifyAnimations/HipHopDance1F';
+import { HipHopDance2F } from '../components/SpotifyAnimations/HipHopDance2F';
+import { MacarenaDanceF } from '../components/SpotifyAnimations/MacarenaDanceF';
+import { SalsaDanceF } from '../components/SpotifyAnimations/SalsaDanceF';
+import { StepHipHopDanceF } from '../components/SpotifyAnimations/StepHipHopDanceF';
+
+import { ChickenDanceM } from '../components/SpotifyAnimations/ChickenDanceM';
+import { HipHopDance1M } from '../components/SpotifyAnimations/HipHopDance1M';
+import { HipHopDance2M } from '../components/SpotifyAnimations/HipHopDance2M';
+import { MacarenaDanceM } from '../components/SpotifyAnimations/MacarenaDanceM';
+import { SalsaDanceM } from '../components/SpotifyAnimations/SalsaDanceM';
+import { StepHipHopDanceM } from '../components/SpotifyAnimations/StepHipHopDanceM';
 
 function Image(props) {
   const { imgSrc, position, scale } = props;
@@ -97,7 +104,7 @@ function Button({track, chooseTrack, ...props}) {
 //     </>
 //   );
 // }
-const ModelTypeSwitcher = ({modelType}) => {
+const ModelTypeSwitcherM = ({modelType}) => {
   // const [renderModel, setRenderModel] = useState()
   // switch(modelType)
   // {
@@ -108,16 +115,42 @@ const ModelTypeSwitcher = ({modelType}) => {
     <>
     {
       modelType == 'Country'
-      ? <StepHipHopDance scale={[0.05, 0.05, 0.05]} position={[0,0,-1.5]} />
+      ? <StepHipHopDanceM scale={0.01} position={[-0.5,0,-1]} />
       : modelType == 'Workout'
-        ? <ChickenDance scale={[0.05, 0.05, 0.05]} position={[0,0,-1]} />
+        ? <ChickenDanceM scale={0.011} position={[-0.5,0,-1]} />
         : modelType == 'Salsa'
-          ? <SalsaDance scale={[0.05, 0.05, 0.05]} position={[0,0,-1]} />
+          ? <SalsaDanceM scale={0.013} position={[-0.5,0,-1]} />
           : modelType == 'Hip-Hop'
-            ? <HipHopDance1 scale={[0.05, 0.05, 0.05]} position={[0,0,-1]} />
+            ? <HipHopDance1M scale={0.011} position={[-0.5,0,-1]} />
             : modelType == 'Latin-Pop'
-              ? <MacarenaDance scale={[0.05, 0.05, 0.05]} position={[0,0,-1]} />
-              : <HipHopDance2 scale={[0.05, 0.05, 0.05]} position={[0,0,-1]} />
+              ? <MacarenaDanceM scale={0.01} position={[-0.5,0,-1]} />
+              : <HipHopDance2M scale={0.013} position={[-0.5,0,-1]} />
+    }
+    </>
+  )
+}
+
+const ModelTypeSwitcherF = ({modelType}) => {
+  // const [renderModel, setRenderModel] = useState()
+  // switch(modelType)
+  // {
+  //   case 'Country':
+
+  // }
+  return (
+    <>
+    {
+      modelType == 'Country'
+      ? <StepHipHopDanceF scale={0.045} position={[-0.5,0,-1.5]} />
+      : modelType == 'Workout'
+        ? <ChickenDanceF scale={[0.05, 0.05, 0.05]} position={[-0.5,0,-1]} />
+        : modelType == 'Salsa'
+          ? <SalsaDanceF scale={[0.05, 0.05, 0.05]} position={[-0.5,0,-1]} />
+          : modelType == 'Hip-Hop'
+            ? <HipHopDance1F scale={[0.05, 0.05, 0.05]} position={[-0.5,0,-1.2]} />
+            : modelType == 'Latin-Pop'
+              ? <MacarenaDanceF scale={[0.05, 0.05, 0.05]} position={[-0.5,0,-1]} />
+              : <HipHopDance2F scale={[0.05, 0.05, 0.05]} position={[-0.5,0,-1]} />
     }
     </>
   )
@@ -126,6 +159,7 @@ const ModelTypeSwitcher = ({modelType}) => {
 const SpotifyPage = () => {
     const [modelType, setModelType] = useState('Workout');
     const [imgUrl, setImgUrl] = useState(modelType);
+    const [toggle, setToggle] = useState('female');
 
 
     return (
@@ -144,6 +178,8 @@ const SpotifyPage = () => {
                 <XR referenceSpace="local">
                 <ambientLight />
                 <pointLight position={[10, 10, 10]} />
+                
+             
                 <Interactive onSelect={()=>setModelType('Workout')}>
                   <Image 
                     position={[-0.7,1,-1]} 
@@ -205,7 +241,29 @@ const SpotifyPage = () => {
                     }/>
                 </Interactive>
                 {/* <ChickenDance scale={[0.05, 0.05, 0.05]} position={[0,0,-1]}/> */}
-                <ModelTypeSwitcher modelType={modelType}/>
+                {toggle === 'female'
+                  ?  <>
+                        <ModelTypeSwitcherF modelType={modelType}/>
+                        <Interactive onSelect={()=>setToggle('male')}>
+                          <Image
+                            position={[-0.55,-0.2,-1]}
+                            scale={[0.4,0.08,0.08]}
+                            imgSrc={'/Switch_Male.png'}
+                          />
+                        </Interactive>
+                      </>
+                  :  <>
+                        <ModelTypeSwitcherM modelType={modelType}/>
+                        <Interactive onSelect={()=>setToggle('female')}>
+                          <Image
+                            position={[-0.55,-0.2,-1]}
+                            scale={[0.4,0.08,0.08]}
+                            imgSrc={'/Switch_Female.png'}
+                          />
+                        </Interactive>
+                      </>
+                }
+                      
                 {/* <Button position={[0, 0.1, -0.2]} track={track} chooseTrack={chooseTrack}/> */}
                 <Controllers />
                 </XR>
