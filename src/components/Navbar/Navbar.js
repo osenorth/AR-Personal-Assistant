@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import logo from "../../assets/ossistant-logo.svg";
@@ -6,7 +6,8 @@ import * as styles from "./Navbar.module.css";
 import { HamburgerButton } from "react-hamburger-button";
 
 const Navbar = () => {
-  const [navOpen, setNavOpen] = React.useState(true);
+  const [navOpen, setNavOpen] = useState(true);
+
   return (
     <nav>
       <div className={`margin-on-side ${styles.navContainer}`}>
@@ -31,20 +32,23 @@ const Navbar = () => {
               >
                 <Link href="/">Home</Link>
               </li>
-              <li className={` text-heading ${styles.navLink}`}>
-                <Link href="/">About</Link>
+              <li className={`text-heading ${styles.navLink}`}>
+                <Link href="/#about">About</Link>
               </li>
-              <li className={` text-heading ${styles.navLink}`}>
-                <Link href="/">Services</Link>
+              <li className={`text-heading ${styles.navLink}`}>
+                <Link href="/#features">Features</Link>
               </li>
-              <li className={` text-heading ${styles.navLink}`}>
-                <Link href="/">Team</Link>
+              <li className={`text-heading ${styles.navLink}`}>
+                <Link href="/#services">Services</Link>
               </li>
-              <li className={` text-heading ${styles.navLink}`}>
-                <Link href="/">Contact</Link>
+              <li className={`text-heading ${styles.navLink}`}>
+                <Link href="/#team">Team</Link>
+              </li>
+              <li className={`text-heading ${styles.navLink}`}>
+                <Link href="/#contact">Contact</Link>
               </li>
             </ul>
-            <div
+            {/* <div
               className={styles.authLinks}
               onClick={() => {
                 setNavOpen((current) => !current);
@@ -56,7 +60,7 @@ const Navbar = () => {
               <button className={`secondary-btn ${styles.authButton}`}>
                 Register
               </button>
-            </div>
+            </div> */}
           </div>
         </div>
         <div className={`${styles.navMenuButton}`}>

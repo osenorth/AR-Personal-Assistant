@@ -13,7 +13,6 @@ const XrHitModel = ({
   zRotationMul,
   scaleMul,
   type,
-  zPos,
 }) => {
   const reticleRef = useRef();
   const [models, setModels] = useState([]);
@@ -48,8 +47,7 @@ const XrHitModel = ({
 
   const placeModel = (e) => {
     let position = e.intersection.object.position.clone();
-    console.log(position);
-    position.z -= zPos;
+    position.z -= 3;
     let id = Date.now();
     setModels([{ position, id }]);
   };

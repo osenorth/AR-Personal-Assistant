@@ -20,7 +20,17 @@ const FooterLinkSet = () => {
               {linkSet.links.map((item, index) => {
                 return (
                   <li key={index}>
-                    <Link href="/">{item}</Link>
+                    {item.route.includes("https://") ? (
+                      <Link
+                        href={item.route}
+                        rel="noopener noreferrer"
+                        target="_blank"
+                      >
+                        {item.label}
+                      </Link>
+                    ) : (
+                      <Link href={item.route}>{item.label}</Link>
+                    )}
                   </li>
                 );
               })}
@@ -30,28 +40,43 @@ const FooterLinkSet = () => {
       </div>
       <div className={styles.socialLinks}>
         <h4 className={styles.footerHeading}>JOIN US</h4>
-        <div className={styles.appLinks}>
+        {/* <div className={styles.appLinks}>
           <Link href="/" className={styles.connectLink}>
             <Image src={appStoreImg} alt="AppStore" />
           </Link>
           <Link href="/" className={styles.connectLink}>
             <Image src={playStoreImg} alt="PlayStore" />
           </Link>
-        </div>
+        </div> */}
         <div className={styles.mediaLinks}>
-          <Link href="/" className={styles.connectLink}>
+          {/* <Link href="/" className={styles.connectLink}>
             <AiFillYoutube size={30} color="#ff0000" />
-          </Link>
-          <Link href="/" className={styles.connectLink}>
+          </Link> */}
+          {/* <Link href="/" className={styles.connectLink}>
             <FaFacebookF size={25} color="#3B5998" />
-          </Link>
-          <Link href="/" className={styles.connectLink}>
+          </Link> */}
+          <Link
+            href="https://twitter.com/osenorth"
+            rel="noopener noreferrer"
+            target="_blank"
+            className={styles.connectLink}
+          >
             <BsTwitter size={25} color="#55ACEE" />
           </Link>
-          <Link href="/" className={styles.connectLink}>
+          <Link
+            href="https://www.instagram.com/osenorth_/"
+            rel="noopener noreferrer"
+            target="_blank"
+            className={styles.connectLink}
+          >
             <BsInstagram size={25} color="#E1256C" />
           </Link>
-          <Link href="/" className={styles.connectLink}>
+          <Link
+            href="https://www.linkedin.com/company/osenorth"
+            rel="noopener noreferrer"
+            target="_blank"
+            className={styles.connectLink}
+          >
             <FaLinkedinIn size={25} color="#0077B5" />
           </Link>
         </div>

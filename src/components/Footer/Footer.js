@@ -6,7 +6,7 @@ import * as styles from "./Footer.module.css";
 
 const Footer = ({ withContact }) => {
   return (
-    <footer className={styles.footerContainer}>
+    <footer className={styles.footerContainer} id="contact">
       <SubscribeLetter />
       {withContact && <Contact />}
       <FooterLinkSet />

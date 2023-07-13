@@ -25,7 +25,6 @@ const YogaCanvas = () => {
   const [bestPerform, setBestPerform] = useState(0);
   const [isStartPose, setIsStartPose] = useState(false);
   const [modelGender, setModelGender] = useState("female");
-  const [zPos, setZPos] = useState(0);
 
   const router = useRouter();
   const [currentPose, setCurrentPose] = useState(null);
@@ -307,12 +306,6 @@ const YogaCanvas = () => {
           <h4 className={`text-primary ${styles.workoutTitle}`}>
             {isStartPose ? currentPoseData.name : "View in 3D"}
           </h4>
-          <input
-            type="number"
-            value={zPos}
-            name="zPos"
-            onChange={(event) => setZPos(event.target.value)}
-          />
           <div className={styles.genderContainer}>
             <button
               className={
@@ -347,7 +340,6 @@ const YogaCanvas = () => {
               modelName={currentPoseData.label}
               modelGender={modelGender}
               type="yoga"
-              zPos={zPos}
             />
           ) : (
             <iframe

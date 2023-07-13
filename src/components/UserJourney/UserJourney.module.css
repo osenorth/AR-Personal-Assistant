@@ -1,0 +1,81 @@
+.userjourneyContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 2rem;
+  margin-bottom: 3rem;
+}
+
+.userjourneyLabel {
+  font-size: 1.5rem;
+}
+
+.userjourneyDes {
+  text-align: center;
+  width: 60%;
+}
+
+.stepsList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  margin-top: 60px;
+}
+
+.cardContainer {
+  position: relative;
+  padding: 18px;
+  border-radius: 24px;
+  height: auto;
+  width: 325px;
+  box-shadow: 0px 2px 16px 2px rgba(0, 0, 0, 0.15);
+  text-align: left;
+  margin-top: 75px;
+}
+
+.imageContainer {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  overflow: hidden;
+  position: absolute;
+  top: -100px;
+  left: 70px;
+  box-shadow: 0px 2px 16px 2px rgba(0, 0, 0, 0.15);
+  background-color: white;
+}
+
+.posterImg {
+  width: 100%;
+  height: auto;
+  transition: all 0.3s ease-in-out;
+}
+
+.cardContainer:hover .avatarImg {
+  transform: scale(1.1);
+  filter: brightness(1.05);
+}
+
+.stepInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 75px;
+  gap: 5px;
+}
+
+.stepName {
+  font-size: 1.3rem;
+  margin: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .userjourneyDes {
+    width: 100%;
+  }
+}
