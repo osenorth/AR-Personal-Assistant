@@ -17,7 +17,7 @@ const AdvancedYogaModel = ({
           name="Armature"
           rotation={[0, Math.PI * 0.125, 0]}
           scale={[scaleMul, scaleMul, scaleMul]}
-          position={[0, -0.75, 0]}
+          position={[0, -1, 0]}
         >
           <group
             {...props}

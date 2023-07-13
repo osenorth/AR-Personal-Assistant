@@ -13,11 +13,11 @@ export default function FemaleYogaModel(props) {
 
   useEffect(() => {
     if (modelName === "bhujangasana") {
-      setPosition([0, -7, 0]);
+      setPosition([0, -7, 3]);
     } else if (modelName === "adhomukhasvanasana") {
       setPosition([0, -3.5, 0]);
     } else if (modelName === "sarvangasana") {
-      setPosition([0, 13, 1]);
+      setPosition([0, 13, 0.75]);
       setRotation([Math.PI, Math.PI, 0]);
     }
   }, []);
@@ -41,7 +41,7 @@ export default function FemaleYogaModel(props) {
           name="Armature"
           rotation={[0, Math.PI * 0.125, 0]}
           scale={scaleMul}
-          position={[0, -0.75, 0]}
+          position={[0, -1, 0]}
         >
           <group
             {...props}
@@ -143,20 +143,20 @@ export default function FemaleYogaModel(props) {
               />
             </group>
           </group>
+          <mesh
+            geometry={nodes.Cube.geometry}
+            material={materials.Material}
+            position={[0.25, 0, 0.68]}
+            scale={[2.5, 6, 8]}
+          />
           {nodes?.Cube001 && (
             <mesh
               geometry={nodes.Cube001.geometry}
               material={materials["Material.001"]}
               position={[0, 1.25, -1.25]}
-              scale={[1.47, 1.25, 1.98]}
+              scale={[1.5, 1.25, 1.5]}
             />
           )}
-          <mesh
-            geometry={nodes.Cube.geometry}
-            material={materials.Material}
-            position={[0, 0.02, 0.68]}
-            scale={[2.47, 5.98, 7.98]}
-          />
         </group>
       </group>
     </group>

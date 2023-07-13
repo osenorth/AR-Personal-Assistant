@@ -118,7 +118,7 @@ const workoutData = {
       rotatedModel: false,
       scaledModel: false,
       zRotationMul: 0,
-      scaleMul: 0.275,
+      scaleMul: 0.3,
       modelLink:
         "https://sketchfab.com/models/4fcbfb3ef1124df8afd57204f9a516ac/embed?autostart=1&dnt=1",
       difficulty: "easy",
@@ -138,7 +138,7 @@ const workoutData = {
       rotatedModel: false,
       scaledModel: true,
       zRotationMul: 0,
-      scaleMul: 0.00275,
+      scaleMul: 0.003,
       modelLink:
         "https://sketchfab.com/models/feffc536b46442bfbe0fd3dfb99861c0/embed?autostart=1&dnt=1",
       difficulty: "hard",
@@ -158,7 +158,7 @@ const workoutData = {
       rotatedModel: false,
       scaledModel: false,
       zRotationMul: 0,
-      scaleMul: 0.275,
+      scaleMul: 0.3,
       modelLink:
         "https://sketchfab.com/models/a3eebd6b06fb4ad5b6462dd28ee8dde6/embed?autostart=1&dnt=1",
       difficulty: "easy",
@@ -175,7 +175,7 @@ const workoutData = {
       rotatedModel: true,
       scaledModel: true,
       zRotationMul: 0.33,
-      scaleMul: 0.00275,
+      scaleMul: 0.003,
       modelLink:
         "https://sketchfab.com/models/93b25198122b4417a5da3d8428fae423/embed?autostart=1&dnt=1",
       difficulty: "medium",
@@ -229,7 +229,7 @@ const workoutData = {
       rotatedModel: true,
       scaledModel: true,
       zRotationMul: 0.33,
-      scaleMul: 0.275,
+      scaleMul: 0.3,
       modelLink:
         "https://sketchfab.com/models/1643f24070c34e6ca82b59a5145b949a/embed?autostart=1&dnt=1",
       difficulty: "medium",
@@ -246,7 +246,7 @@ const workoutData = {
       rotatedModel: true,
       scaledModel: true,
       zRotationMul: 0.33,
-      scaleMul: 0.275,
+      scaleMul: 0.3,
       modelLink:
         "https://sketchfab.com/models/78bb64dbb876415fa50f8544a2afa7d8/embed?autostart=1&dnt=1",
       difficulty: "medium",
@@ -265,7 +265,7 @@ const workoutData = {
       rotatedModel: true,
       scaledModel: false,
       zRotationMul: 0.33,
-      scaleMul: 0.25,
+      scaleMul: 0.3,
       modelLink:
         "https://sketchfab.com/models/71af3ef8760f484ca8d81287f0dae74c/embed?autostart=1&dnt=1",
       difficulty: "medium",
@@ -285,7 +285,7 @@ const workoutData = {
       rotatedModel: true,
       scaledModel: true,
       zRotationMul: 0.33,
-      scaleMul: 0.275,
+      scaleMul: 0.3,
       modelLink:
         "https://sketchfab.com/models/6c7bc2c57c8648f3a70488155b326a16/embed?autostart=1&dnt=1",
       difficulty: "hard",

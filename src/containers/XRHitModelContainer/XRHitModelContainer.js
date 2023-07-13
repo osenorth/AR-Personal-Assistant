@@ -10,6 +10,7 @@ const XrHitModelContainer = ({
   zRotationMul = 0.33,
   scaleMul = 0.3,
   type,
+  zPos,
 }) => {
   const [isARSupported, setISARSupported] = useState(true);
   const canvasRef = useRef(null);
@@ -67,6 +68,7 @@ const XrHitModelContainer = ({
               (scaleMul * Math.max(dimensions.width, dimensions.height)) / 600
             }
             type={type}
+            zPos={zPos}
           />
         </XR>
       </Canvas>

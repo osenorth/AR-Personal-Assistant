@@ -18,8 +18,8 @@ const AdvancedWorkoutModel = ({
         {...props}
         dispose={null}
         rotation={[0, Math.PI * zRotationMul, 0]}
-        position={[0, -4, 0]}
-        scale={scaleMul * 950}
+        position={[0, -1.5, 0]}
+        scale={scaleMul * 350}
       >
         <group name="Scene">
           <group name="Armature">
@@ -143,13 +143,13 @@ const AdvancedWorkoutModel = ({
             <skinnedMesh
               name="tshirt021"
               geometry={nodes.tshirt021.geometry}
-              material={nodes.tshirt021.material}
+              material={materials["default"]}
               skeleton={nodes.tshirt021.skeleton}
             />
             <skinnedMesh
               name="tshirt022"
               geometry={nodes.tshirt022.geometry}
-              material={nodes.tshirt022.material}
+              material={materials["default"]}
               skeleton={nodes.tshirt022.skeleton}
             />
             <skinnedMesh
@@ -161,13 +161,13 @@ const AdvancedWorkoutModel = ({
             <skinnedMesh
               name="tshirt024"
               geometry={nodes.tshirt024.geometry}
-              material={nodes.tshirt024.material}
+              material={materials["default"]}
               skeleton={nodes.tshirt024.skeleton}
             />
             <skinnedMesh
               name="tshirt025"
               geometry={nodes.tshirt025.geometry}
-              material={nodes.tshirt025.material}
+              material={materials["default"]}
               skeleton={nodes.tshirt025.skeleton}
             />
             <skinnedMesh
@@ -370,7 +370,7 @@ const AdvancedWorkoutModel = ({
   if (modelName === "pullups") {
     return (
       <group ref={group} {...props} dispose={null}>
-        <group name="Scene" position={[0, -4, 0]} scale={scaleMul * 1000}>
+        <group name="Scene" position={[0, -1.5, 0]} scale={scaleMul * 350}>
           <group name="Armature">
             <primitive object={nodes.mixamorigHips} />
             <skinnedMesh
@@ -670,9 +670,9 @@ const AdvancedWorkoutModel = ({
       <group ref={group} {...props} dispose={null}>
         <group
           name="Scene"
-          position={[0, -3, 0]}
+          position={[0, -1.5, 0]}
           rotation={[0, 0, 0]}
-          scale={scaleMul * 950}
+          scale={scaleMul * 350}
         >
           <group name="Armature">
             <primitive object={nodes.mixamorigHips} />

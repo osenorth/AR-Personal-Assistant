@@ -25,6 +25,7 @@ const WorkoutCanvas = () => {
   const [status, setStatus] = useState(true);
   const [speech, setSpeech] = useState(null);
   const [modelGender, setModelGender] = useState("female");
+  const [zPos, setZPos] = useState(0);
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
   const router = useRouter();
@@ -893,6 +894,12 @@ const WorkoutCanvas = () => {
           <h4 className={`text-primary ${styles.workoutTitle}`}>
             {isStartSession ? currentWorkoutData.name : "View in 3D"}
           </h4>
+          <input
+            type="number"
+            value={zPos}
+            name="zPos"
+            onChange={(event) => setZPos(event.target.value)}
+          />
           {currentWorkoutData?.modelAvailable && (
             <div className={styles.genderContainer}>
               <button
@@ -936,6 +943,7 @@ const WorkoutCanvas = () => {
               zRotationMul={currentWorkoutData.zRotationMul}
               scaleMul={currentWorkoutData.scaleMul}
               type="workout"
+              zPos={zPos}
             />
           ) : (
             <iframe

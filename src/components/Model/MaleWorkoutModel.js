@@ -4,9 +4,9 @@ import AdvancedWorkoutModel from "./AdvancedWorkoutModel";
 
 export default function MaleWorkoutModel(props) {
   const { modelName, zRotationMul, scaleMul } = props;
-  const [yPosition, setYPosition] = useState(-4);
+  const [yPosition, setYPosition] = useState(-1.5);
   const [isRotated, setIsRotated] = useState(false);
-  const [factor, setFactor] = useState(0.8);
+  const [factor, setFactor] = useState(0.275);
   const isJumpingJacks = modelName === "jumpingjacks";
 
   const group = useRef();
@@ -32,36 +32,31 @@ export default function MaleWorkoutModel(props) {
   useEffect(() => {
     switch (modelName) {
       case "burpees":
-        setFactor(0.65);
-        setYPosition(-5);
+        setFactor(0.2);
         break;
       case "bicyclecrunches":
-        setFactor(0.65);
-        setYPosition(-9);
+        setFactor(0.25);
+        setYPosition(-3);
         break;
       case "plank":
-        setFactor(4.5);
-        setYPosition(-4);
+        setFactor(2);
         setIsRotated(true);
         break;
       case "pushups":
-        setFactor(4);
-        setYPosition(-4);
+        setFactor(2);
         setIsRotated(true);
         break;
       case "pikewalk":
-        setFactor(4.8);
-        setYPosition(-4);
+        setFactor(2);
+        setYPosition(-1);
         setIsRotated(true);
         break;
       case "situps":
-        setFactor(425);
-        setYPosition(-4);
+        setFactor(225);
         setIsRotated(true);
         break;
       case "jumpingjacks":
-        setFactor(6);
-        setYPosition(-4);
+        setFactor(2);
         setIsRotated(true);
         break;
       default:

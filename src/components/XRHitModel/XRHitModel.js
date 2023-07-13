@@ -13,6 +13,7 @@ const XrHitModel = ({
   zRotationMul,
   scaleMul,
   type,
+  zPos,
 }) => {
   const reticleRef = useRef();
   const [models, setModels] = useState([]);
@@ -31,17 +32,11 @@ const XrHitModel = ({
 
   useThree(({ camera }) => {
     if (!isPresenting) {
-      if (modelGender === "female") {
-        camera.position.z = 4;
-      } else {
-        camera.position.z = 12;
-      }
+      camera.position.z = 5;
     }
   });
 
   useHitTest((hitMatrix, hit) => {
-    console.log(reticleRef.current.position);
-    // reticleRef.current.position.z = 0;
     hitMatrix.decompose(
       reticleRef.current.position,
       reticleRef.current.quaternion,
@@ -53,6 +48,8 @@ const XrHitModel = ({
 
   const placeModel = (e) => {
     let position = e.intersection.object.position.clone();
+    console.log(position);
+    position.z -= zPos;
     let id = Date.now();
     setModels([{ position, id }]);
   };
@@ -80,9 +77,7 @@ const XrHitModel = ({
                 position={position}
                 modelName={modelName}
                 zRotationMul={zRotationMul}
-                scaleMul={
-                  modelGender === "female" ? scaleMul / 1.25 : scaleMul / 2.5
-                }
+                scaleMul={scaleMul / 1.25}
               />
             );
           }
@@ -92,7 +87,7 @@ const XrHitModel = ({
               key={id}
               position={position}
               modelName={modelName}
-              scaleMul={modelGender === "female" ? 0.15 : 0.075}
+              scaleMul={0.15}
             />
           );
         })}
@@ -113,7 +108,7 @@ const XrHitModel = ({
             scaleMul={scaleMul}
           />
         ) : (
-          <YogaModel modelName={modelName} scaleMul={0.25} />
+          <YogaModel modelName={modelName} scaleMul={0.3} />
         ))}
     </>
   );
