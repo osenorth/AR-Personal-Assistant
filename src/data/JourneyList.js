@@ -18,7 +18,7 @@ const journeyData = [
   {
     id: 3,
     title: "Get Immersed in AR",
-    desc: "To know how to do it better next time in your environment enter the AR mode on your mobile, place the 3D model in your environment and learn while observing it.",
+    desc: "To know how to do it better in your environment, Enter AR mode on your mobile, place the 3D model in your environment and learn while observing it.",
     poster: step3Img,
   },
 ];

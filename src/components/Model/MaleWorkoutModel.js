@@ -39,20 +39,20 @@ export default function MaleWorkoutModel(props) {
         setYPosition(-3);
         break;
       case "plank":
-        setFactor(2);
+        setFactor(1.75);
         setIsRotated(true);
         break;
       case "pushups":
-        setFactor(2);
+        setFactor(1.52);
         setIsRotated(true);
         break;
       case "pikewalk":
-        setFactor(2);
+        setFactor(1.75);
         setYPosition(-1);
         setIsRotated(true);
         break;
       case "situps":
-        setFactor(225);
+        setFactor(185);
         setIsRotated(true);
         break;
       case "jumpingjacks":
@@ -315,7 +315,7 @@ export default function MaleWorkoutModel(props) {
             <skinnedMesh
               name="tshirt031"
               geometry={nodes.tshirt031.geometry}
-              material={materials["hair black"]}
+              material={materials["hair black"] || materials["Hair Black.001"]}
               skeleton={nodes.tshirt031.skeleton}
               rotation={isJumpingJacks ? [Math.PI, 0, 0] : [0, 0, 0]}
             />
@@ -324,7 +324,7 @@ export default function MaleWorkoutModel(props) {
             <skinnedMesh
               name="tshirt032"
               geometry={nodes.tshirt032.geometry}
-              material={materials["hair black"]}
+              material={materials["hair black"] || materials["Hair Black.001"]}
               skeleton={nodes.tshirt032.skeleton}
               rotation={isJumpingJacks ? [Math.PI, 0, 0] : [0, 0, 0]}
             />

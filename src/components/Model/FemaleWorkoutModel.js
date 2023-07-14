@@ -136,13 +136,21 @@ export default function FemaleWorkoutModel(props) {
             <skinnedMesh
               name="TOPmesh"
               geometry={nodes.TOPmesh?.geometry || nodes.TOP_1.geometry}
-              material={materials["White Cloth"]}
+              material={
+                modelName === "squats"
+                  ? materials["Black Cloth"]
+                  : materials["White Cloth"]
+              }
               skeleton={nodes.TOPmesh?.skeleton || nodes.TOP_1.skeleton}
             />
             <skinnedMesh
               name="TOPmesh_1"
               geometry={nodes.TOPmesh_1?.geometry || nodes.TOP_2.geometry}
-              material={materials["Black Cloth"]}
+              material={
+                modelName === "squats"
+                  ? materials["White Cloth"]
+                  : materials["Black Cloth"]
+              }
               skeleton={nodes.TOPmesh_1?.skeleton || nodes.TOP_2.skeleton}
             />
           </group>

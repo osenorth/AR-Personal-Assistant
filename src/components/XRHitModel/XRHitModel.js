@@ -85,7 +85,7 @@ const XrHitModel = ({
               key={id}
               position={position}
               modelName={modelName}
-              scaleMul={0.15}
+              scaleMul={0.2}
             />
           );
         })}
