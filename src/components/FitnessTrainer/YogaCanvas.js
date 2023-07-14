@@ -298,11 +298,6 @@ const YogaCanvas = () => {
       </div>
       <div className={styles.resultsContainer}>
         <div className={styles.viewerTop}>
-          {isStartPose && (
-            <h4 className={`text-subheading ${styles.workoutTitle}`}>
-              Try to mimic this posture to perform
-            </h4>
-          )}
           <h4 className={`text-primary ${styles.workoutTitle}`}>
             {isStartPose ? currentPoseData.name : "View in 3D"}
           </h4>

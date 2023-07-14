@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import Image from "next/image";
 import * as styles from "./UserJourney.module.css";
 
@@ -30,6 +31,16 @@ export default function UserJourney({ journeyData }) {
                 {step.title}
               </h4>
               <p>{step.desc}</p>
+              {step.demoUrl && (
+                <Link
+                  href={step.demoUrl}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  className="primary-btn"
+                >
+                  Demo &gt;
+                </Link>
+              )}
             </div>
           </div>
         ))}

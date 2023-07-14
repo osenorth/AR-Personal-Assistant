@@ -885,11 +885,6 @@ const WorkoutCanvas = () => {
       </div>
       <div className={styles.resultsContainer}>
         <div className={styles.viewerTop}>
-          {isStartSession && (
-            <h4 className={`text-subheading ${styles.workoutTitle}`}>
-              Try to mimic this workout
-            </h4>
-          )}
           <h4 className={`text-primary ${styles.workoutTitle}`}>
             {isStartSession ? currentWorkoutData.name : "View in 3D"}
           </h4>
