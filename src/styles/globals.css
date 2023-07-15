@@ -7,7 +7,9 @@
   --subheading: #444444;
   --regular: #555555;
 }
-
+:root {
+  --poster-color: rgba(255, 255, 255, 0);
+}
 html,
 body,
 * {
@@ -169,12 +171,12 @@ model-viewer {
 
 canvas {
   background-color: #000000;
-  height: 100vh; 
-  width: 100vw; 
+  height: 100vh;
+  width: 100vw;
   display: block;
 }
 
-#overlay-content{
+#overlay-content {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -182,13 +184,13 @@ canvas {
   pointer-events: none;
 }
 
-.dom-container{
+.dom-container {
   position: absolute;
   top: 10vh;
   width: 100%;
 }
 
-.web-container{
+.web-container {
   display: flex;
   justify-content: center;
   align-items: center;
