@@ -9,8 +9,8 @@ import Interface from "../../components/Directions/Interface";
 
 export default function () {
   const [mapState, setMapState] = useState({
-    start: "mumbai",
-    destination: "pune",
+    start: "",
+    destination: "",
     travelMode: "DRIVING",
     direction: null,
     distance: "",
