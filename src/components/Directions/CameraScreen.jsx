@@ -13,6 +13,7 @@ import ReactHtmlParser from "react-html-parser";
 import { Fab } from "@mui/material";
 import MapIcon from "@mui/icons-material/Map";
 import dynamic from "next/dynamic";
+import { useRouter } from "next/router";
 
 const LeftFemale = dynamic(() => import("./ModelViews/leftFemale"), {
   ssr: false,
@@ -32,6 +33,12 @@ const RightMale = dynamic(() => import("./ModelViews/rightMale"), {
 const StopMale = dynamic(() => import("./ModelViews/stopMale"), {
   ssr: false,
 });
+const StraightFemale = dynamic(() => import("./ModelViews/straightFemale"), {
+  ssr: false,
+});
+const StraightMale = dynamic(() => import("./ModelViews/straightMale"), {
+  ssr: false,
+});
 
 export default function ({ mapState, toggleComponent }) {
   const [directions, setDirections] = useState(null);
@@ -39,6 +46,14 @@ export default function ({ mapState, toggleComponent }) {
   const [completed, setCompleted] = useState({});
   const [gender, setGender] = useState("male");
   const scrollRef = useRef(null); // Ref for the currently focused card
+  const router = useRouter();
+  const [speech, setSpeech] = useState(window.speechSynthesis);
+
+  useEffect(() => {
+    if (router.isReady) {
+      setSpeech(window.speechSynthesis);
+    }
+  }, [router.isReady]);
 
   useEffect(() => {
     const calculateDirections = async () => {
@@ -84,9 +99,23 @@ export default function ({ mapState, toggleComponent }) {
 
   const handleComplete = () => {
     const newCompleted = completed;
+    const instructions = directions.steps[activeStep + 1].html_instructions;
+    const inputString = instructions;
+    // Remove HTML tags
+    let cleanString = inputString.replace(/<.*?>/g, "");
+    cleanString = cleanString.replace(/(.*?)/g, "");
+    // Remove line breaks
+    const sentence = cleanString.replace(/\/<wbr\/>/g, "/");
+    speak(sentence);
     newCompleted[activeStep] = true;
     setCompleted(newCompleted);
     handleNext();
+  };
+
+  const speak = (speechText) => {
+    const object = new SpeechSynthesisUtterance(speechText);
+    object.lang = "en-US";
+    speech.speak(object);
   };
 
   const allStepsCompleted = () => {
@@ -95,22 +124,27 @@ export default function ({ mapState, toggleComponent }) {
   };
 
   const extractFirstDirection = (instructions) => {
-    const directions = ["left", "right", "straight"];
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(instructions, "text/html");
-    const textContent = doc.body.textContent || "";
-    const words = textContent.trim().split(" ");
-    for (let i = 0; i < words.length - 1; i++) {
-      const value = words[i].trim();
-      if (directions.includes(value)) {
-        return value;
-      }
+    const inputString = instructions;
+    // Remove HTML tags
+    let cleanString = inputString.replace(/<.*?>/g, "");
+    cleanString = cleanString.replace(/(.*?)/g, "");
+    // Remove line breaks
+    const sentence = cleanString.replace(/\/<wbr\/>/g, "/");
+    if (sentence.includes("right")) {
+      console.log("paplu");
+      return "right";
+    } else if (sentence.includes("left")) {
+      console.log("dablu");
+      return "left";
+    } else if (sentence.includes("stop")) {
+      console.log("jablu");
+      return "stop";
     }
-    return "stop";
+    console.log("ghesaplu");
+    return "straight";
   };
 
   const changeGender = () => {
-    console.log("gender changed");
     gender === "male" ? setGender("female") : setGender("male");
   };
 
@@ -203,31 +237,31 @@ export default function ({ mapState, toggleComponent }) {
                   height: "40vh",
                 }}
               >
-                {extractFirstDirection(
-                  directions.steps[activeStep].html_instructions
-                ) === "left" &&
-                  gender === "male" && <LeftMale />}
-                {extractFirstDirection(
-                  directions.steps[activeStep].html_instructions
-                ) === "left" &&
-                  gender === "female" && <LeftFemale />}
-                {extractFirstDirection(
-                  directions.steps[activeStep].html_instructions
-                ) === "right" &&
-                  gender === "male" && <RightMale />}
-                {extractFirstDirection(
-                  directions.steps[activeStep].html_instructions
-                ) === "right" &&
-                  gender === "female" && <RightFemale />}
-                {extractFirstDirection(
-                  directions.steps[activeStep].html_instructions
-                ) === "stop" &&
-                  gender === "male" && <StopMale />}
-                {extractFirstDirection(
-                  directions.steps[activeStep].html_instructions
-                ) === "stop" &&
-                  gender === "female" && <StopFemale />}
+                {(() => {
+                  const direction = extractFirstDirection(
+                    directions.steps[activeStep].html_instructions
+                  );
+
+                  if (direction === "left" && gender === "male") {
+                    return <LeftMale />;
+                  } else if (direction === "left" && gender === "female") {
+                    return <LeftFemale />;
+                  } else if (direction === "right" && gender === "male") {
+                    return <RightMale />;
+                  } else if (direction === "right" && gender === "female") {
+                    return <RightFemale />;
+                  } else if (direction === "stop" && gender === "male") {
+                    return <StopMale />;
+                  } else if (direction === "stop" && gender === "female") {
+                    return <StopFemale />;
+                  } else if (direction === "straight" && gender === "female") {
+                    return <StraightFemale />;
+                  } else if (direction === "straight" && gender === "male") {
+                    return <StraightMale />;
+                  }
+                })()}
               </Box>
+
               <Typography sx={{ mt: 2, mb: 1, py: 1 }}>
                 Step {activeStep + 1}/{directions.steps.length}
               </Typography>

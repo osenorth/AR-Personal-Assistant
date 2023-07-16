@@ -13,6 +13,8 @@ const LeftMale = () => (
       shadow-intensity="1"
       autoplay
       camera-orbit="0deg 180deg 0deg"
+      camera-target="0m 2m 0m"
+      min-field-of-view="30deg"
     >
       {""}
     </model-viewer>

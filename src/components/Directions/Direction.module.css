@@ -55,6 +55,15 @@
   color: rgb(116, 0, 0);
 }
 
+.card {
+  position: relative;
+  opacity: 0.75;
+}
+
+.modelView {
+  background-color: transparent;
+}
+
 /* Media query for mobile devices */
 @media screen and (max-width: 768px) {
   .navigationModal {
@@ -76,8 +85,6 @@
     margin: 5px;
   }
 }
-
-
 
 /* Media query for mobile devices */
 @media screen and (max-width: 768px) {

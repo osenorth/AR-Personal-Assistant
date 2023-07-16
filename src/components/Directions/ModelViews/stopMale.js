@@ -5,7 +5,7 @@ const StopMale = () => (
   <div className={styles.card}>
     <model-viewer
       className={styles.modelView}
-      src="/models/right_male.glb"
+      src="/models/stop_male.glb"
       ar
       ar-modes="webxr scene-viewer quick-look"
       camera-controls

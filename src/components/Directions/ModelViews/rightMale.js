@@ -5,17 +5,18 @@ const RightMale = () => (
   <div className={styles.card}>
     <model-viewer
       className={styles.modelView}
-      src="models/right_female.glb"
+      src="/models/right_male.glb"
       ar
       ar-modes="webxr scene-viewer quick-look"
       camera-controls
       poster="poster.webp"
       shadow-intensity="1"
       autoplay
-      camera-target="0.01307m 7.5m -0.05753m"
-      min-camera-orbit="0m 5m 10m"
+      camera-orbit="0deg 180deg 0deg"
+      camera-target="0m 2m 0m"
       min-field-of-view="30deg"
     >
+      {""}
     </model-viewer>
   </div>
 );
