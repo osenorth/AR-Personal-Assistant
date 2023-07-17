@@ -9,6 +9,7 @@ import { drawPoint, drawSegment } from "../../helpers/Utils";
 import Webcam from "react-webcam";
 import Instructions from "../Instructions/Instructions";
 import XrHitModelContainer from "../../containers/XRHitModelContainer/XRHitModelContainer";
+// import ModelViewer from "../ModelViewer/ModelViewer";
 import * as styles from "./FitnessTrainer.module.css";
 
 let flag = false,
@@ -23,6 +24,7 @@ const YogaCanvas = () => {
   const [poseTime, setPoseTime] = useState(0);
   const [bestPerform, setBestPerform] = useState(0);
   const [isStartPose, setIsStartPose] = useState(false);
+  const [modelGender, setModelGender] = useState("female");
 
   const router = useRouter();
   const [currentPose, setCurrentPose] = useState(null);
@@ -295,21 +297,43 @@ const YogaCanvas = () => {
         )}
       </div>
       <div className={styles.resultsContainer}>
-        <div>
-          {isStartPose && (
-            <h4 className={`text-subheading ${styles.workoutTitle}`}>
-              Try to mimic this posture to perform
-            </h4>
-          )}
+        <div className={styles.viewerTop}>
           <h4 className={`text-primary ${styles.workoutTitle}`}>
             {isStartPose ? currentPoseData.name : "View in 3D"}
           </h4>
+          <div className={styles.genderContainer}>
+            <button
+              className={
+                modelGender === "female" ? "primary-btn" : "secondary-btn"
+              }
+              onClick={() => {
+                setModelGender("female");
+              }}
+            >
+              Female
+            </button>
+            <button
+              className={
+                modelGender === "male" ? "primary-btn" : "secondary-btn"
+              }
+              onClick={() => setModelGender("male")}
+            >
+              Male
+            </button>
+          </div>
         </div>
-
+        {/* <ModelViewer
+          modelName={currentPoseData.label}
+          modelGender={modelGender}
+          position={"0m 100m 0m"}
+          rotatedModel={false}
+          type="yoga"
+        /> */}
         {currentPoseData &&
           (currentPoseData.modelAvailable ? (
             <XrHitModelContainer
               modelName={currentPoseData.label}
+              modelGender={modelGender}
               type="yoga"
             />
           ) : (

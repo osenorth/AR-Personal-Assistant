@@ -69,6 +69,19 @@
   text-align: center;
 }
 
+.viewerTop {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 15%;
+}
+
+.genderContainer {
+  display: flex;
+  gap: 10px;
+}
+
 .demoContainer {
   display: flex;
   flex-direction: column;
@@ -144,6 +157,10 @@
   .detectContainer {
     width: 100%;
     height: 53vh;
+    border-bottom: 2px solid var(--secondary);
+  }
+  .viewerTop {
+    gap: 5%;
   }
   .infoContainer {
     flex-direction: row-reverse;

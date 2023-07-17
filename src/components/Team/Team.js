@@ -5,7 +5,7 @@ import * as styles from "./Team.module.css";
 
 const Teams = () => {
   return (
-    <section className={`margin-on-side ${styles.teamContainer}`}>
+    <section className={`margin-on-side ${styles.teamContainer}`} id="team">
       <h4 className={`text-heading ${styles.teamLabel}`}>Our Creative Team</h4>
       <p className={styles.teamDes}>
         With a passion for innovation and a commitment to excellence, our team
