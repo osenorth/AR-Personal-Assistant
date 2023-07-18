@@ -131,16 +131,12 @@ export default function ({ mapState, toggleComponent }) {
     // Remove line breaks
     const sentence = cleanString.replace(/\/<wbr\/>/g, "/");
     if (sentence.includes("right")) {
-      console.log("paplu");
       return "right";
     } else if (sentence.includes("left")) {
-      console.log("dablu");
       return "left";
     } else if (sentence.includes("stop")) {
-      console.log("jablu");
       return "stop";
     }
-    console.log("ghesaplu");
     return "straight";
   };
 

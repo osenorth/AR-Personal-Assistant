@@ -7,7 +7,6 @@ const Model = async (props) => {
   useGLTF.preload(`/models/left_female.glb/`);
   const { nodes, materials, animations } = useGLTF("/models/left_female.glb/");
   const { actions, names } = useAnimations(animations, group);
-  console.log({ actions, names });
   const { setAnimations, animationIndex } = useCharacterAnimations();
   useEffect(() => {
     setAnimations(names);
