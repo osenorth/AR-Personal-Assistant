@@ -1,0 +1,93 @@
+#root {
+  margin: 0;
+  padding: 0;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+  box-sizing: border-box;
+  font-family: 'Inter var', sans-serif;
+  background: linear-gradient(155deg, #2C3E50 20%, #000000);
+  color: #070730;
+}
+
+.overlay {
+  padding: 40px;
+  height: 100%;
+  width: 100%;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: center;
+}
+
+.p {
+    pointer-events: all;
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    color: #101015;
+    text-decoration: none;
+  }
+  
+.headerSub {
+  margin-top: 1em;
+  text-align: center;
+  font-weight: 400;
+  font-size: 0.9em;
+  line-height: 1.4em;
+  letter-spacing: 2px;
+}
+
+
+.button {
+    outline: revert;
+    cursor: pointer;
+    color: white;
+    background-color: var(--accent-color, black);
+    border-radius: 9999px;
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    padding: 1rem 2rem;
+    font-size: 1.25rem;
+    border: none;
+  }
+  
+  .button:is(:hover, :focus):not(:disabled, :active) {
+    transform: scale(1.05);
+  }
+  
+  .button:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  .headerAlt{
+    display: inline-block;
+    background: linear-gradient(30deg, #39E5B6, #70B2D9);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 10em;
+    line-height: 18vh;
+  }
+
+  @media (max-width: 780px) {
+    /* CSS rules for reducing text size */
+    .headerAlt {
+      font-size: 5em;
+      line-height: 10vh;
+    }
+  }
+
+  @media (max-width: 400px) {
+    /* CSS rules for reducing text size */
+    .headerAlt {
+      font-size: 3em;
+      line-height: 8vh;
+    }
+  }
+  
