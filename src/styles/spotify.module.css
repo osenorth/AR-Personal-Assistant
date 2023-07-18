@@ -1,0 +1,147 @@
+.container {
+  padding: 0 2rem;
+  margin: 0 auto;
+}
+
+.main {
+  min-height: 100vh;
+  padding: 4rem 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+.main :any-link {
+  color: #0070f3;
+  font-weight: 700;
+}
+
+.footer {
+  display: flex;
+  flex: 1;
+  padding: 2rem 0;
+  border-top: 1px solid #eaeaea;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  text-decoration: none;
+}
+
+.title {
+  margin: 0;
+  line-height: 1.15;
+  font-size: 4rem;
+  text-align: center;
+}
+
+.button {
+  all: unset;
+  outline: revert;
+  cursor: pointer;
+  color: white;
+  background-color: var(--accent-color, black);
+  border-radius: 9999px;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  padding: 1rem 2rem;
+  font-size: 1.25rem;
+  transition: all ease 75ms;
+}
+
+.button:is(:hover, :focus):not(:disabled, :active) {
+  transform: scale(1.05);
+}
+
+.button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.rivewrapper {
+  width: 900px;
+  height: 800px;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Andada+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&display=swap");
+
+/* body {
+  background-color: #000;
+} */
+
+.sidebarIcon {
+  height: 1.5rem;
+  color: #808080;
+  cursor: pointer;
+}
+
+.tag {
+  padding-top: 0.375rem;
+  padding-bottom: 0.375rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  color: #cecece;
+  background-color: #282828;
+  border-radius: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: bold;
+  border-width: 0.125rem;
+  border-color: #484848;
+}
+
+.genre {
+  background-color: #101010;
+  color: #cecece;
+  border: 1px solid #484848;
+  border-radius: 0.5rem;
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+  padding-left: 0.875rem;
+  padding-right: 0.875rem;
+  font-size: 11px;
+  font-weight: bold;
+  cursor: default;
+}
+
+.btn {
+  color: #cecece;
+  background-color: #1a1a1a;
+  font-size: 13px;
+  padding-top: 0.875rem;
+  padding-bottom: 0.875rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-radius: 1rem;
+  width: 100%;
+  font-weight: bold;
+  background-opacity: 0.8;
+  transition: background-opacity 0.3s ease-out;
+}
+
+.btn:hover {
+  background-opacity: 1;
+}
+
+.icon:hover {
+  transform: scale(1.25);
+  transition-duration: 0.15s;
+  transition-timing-function: ease-out;
+}
+
+.croppedIcon {
+  clip-path: inset(0 50% 0 0);
+}
+
+.playerIcon:hover {
+  transform: scale(1.05);
+  color: #fff;
+  transition: ease-out;
+}
+

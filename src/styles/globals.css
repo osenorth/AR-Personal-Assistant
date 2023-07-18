@@ -17,6 +17,7 @@ body,
   margin: 0;
   box-sizing: border-box;
   font-family: "DM Sans", sans-serif;
+  scroll-behavior: smooth !important;
 }
 
 p {
@@ -59,6 +60,8 @@ body {
   font-size: 1rem;
   cursor: pointer;
   transition: all 0.1s ease-in-out;
+  text-decoration: none;
+  text-align: center;
 }
 .primary-btn:hover,
 .secondary-btn:hover {

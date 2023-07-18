@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import Image from "next/image";
 import * as styles from "./Hero.module.css";
 import hero from "../../assets/hero.svg";
@@ -8,7 +9,10 @@ import lonelyplanet from "../../assets/lonelyplanet.svg";
 
 const Hero = () => {
   return (
-    <section className={`secondary-background ${styles.heroContainer}`}>
+    <section
+      className={`secondary-background ${styles.heroContainer}`}
+      id="about"
+    >
       <div className={`${styles.heroInfo}`}>
         <h1 className={styles.heroHeading}>Revolutionize your workday</h1>
         <h4 className={`text-primary ${styles.heroSubheading}`}>
@@ -23,8 +27,12 @@ const Hero = () => {
         </p>
 
         <div className={styles.heroButtons}>
-          <button className="primary-btn">Explore</button>
-          <button className="secondary-btn">Know More</button>
+          <Link href={"/#services"} className="primary-btn">
+            Explore
+          </Link>
+          <Link href={"/#features"} className="secondary-btn">
+            Know More
+          </Link>
         </div>
         <div className={`${styles.trustedOrgs} ${styles.deskOrgs}`}>
           <p className="text-subheading">Trusted By :</p>

@@ -4,7 +4,10 @@ import * as styles from "./Services.module.css";
 
 const Services = ({ servicesData }) => {
   return (
-    <section className={`margin-on-side ${styles.servicesContainer}`}>
+    <section
+      className={`margin-on-side ${styles.servicesContainer}`}
+      id="services"
+    >
       <h4 className={`text-heading ${styles.servicesLabel}`}>
         {servicesData.title}
       </h4>
