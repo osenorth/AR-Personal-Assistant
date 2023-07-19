@@ -12,9 +12,11 @@ import {
 import { POINTS, LINES } from "../../data/WorkoutPoints";
 import workoutData from "../../data/WorkoutData";
 import Instructions from "../Instructions/Instructions";
+import MobileInstructions from "../Instructions/MobileInstructions";
 import XrHitModelContainer from "../../containers/XRHitModelContainer/XRHitModelContainer";
 // import ModelViewer from "../ModelViewer/ModelViewer";
 import * as styles from "./FitnessTrainer.module.css";
+import * as mystyles from "../Instructions/Instructions.module.css";
 
 const WorkoutCanvas = () => {
   const [currentWorkout, setCurrentWorkout] = useState();
@@ -25,6 +27,7 @@ const WorkoutCanvas = () => {
   const [status, setStatus] = useState(true);
   const [speech, setSpeech] = useState(null);
   const [modelGender, setModelGender] = useState("female");
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
   const router = useRouter();
@@ -57,6 +60,9 @@ const WorkoutCanvas = () => {
       setCurrentWorkout(exercise);
       setCurrentWorkoutData(workoutData.exerciseData[exercise]);
       setSpeech(window.speechSynthesis);
+      setIsSmallScreen(
+        Math.min(window.screen.width, window.screen.height) < 768
+      );
       setCounter(0);
     }
   }, [router.isReady]);
@@ -589,7 +595,7 @@ const WorkoutCanvas = () => {
     return 0;
   }
 
-  function lungs(landmarks) {
+  function lunges(landmarks) {
     const rightHip = landmarks[POINTS.RIGHT_HIP];
     const rightKnee = landmarks[POINTS.RIGHT_KNEE];
     const rightAnkle = landmarks[POINTS.RIGHT_ANKLE];
@@ -732,8 +738,8 @@ const WorkoutCanvas = () => {
       squats(landmarks);
     } else if (currentWorkout === "bicepcurls") {
       bicepCurls(landmarks);
-    } else if (currentWorkout === "lungs") {
-      lungs(landmarks);
+    } else if (currentWorkout === "lunges") {
+      lunges(landmarks);
     } else if (currentWorkout === "bicyclecrunches") {
       bicycleCrunches(landmarks);
     } else if (currentWorkout === "plank") {
@@ -849,6 +855,23 @@ const WorkoutCanvas = () => {
 
   const resetCount = () => {
     setCounter(0);
+
+    sets = 0;
+    reps = 0;
+    direction = 0;
+    leftCounter = 0;
+    rightCounter = 0;
+
+    setscount = 0;
+    leftUp = false;
+    leftDown = false;
+
+    rightUp = false;
+    rightDown = false;
+
+    leftMaxAngle = 10;
+    rightMaxAngle = 10;
+    interval = null;
   };
 
   const startSession = () => {
@@ -861,13 +884,52 @@ const WorkoutCanvas = () => {
     // router.reload();
   };
 
+  const SessionControls = () => {
+    if (isStartSession) {
+      return (
+        <div className={styles.countDisplay}>
+          <p className="text-subheading">Count</p>
+          <input value={counter} className={styles.countInput} readOnly />
+          <button
+            className={`secondary-btn ${styles.controlButtons}`}
+            onClick={resetCount}
+          >
+            Reset
+          </button>
+          <button
+            className={`primary-btn ${styles.controlButtons}`}
+            onClick={stopSession}
+          >
+            Stop Session
+          </button>
+        </div>
+      );
+    } else if (isSmallScreen) {
+      return (
+        <div className={styles.introContainer}>
+          <h2 className="text-primary">{currentWorkoutData?.name}</h2>
+          <div className={mystyles.actionButtons}>
+            <button className="primary-btn" onClick={startSession}>
+              Start Session
+            </button>
+            <a href={currentWorkoutData?.refLink} target="_blank">
+              <button className="secondary-btn"> Know More </button>
+            </a>
+          </div>
+        </div>
+      );
+    }
+  };
+
   return (
     <div className={styles.workoutContainer}>
       <title>Ossistant</title>
       <div
-        className={`${styles.detectContainer} ${
-          isStartSession && styles.infoContainer
-        }`}
+        className={
+          !isStartSession && isSmallScreen
+            ? styles.infoContainer
+            : styles.detectContainer
+        }
       >
         {isStartSession ? (
           <>
@@ -875,7 +937,8 @@ const WorkoutCanvas = () => {
             <canvas ref={canvasRef} className={styles.workoutCanvas}></canvas>
           </>
         ) : (
-          currentWorkoutData && (
+          currentWorkoutData &&
+          !isSmallScreen && (
             <Instructions
               data={currentWorkoutData}
               startSession={startSession}
@@ -883,6 +946,7 @@ const WorkoutCanvas = () => {
           )
         )}
       </div>
+      {isSmallScreen && <SessionControls />}
       <div className={styles.resultsContainer}>
         <div className={styles.viewerTop}>
           <h4 className={`text-primary ${styles.workoutTitle}`}>
@@ -891,22 +955,14 @@ const WorkoutCanvas = () => {
           {currentWorkoutData?.modelAvailable && (
             <div className={styles.genderContainer}>
               <button
-                className={
-                  modelGender === "female" ? "primary-btn" : "secondary-btn"
-                }
+                className="secondary-btn"
                 onClick={() => {
-                  setModelGender("female");
+                  modelGender === "female"
+                    ? setModelGender("male")
+                    : setModelGender("female");
                 }}
               >
-                Female
-              </button>
-              <button
-                className={
-                  modelGender === "male" ? "primary-btn" : "secondary-btn"
-                }
-                onClick={() => setModelGender("male")}
-              >
-                Male
+                Change Gender
               </button>
             </div>
           )}
@@ -947,26 +1003,15 @@ const WorkoutCanvas = () => {
               className={styles.modelContrainer}
             ></iframe>
           ))}
-        {isStartSession && (
-          <div className={styles.countDisplay}>
-            <p className="text-subheading">Count</p>
-            <input value={counter} className={styles.countInput} readOnly />
-            <button
-              className={`primary-btn ${styles.controlButtons}`}
-              onClick={resetCount}
-            >
-              Reset
-            </button>
-            <button
-              className={`secondary-btn ${styles.controlButtons}`}
-              onClick={stopSession}
-            >
-              Stop Session
-            </button>
-          </div>
+        {isStartSession && !isSmallScreen && <SessionControls />}
+        {currentWorkoutData && isSmallScreen && (
+          <MobileInstructions
+            data={currentWorkoutData}
+            startSession={startSession}
+          />
         )}
         <Link href="/workouts" className={styles.link} onClick={stopSession}>
-          <button className={`primary-btn ${styles.controlButtons}`}>
+          <button className={`primary-btn ${styles.exploreButton}`}>
             Explore More Workouts
           </button>
         </Link>

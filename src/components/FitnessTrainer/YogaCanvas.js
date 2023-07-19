@@ -8,9 +8,11 @@ import { POINTS, keypointConnections } from "../../data/YogaPoints";
 import { drawPoint, drawSegment } from "../../helpers/Utils";
 import Webcam from "react-webcam";
 import Instructions from "../Instructions/Instructions";
+import MobileInstructions from "../Instructions/MobileInstructions";
 import XrHitModelContainer from "../../containers/XRHitModelContainer/XRHitModelContainer";
 // import ModelViewer from "../ModelViewer/ModelViewer";
 import * as styles from "./FitnessTrainer.module.css";
+import * as mystyles from "../Instructions/Instructions.module.css";
 
 let flag = false,
   reps = 0,
@@ -25,6 +27,7 @@ const YogaCanvas = () => {
   const [bestPerform, setBestPerform] = useState(0);
   const [isStartPose, setIsStartPose] = useState(false);
   const [modelGender, setModelGender] = useState("female");
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   const router = useRouter();
   const [currentPose, setCurrentPose] = useState(null);
@@ -52,6 +55,9 @@ const YogaCanvas = () => {
       const { pose } = router.query;
       setCurrentPose(poseMapping[pose]);
       setCurrentPoseData(yogaData.poseData[poseMapping[pose]]);
+      setIsSmallScreen(
+        Math.min(window.screen.width, window.screen.height) < 768
+      );
     }
   }, [router.isReady]);
 
@@ -260,6 +266,47 @@ const YogaCanvas = () => {
     }
   }, [isStartPose]);
 
+  const SessionControls = () => {
+    if (isStartPose) {
+      return (
+        <div className={styles.countDisplay}>
+          <div>
+            <p className="text-subheading">Pose Time (sec)</p>
+            <input value={poseTime} className={styles.countInput} readOnly />
+          </div>
+          <div>
+            <p className="text-primary">Best (sec)</p>
+            <input
+              value={bestPerform}
+              className={`${styles.countInput} text-primary`}
+              readOnly
+            />
+          </div>
+          <button
+            className={`primary-btn ${styles.controlButtons}`}
+            onClick={stopPose}
+          >
+            Stop Pose
+          </button>
+        </div>
+      );
+    } else if (isSmallScreen) {
+      return (
+        <div className={styles.introContainer}>
+          <h2 className="text-primary">{currentPoseData?.name}</h2>
+          <div className={mystyles.actionButtons}>
+            <button className="primary-btn" onClick={startYoga}>
+              Start Session
+            </button>
+            <a href={currentPoseData?.refLink} target="_blank">
+              <button className="secondary-btn"> Know More </button>
+            </a>
+          </div>
+        </div>
+      );
+    }
+  };
+
   if (!currentPoseData)
     return (
       <div className={styles.loading}>
@@ -271,9 +318,11 @@ const YogaCanvas = () => {
     <div className={styles.workoutContainer}>
       <title>Ossistant</title>
       <div
-        className={`${styles.detectContainer} ${
-          isStartPose && styles.infoContainer
-        }`}
+        className={
+          !isStartPose && isSmallScreen
+            ? styles.infoContainer
+            : styles.detectContainer
+        }
       >
         {isStartPose ? (
           <>
@@ -291,11 +340,13 @@ const YogaCanvas = () => {
             ></canvas>
           </>
         ) : (
-          currentPoseData && (
+          currentPoseData &&
+          !isSmallScreen && (
             <Instructions data={currentPoseData} startSession={startYoga} />
           )
         )}
       </div>
+      {isSmallScreen && <SessionControls />}
       <div className={styles.resultsContainer}>
         <div className={styles.viewerTop}>
           <h4 className={`text-primary ${styles.workoutTitle}`}>
@@ -303,22 +354,14 @@ const YogaCanvas = () => {
           </h4>
           <div className={styles.genderContainer}>
             <button
-              className={
-                modelGender === "female" ? "primary-btn" : "secondary-btn"
-              }
+              className="secondary-btn"
               onClick={() => {
-                setModelGender("female");
+                modelGender === "female"
+                  ? setModelGender("male")
+                  : setModelGender("female");
               }}
             >
-              Female
-            </button>
-            <button
-              className={
-                modelGender === "male" ? "primary-btn" : "secondary-btn"
-              }
-              onClick={() => setModelGender("male")}
-            >
-              Male
+              Change Gender
             </button>
           </div>
         </div>
@@ -351,30 +394,13 @@ const YogaCanvas = () => {
               className={styles.modelContrainer}
             ></iframe>
           ))}
-        {isStartPose && (
-          <div className={styles.countDisplay}>
-            <div>
-              <p className="text-subheading">Pose Time (sec)</p>
-              <input value={poseTime} className={styles.countInput} readOnly />
-            </div>
-            <div>
-              <p className="text-primary">Best (sec)</p>
-              <input
-                value={bestPerform}
-                className={`${styles.countInput} text-primary`}
-                readOnly
-              />
-            </div>
-            <button
-              className={`secondary-btn ${styles.controlButtons}`}
-              onClick={stopPose}
-            >
-              Stop Pose
-            </button>
-          </div>
+        {isStartPose && !isSmallScreen && <SessionControls />}
+        {!isStartPose && currentPoseData && isSmallScreen && (
+          <MobileInstructions data={currentPoseData} startSession={startYoga} />
         )}
+
         <Link href="/yoga" className={styles.link} onClick={stopPose}>
-          <button className={`primary-btn ${styles.controlButtons}`}>
+          <button className={`primary-btn ${styles.exploreButton}`}>
             Explore More Yoga
           </button>
         </Link>

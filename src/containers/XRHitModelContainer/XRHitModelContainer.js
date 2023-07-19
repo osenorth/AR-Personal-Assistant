@@ -3,6 +3,7 @@ import { Canvas } from "@react-three/fiber";
 import { ARButton, XR } from "@react-three/xr";
 import XrHitModel from "../../components/XRHitModel/XRHitModel";
 import * as styles from "./XRHitModelContainer.module.css";
+import LoadingScreen from "./LoadingScreen";
 
 const XrHitModelContainer = ({
   modelName,
@@ -30,13 +31,13 @@ const XrHitModelContainer = ({
     return false;
   }
 
-  async function start() {
+  async function checkSupport() {
     const immersiveArSupported = await browserHasImmersiveArCompatibility();
     setISARSupported(immersiveArSupported);
   }
 
   useEffect(() => {
-    start();
+    checkSupport();
     setDimensions({
       width: canvasRef.current?.offsetWidth,
       height: canvasRef.current?.offsetHeight,
@@ -57,6 +58,7 @@ const XrHitModelContainer = ({
           Try AR mode on mobile using chrome
         </button>
       )}
+      <LoadingScreen />
       <Canvas>
         <XR>
           <XrHitModel
