@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import Image from "next/image";
 import Webcam from "react-webcam";
 import { Pose } from "@mediapipe/pose";
 import * as cam from "@mediapipe/camera_utils";
@@ -10,6 +11,7 @@ import {
   angleBetweenThreePoints,
 } from "../../helpers/Utils";
 import { POINTS, LINES } from "../../data/WorkoutPoints";
+import trackingBodyImg from "../../assets/tracking-body.gif";
 import workoutData from "../../data/WorkoutData";
 import Instructions from "../Instructions/Instructions";
 import MobileInstructions from "../Instructions/MobileInstructions";
@@ -28,6 +30,7 @@ const WorkoutCanvas = () => {
   const [speech, setSpeech] = useState(null);
   const [modelGender, setModelGender] = useState("female");
   const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const [bodyTracked, setBodyTracked] = useState(true);
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
   const router = useRouter();
@@ -773,6 +776,8 @@ const WorkoutCanvas = () => {
         canvasElement.height
       );
       if (landmarks && landmarks.length > 0) {
+        setBodyTracked(true);
+
         const excludedPoints = [
           1, 2, 3, 4, 5, 6, 9, 10, 19, 20, 21, 22, 29, 30, 31, 32,
         ];
@@ -810,6 +815,8 @@ const WorkoutCanvas = () => {
         calculateExercise(landmarks);
       }
       canvasCtx.restore();
+    } else {
+      setBodyTracked(false);
     }
   }
 
@@ -842,7 +849,10 @@ const WorkoutCanvas = () => {
         height: 480,
       });
 
-      if (isStartSession) camera.start();
+      if (isStartSession) {
+        camera.start();
+        setBodyTracked(false);
+      }
     }
   }, [isStartSession]);
 
@@ -881,7 +891,9 @@ const WorkoutCanvas = () => {
 
   const stopSession = () => {
     setisStartSession(false);
-    // router.reload();
+    const mediaStream = webcamRef?.current?.video?.srcObject;
+    const tracks = mediaStream.getTracks();
+    tracks.forEach((track) => track.stop());
   };
 
   const SessionControls = () => {
@@ -935,6 +947,25 @@ const WorkoutCanvas = () => {
           <>
             <Webcam className={styles.workoutWebcam} ref={webcamRef} />
             <canvas ref={canvasRef} className={styles.workoutCanvas}></canvas>
+            {!bodyTracked && (
+              <div className={styles.showbodyScreen}>
+                <h4
+                  className={`text-primary ${styles.workoutTitle} ${styles.trackTitle}`}
+                >
+                  Show your complete body in the camera and
+                </h4>
+                <h4
+                  className={`text-primary ${styles.workoutTitle} ${styles.trackTitle}`}
+                >
+                  Wait till we track your body as shown below
+                </h4>
+                <Image
+                  src={trackingBodyImg}
+                  alt="bodyTrackingExample"
+                  className={styles.trackingImg}
+                />
+              </div>
+            )}
           </>
         ) : (
           currentWorkoutData &&

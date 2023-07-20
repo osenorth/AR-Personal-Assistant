@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import yogaData from "../../data/YogaData";
 import * as poseDetection from "@tensorflow-models/pose-detection";
@@ -7,6 +8,7 @@ import * as tf from "@tensorflow/tfjs";
 import { POINTS, keypointConnections } from "../../data/YogaPoints";
 import { drawPoint, drawSegment } from "../../helpers/Utils";
 import Webcam from "react-webcam";
+import trackingBodyImg from "../../assets/tracking-body.gif";
 import Instructions from "../Instructions/Instructions";
 import MobileInstructions from "../Instructions/MobileInstructions";
 import XrHitModelContainer from "../../containers/XRHitModelContainer/XRHitModelContainer";
@@ -28,6 +30,7 @@ const YogaCanvas = () => {
   const [isStartPose, setIsStartPose] = useState(false);
   const [modelGender, setModelGender] = useState("female");
   const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const [bodyTracked, setBodyTracked] = useState(true);
 
   const router = useRouter();
   const [currentPose, setCurrentPose] = useState(null);
@@ -198,6 +201,7 @@ const YogaCanvas = () => {
         const keypoints = pose[0]?.keypoints;
         let input = null;
         if (keypoints && keypoints.length > 0) {
+          setBodyTracked(true);
           input = keypoints?.map((keypoint) => {
             if (keypoint.score > 0.4) {
               if (
@@ -225,6 +229,8 @@ const YogaCanvas = () => {
             }
             return [keypoint.x, keypoint.y];
           });
+        } else {
+          setBodyTracked(false);
         }
         if (notDetected > 4) {
           skeletonColor = "rgb(255,0,0)";
@@ -262,6 +268,7 @@ const YogaCanvas = () => {
 
   useEffect(() => {
     if (isStartPose) {
+      setBodyTracked(false);
       runMovenet();
     }
   }, [isStartPose]);
@@ -338,6 +345,25 @@ const YogaCanvas = () => {
               width="640px"
               height="480px"
             ></canvas>
+            {!bodyTracked && (
+              <div className={styles.showbodyScreen}>
+                <h4
+                  className={`text-primary ${styles.workoutTitle} ${styles.trackTitle}`}
+                >
+                  Show your complete body in the camera and
+                </h4>
+                <h4
+                  className={`text-primary ${styles.workoutTitle} ${styles.trackTitle}`}
+                >
+                  Wait till we track your body as shown below
+                </h4>
+                <Image
+                  src={trackingBodyImg}
+                  alt="bodyTrackingExample"
+                  className={styles.trackingImg}
+                />
+              </div>
+            )}
           </>
         ) : (
           currentPoseData &&
