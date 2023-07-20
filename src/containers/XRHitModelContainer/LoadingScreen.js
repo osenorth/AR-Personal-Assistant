@@ -2,9 +2,8 @@ import { useState, useEffect } from "react";
 import { useProgress } from "@react-three/drei";
 import * as styles from "./LoadingScreen.module.css";
 
-const LoadingScreen = () => {
+const LoadingScreen = ({ loaded, setLoaded }) => {
   const { progress } = useProgress();
-  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     if (progress >= 100) {
@@ -15,7 +14,7 @@ const LoadingScreen = () => {
   return (
     <div
       className={`${styles.loadingScreen} ${
-        loaded && styles.loadingScreen_loaded
+        loaded ? styles.loadingScreen_loaded : styles.loadingScreen_start
       }`}
     >
       <div className={styles.loadingScreen_progress}>

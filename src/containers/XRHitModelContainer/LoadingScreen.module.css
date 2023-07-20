@@ -53,6 +53,15 @@
   opacity: 0;
 }
 
+.loadingScreen_start {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.loadingScreen_start .loadingScreen_board {
+  opacity: 1;
+}
+
 @media screen and (max-width: 768px) {
   .loadingScreen_title {
     font-size: 1.5rem;

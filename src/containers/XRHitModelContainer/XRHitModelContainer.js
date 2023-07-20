@@ -15,6 +15,7 @@ const XrHitModelContainer = ({
   const [isARSupported, setISARSupported] = useState(true);
   const canvasRef = useRef(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+  const [loaded, setLoaded] = useState(false);
 
   async function browserHasImmersiveArCompatibility() {
     if (window.navigator.xr) {
@@ -44,21 +45,28 @@ const XrHitModelContainer = ({
     });
   }, []);
 
+  const ViewAR = () => {
+    return isARSupported ? (
+      <ARButton
+        sessionInit={{
+          requiredFeatures: ["hit-test"],
+        }}
+        className={styles.arButton}
+      />
+    ) : (
+      <button className={styles.arButton}>
+        Try AR mode on mobile using chrome
+      </button>
+    );
+  };
+
   return (
     <div className={styles.XRContainer} ref={canvasRef}>
-      {isARSupported ? (
-        <ARButton
-          sessionInit={{
-            requiredFeatures: ["hit-test"],
-          }}
-          className={styles.arButton}
-        />
-      ) : (
-        <button className={styles.arButton}>
-          Try AR mode on mobile using chrome
-        </button>
-      )}
-      <LoadingScreen />
+      {loaded && <ViewAR />}
+      <LoadingScreen
+        loaded={loaded}
+        setLoaded={setLoaded}
+      />
       <Canvas>
         <XR>
           <XrHitModel
