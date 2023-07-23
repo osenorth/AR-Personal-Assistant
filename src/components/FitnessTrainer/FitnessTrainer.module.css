@@ -54,6 +54,10 @@
   padding: 0.5rem;
 }
 
+.cameraLoadingScreen {
+  background-color: #fff;
+}
+
 .trackingImg {
   height: 300px;
   width: auto;

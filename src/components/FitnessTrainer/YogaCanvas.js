@@ -8,11 +8,12 @@ import * as tf from "@tensorflow/tfjs";
 import { POINTS, keypointConnections } from "../../data/YogaPoints";
 import { drawPoint, drawSegment } from "../../helpers/Utils";
 import Webcam from "react-webcam";
+import loadingCameraImg from "../../assets/loading-camera.gif";
 import trackingBodyImg from "../../assets/tracking-body.gif";
 import Instructions from "../Instructions/Instructions";
 import MobileInstructions from "../Instructions/MobileInstructions";
-import XrHitModelContainer from "../../containers/XRHitModelContainer/XRHitModelContainer";
-// import ModelViewer from "../ModelViewer/ModelViewer";
+import XrHitFemaleModelContainer from "../../containers/XRHitModelContainer/XrHitFemaleModelContainer";
+import XRHitMaleModelContainer from "../../containers/XRHitModelContainer/XRHitMaleModelContainer";
 import * as styles from "./FitnessTrainer.module.css";
 import * as mystyles from "../Instructions/Instructions.module.css";
 
@@ -30,6 +31,7 @@ const YogaCanvas = () => {
   const [isStartPose, setIsStartPose] = useState(false);
   const [modelGender, setModelGender] = useState("female");
   const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const [cameraLoaded, setCameraLoaded] = useState(true);
   const [bodyTracked, setBodyTracked] = useState(true);
 
   const router = useRouter();
@@ -268,6 +270,7 @@ const YogaCanvas = () => {
 
   useEffect(() => {
     if (isStartPose) {
+      setCameraLoaded(false);
       setBodyTracked(false);
       runMovenet();
     }
@@ -293,7 +296,7 @@ const YogaCanvas = () => {
             className={`primary-btn ${styles.controlButtons}`}
             onClick={stopPose}
           >
-            Stop Pose
+            Stop Session
           </button>
         </div>
       );
@@ -338,6 +341,7 @@ const YogaCanvas = () => {
               ref={webcamRef}
               width="640px"
               height="480px"
+              onUserMedia={() => setCameraLoaded(true)}
             />
             <canvas
               ref={canvasRef}
@@ -345,7 +349,21 @@ const YogaCanvas = () => {
               width="640px"
               height="480px"
             ></canvas>
-            {!bodyTracked && (
+            {!cameraLoaded && (
+              <div
+                className={`${styles.showbodyScreen} ${styles.cameraLoadingScreen}`}
+              >
+                <h4 className={`text-primary ${styles.workoutTitle}`}>
+                  Loading your environment from camera
+                </h4>
+                <Image
+                  src={loadingCameraImg}
+                  alt="bodyTrackingExample"
+                  className={styles.trackingImg}
+                />
+              </div>
+            )}
+            {cameraLoaded && !bodyTracked && (
               <div className={styles.showbodyScreen}>
                 <h4
                   className={`text-primary ${styles.workoutTitle} ${styles.trackTitle}`}
@@ -400,11 +418,17 @@ const YogaCanvas = () => {
         /> */}
         {currentPoseData &&
           (currentPoseData.modelAvailable ? (
-            <XrHitModelContainer
-              modelName={currentPoseData.label}
-              modelGender={modelGender}
-              type="yoga"
-            />
+            modelGender === "female" ? (
+              <XrHitFemaleModelContainer
+                modelName={currentPoseData.label}
+                type="yoga"
+              />
+            ) : (
+              <XRHitMaleModelContainer
+                modelName={currentPoseData.label}
+                type="yoga"
+              />
+            )
           ) : (
             <iframe
               title={currentPoseData.name}

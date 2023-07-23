@@ -10,7 +10,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: opacity 5s;
+  transition: opacity 3s;
   z-index: 3;
 }
 

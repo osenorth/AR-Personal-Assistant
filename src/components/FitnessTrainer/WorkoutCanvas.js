@@ -11,11 +11,13 @@ import {
   angleBetweenThreePoints,
 } from "../../helpers/Utils";
 import { POINTS, LINES } from "../../data/WorkoutPoints";
+import loadingCameraImg from "../../assets/loading-camera.gif";
 import trackingBodyImg from "../../assets/tracking-body.gif";
 import workoutData from "../../data/WorkoutData";
 import Instructions from "../Instructions/Instructions";
 import MobileInstructions from "../Instructions/MobileInstructions";
-import XrHitModelContainer from "../../containers/XRHitModelContainer/XRHitModelContainer";
+import XrHitFemaleModelContainer from "../../containers/XRHitModelContainer/XrHitFemaleModelContainer";
+import XRHitMaleModelContainer from "../../containers/XRHitModelContainer/XRHitMaleModelContainer";
 // import ModelViewer from "../ModelViewer/ModelViewer";
 import * as styles from "./FitnessTrainer.module.css";
 import * as mystyles from "../Instructions/Instructions.module.css";
@@ -30,6 +32,7 @@ const WorkoutCanvas = () => {
   const [speech, setSpeech] = useState(null);
   const [modelGender, setModelGender] = useState("female");
   const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const [cameraLoaded, setCameraLoaded] = useState(true);
   const [bodyTracked, setBodyTracked] = useState(true);
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
@@ -850,6 +853,7 @@ const WorkoutCanvas = () => {
       });
 
       if (isStartSession) {
+        setCameraLoaded(false);
         camera.start();
         setBodyTracked(false);
       }
@@ -945,9 +949,27 @@ const WorkoutCanvas = () => {
       >
         {isStartSession ? (
           <>
-            <Webcam className={styles.workoutWebcam} ref={webcamRef} />
+            <Webcam
+              className={styles.workoutWebcam}
+              ref={webcamRef}
+              onUserMedia={() => setCameraLoaded(true)}
+            />
             <canvas ref={canvasRef} className={styles.workoutCanvas}></canvas>
-            {!bodyTracked && (
+            {!cameraLoaded && (
+              <div
+                className={`${styles.showbodyScreen} ${styles.cameraLoadingScreen}`}
+              >
+                <h4 className={`text-primary ${styles.workoutTitle}`}>
+                  Loading your environment from camera
+                </h4>
+                <Image
+                  src={loadingCameraImg}
+                  alt="bodyTrackingExample"
+                  className={styles.trackingImg}
+                />
+              </div>
+            )}
+            {cameraLoaded && !bodyTracked && (
               <div className={styles.showbodyScreen}>
                 <h4
                   className={`text-primary ${styles.workoutTitle} ${styles.trackTitle}`}
@@ -1012,13 +1034,21 @@ const WorkoutCanvas = () => {
           /> */}
         {currentWorkoutData &&
           (currentWorkoutData.modelAvailable ? (
-            <XrHitModelContainer
-              modelName={currentWorkout}
-              modelGender={modelGender}
-              zRotationMul={currentWorkoutData.zRotationMul}
-              scaleMul={currentWorkoutData.scaleMul}
-              type="workout"
-            />
+            modelGender === "female" ? (
+              <XrHitFemaleModelContainer
+                modelName={currentWorkout}
+                zRotationMul={currentWorkoutData.zRotationMul}
+                scaleMul={currentWorkoutData.scaleMul}
+                type="workout"
+              />
+            ) : (
+              <XRHitMaleModelContainer
+                modelName={currentWorkout}
+                zRotationMul={currentWorkoutData.zRotationMul}
+                scaleMul={currentWorkoutData.scaleMul}
+                type="workout"
+              />
+            )
           ) : (
             <iframe
               title={currentWorkoutData.name}
