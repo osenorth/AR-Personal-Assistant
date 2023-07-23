@@ -186,12 +186,12 @@ model-viewer {
   --poster-color: #ffffff00;
 }
 
-canvas {
+/* canvas {
   background-color: #000000;
   height: 100vh;
   width: 100vw;
   display: block;
-}
+} */
 
 #overlay-content {
   position: absolute;
