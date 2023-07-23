@@ -263,6 +263,13 @@ const SpotifyPage = () => {
                         </Interactive>
                       </>
                 }
+
+                <Interactive>
+                  <Image imgSrc={'/Chill_Vibes_Panel.png'} position={[0.3, 0.3, -1.2]} scale={0.8}/>
+                </Interactive>
+                <Interactive>
+                  <Image imgSrc={'/Chill_Hits_Panel.png'} position={[1.2, 0.3, -1.2]} scale={0.8}/>
+                </Interactive>
                       
                 {/* <Button position={[0, 0.1, -0.2]} track={track} chooseTrack={chooseTrack}/> */}
                 <Controllers />
