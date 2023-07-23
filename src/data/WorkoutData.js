@@ -18,45 +18,45 @@ const workoutData = {
   servicesList: [
     {
       id: 1,
-      title: "Bicep Curls",
-      desc: "Bicep curls are a weightlifting exercise that target the biceps muscle. They increase mustle strength, and improve overall upper body aesthetics.",
-      poster: bicepcurlsImg,
-      route: "/workouts/bicepcurls",
-    },
-    {
-      id: 2,
-      title: "Jumping Jacks",
-      desc: "Jumping Jacks are  cardio exercise that engages the entire body, boosting heart rate and burning calories. They promote coordination during workout.",
-      poster: jumpingjacksImg,
-      route: "/workouts/jumpingjacks",
-    },
-    {
-      id: 3,
-      title: "Pull Ups",
-      desc: "Pull-ups are a challenging upper body exercise that targets back, arms, and shoulders. They build strength, grip, and upper body stability for overall development.",
-      poster: pullupsImg,
-      route: "/workouts/pullups",
-    },
-    {
-      id: 4,
       title: "Squats",
       desc: "Squats are a fundamental exercise that strengthens the legs and glutes, while improving mobility and balance. They promote overall fitness and athletic performance.",
       poster: squatImg,
       route: "/workouts/squats",
     },
     {
-      id: 5,
+      id: 2,
       title: "Lungs",
       desc: "Lunges are an effective lower body exercise that targets the legs and glutes. They enhance your lower body muscle tone and overall functional fitness.",
       poster: lungsImg,
       route: "/workouts/lungs",
     },
     {
+      id: 3,
+      title: "Plank",
+      desc: "Plank is a core strengthening exercise that engages abs, back, and shoulders. They improve core stability, posture, and overall strength and balance.",
+      poster: plankImg,
+      route: "/workouts/plank",
+    },
+    {
+      id: 4,
+      title: "Push Ups",
+      desc: "Push ups are a bodyweight exercise that targets the chest, arms, and shoulders. They build upper body strength and increase muscular endurance.",
+      poster: pushupImg,
+      route: "/workouts/pushups",
+    },
+    {
+      id: 5,
+      title: "Pull Ups",
+      desc: "Pull-ups are a challenging upper body exercise that targets back, arms, and shoulders. They build strength, grip, and upper body stability for overall development.",
+      poster: pullupsImg,
+      route: "/workouts/pullups",
+    },
+    {
       id: 6,
-      title: "Sit Ups",
-      desc: "Sit-ups engage the abs, obliques, and hip flexors, strengthening the core and improving stability. They are very effective for achieving a well-defined midsection.",
-      poster: situpsImg,
-      route: "/workouts/situps",
+      title: "Bicep Curls",
+      desc: "Bicep curls are a weightlifting exercise that target the biceps muscle. They increase mustle strength, and improve overall upper body aesthetics.",
+      poster: bicepcurlsImg,
+      route: "/workouts/bicepcurls",
     },
     {
       id: 7,
@@ -67,38 +67,41 @@ const workoutData = {
     },
     {
       id: 8,
-      title: "Plank",
-      desc: "Plank is a core strengthening exercise that engages abs, back, and shoulders. They improve core stability, posture, and overall strength and balance.",
-      poster: plankImg,
-      route: "/workouts/plank",
+      title: "Sit Ups",
+      desc: "Sit-ups engage the abs, obliques, and hip flexors, strengthening the core and improving stability. They are very effective for achieving a well-defined midsection.",
+      poster: situpsImg,
+      route: "/workouts/situps",
     },
     {
       id: 9,
+      title: "Jumping Jacks",
+      desc: "Jumping Jacks are  cardio exercise that engages the entire body, boosting heart rate and burning calories. They promote coordination during workout.",
+      poster: jumpingjacksImg,
+      route: "/workouts/jumpingjacks",
+    },
+    {
+      id: 10,
       title: "Pike Walk",
       desc: "Pike walk is a challenging plank variation that targets the core, abs, back, and shoulders. It improves stability, posture, and overall strength.",
       poster: pikewalkImg,
       route: "/workouts/pikewalk",
     },
     {
-      id: 10,
+      id: 11,
       title: "Burpees",
       desc: "Burpees engage multiple muscle groups for a full-body workout, combining strength training. They improve strength, endurance, and overall fitness levels efficiently.",
       poster: burpeesImg,
       route: "/workouts/burpees",
     },
-    {
-      id: 11,
-      title: "Push Ups",
-      desc: "Push ups are a bodyweight exercise that targets the chest, arms, and shoulders. They build upper body strength and increase muscular endurance.",
-      poster: pushupImg,
-      route: "/workouts/pushups",
-    },
   ],
   exerciseData: {
     bicepcurls: {
       name: "Bicep Curls",
-      modelAvailable: false,
+      modelAvailable: true,
+      rotatedModel: false,
+      scaledModel: true,
       zRotationMul: 0,
+      scaleMul: 0.003,
       modelLink:
         "https://sketchfab.com/models/4e958ee159fe46128b044b6e63d0ec69/embed?autostart=1&dnt=1",
       difficulty: "easy",
@@ -112,6 +115,8 @@ const workoutData = {
     jumpingjacks: {
       name: "Jumping Jacks",
       modelAvailable: true,
+      rotatedModel: false,
+      scaledModel: false,
       zRotationMul: 0,
       scaleMul: 0.3,
       modelLink:
@@ -129,9 +134,11 @@ const workoutData = {
     },
     pullups: {
       name: "Pull Ups",
-      modelAvailable: false,
+      modelAvailable: true,
+      rotatedModel: false,
+      scaledModel: true,
       zRotationMul: 0,
-      scaleMul: 0.3,
+      scaleMul: 0.003,
       modelLink:
         "https://sketchfab.com/models/feffc536b46442bfbe0fd3dfb99861c0/embed?autostart=1&dnt=1",
       difficulty: "hard",
@@ -148,6 +155,8 @@ const workoutData = {
     squats: {
       name: "Squats",
       modelAvailable: true,
+      rotatedModel: false,
+      scaledModel: false,
       zRotationMul: 0,
       scaleMul: 0.3,
       modelLink:
@@ -162,9 +171,11 @@ const workoutData = {
     },
     lungs: {
       name: "Lungs",
-      modelAvailable: false,
+      modelAvailable: true,
+      rotatedModel: true,
+      scaledModel: true,
       zRotationMul: 0.33,
-      scaleMul: 0.3,
+      scaleMul: 0.003,
       modelLink:
         "https://sketchfab.com/models/93b25198122b4417a5da3d8428fae423/embed?autostart=1&dnt=1",
       difficulty: "medium",
@@ -177,9 +188,11 @@ const workoutData = {
     },
     situps: {
       name: "Sit Ups",
-      modelAvailable: false,
+      modelAvailable: true,
+      rotatedModel: true,
+      scaledModel: true,
       zRotationMul: 0.33,
-      scaleMul: 0.3,
+      scaleMul: 0.003,
       modelLink:
         "https://sketchfab.com/models/d39138e42be949b2b1f124a555f22239/embed?autostart=1&dnt=1",
       difficulty: "easy",
@@ -194,8 +207,10 @@ const workoutData = {
     bicyclecrunches: {
       name: "Bicycle Crunches",
       modelAvailable: true,
+      rotatedModel: true,
+      scaledModel: false,
       zRotationMul: 0.33,
-      scaleMul: 0.4,
+      scaleMul: 0.3,
       modelLink:
         "https://sketchfab.com/models/c24d18ab0e194c629eb5df4ded145b15/embed?autostart=1&dnt=1",
       difficulty: "medium",
@@ -211,8 +226,10 @@ const workoutData = {
     plank: {
       name: "Plank",
       modelAvailable: true,
+      rotatedModel: true,
+      scaledModel: true,
       zRotationMul: 0.33,
-      scaleMul: 0.4,
+      scaleMul: 0.3,
       modelLink:
         "https://sketchfab.com/models/1643f24070c34e6ca82b59a5145b949a/embed?autostart=1&dnt=1",
       difficulty: "medium",
@@ -226,8 +243,10 @@ const workoutData = {
     pikewalk: {
       name: "Pike Walk",
       modelAvailable: true,
+      rotatedModel: true,
+      scaledModel: true,
       zRotationMul: 0.33,
-      scaleMul: 0.4,
+      scaleMul: 0.3,
       modelLink:
         "https://sketchfab.com/models/78bb64dbb876415fa50f8544a2afa7d8/embed?autostart=1&dnt=1",
       difficulty: "medium",
@@ -243,6 +262,8 @@ const workoutData = {
     burpees: {
       name: "Burpees",
       modelAvailable: true,
+      rotatedModel: true,
+      scaledModel: false,
       zRotationMul: 0.33,
       scaleMul: 0.3,
       modelLink:
@@ -261,8 +282,10 @@ const workoutData = {
     pushups: {
       name: "Push Ups",
       modelAvailable: true,
+      rotatedModel: true,
+      scaledModel: true,
       zRotationMul: 0.33,
-      scaleMul: 0.4,
+      scaleMul: 0.3,
       modelLink:
         "https://sketchfab.com/models/6c7bc2c57c8648f3a70488155b326a16/embed?autostart=1&dnt=1",
       difficulty: "hard",

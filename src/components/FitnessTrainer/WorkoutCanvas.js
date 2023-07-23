@@ -13,6 +13,7 @@ import { POINTS, LINES } from "../../data/WorkoutPoints";
 import workoutData from "../../data/WorkoutData";
 import Instructions from "../Instructions/Instructions";
 import XrHitModelContainer from "../../containers/XRHitModelContainer/XRHitModelContainer";
+// import ModelViewer from "../ModelViewer/ModelViewer";
 import * as styles from "./FitnessTrainer.module.css";
 
 const WorkoutCanvas = () => {
@@ -23,6 +24,7 @@ const WorkoutCanvas = () => {
   const [feedback, setFeedback] = useState("");
   const [status, setStatus] = useState(true);
   const [speech, setSpeech] = useState(null);
+  const [modelGender, setModelGender] = useState("female");
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
   const router = useRouter();
@@ -882,20 +884,50 @@ const WorkoutCanvas = () => {
         )}
       </div>
       <div className={styles.resultsContainer}>
-        <div>
-          {isStartSession && (
-            <h4 className={`text-subheading ${styles.workoutTitle}`}>
-              Try to mimic this workout
-            </h4>
-          )}
+        <div className={styles.viewerTop}>
           <h4 className={`text-primary ${styles.workoutTitle}`}>
             {isStartSession ? currentWorkoutData.name : "View in 3D"}
           </h4>
+          {currentWorkoutData?.modelAvailable && (
+            <div className={styles.genderContainer}>
+              <button
+                className={
+                  modelGender === "female" ? "primary-btn" : "secondary-btn"
+                }
+                onClick={() => {
+                  setModelGender("female");
+                }}
+              >
+                Female
+              </button>
+              <button
+                className={
+                  modelGender === "male" ? "primary-btn" : "secondary-btn"
+                }
+                onClick={() => setModelGender("male")}
+              >
+                Male
+              </button>
+            </div>
+          )}
         </div>
+        {/* <ModelViewer
+            modelName={currentWorkout}
+            modelGender={modelGender}
+            position={
+              modelGender === "female" || currentWorkoutData.scaledModel
+                ? "0m 100m 0m"
+                : "0m 1000m 0m"
+            }
+            rotatedModel={currentWorkoutData.rotatedModel}
+            scaledModel={currentWorkoutData.scaledModel}
+            type="workout"
+          /> */}
         {currentWorkoutData &&
           (currentWorkoutData.modelAvailable ? (
             <XrHitModelContainer
               modelName={currentWorkout}
+              modelGender={modelGender}
               zRotationMul={currentWorkoutData.zRotationMul}
               scaleMul={currentWorkoutData.scaleMul}
               type="workout"

@@ -9,7 +9,7 @@ import * as styles from "./Features.module.css";
 
 const HomeFeatures = () => {
   return (
-    <section className={styles.featuresContainer}>
+    <section className={styles.featuresContainer} id="features">
       <div className={styles.featuresImageContainer}>
         <Image
           src={featureAvatar}
