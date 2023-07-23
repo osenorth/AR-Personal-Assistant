@@ -12,7 +12,7 @@ import loadingCameraImg from "../../assets/loading-camera.gif";
 import trackingBodyImg from "../../assets/tracking-body.gif";
 import Instructions from "../Instructions/Instructions";
 import MobileInstructions from "../Instructions/MobileInstructions";
-import XrHitFemaleModelContainer from "../../containers/XRHitModelContainer/XrHitFemaleModelContainer";
+import XRHitFemaleModelContainer from "../../containers/XRHitModelContainer/XRHitFemaleModelContainer";
 import XRHitMaleModelContainer from "../../containers/XRHitModelContainer/XRHitMaleModelContainer";
 import * as styles from "./FitnessTrainer.module.css";
 import * as mystyles from "../Instructions/Instructions.module.css";
@@ -419,7 +419,7 @@ const YogaCanvas = () => {
         {currentPoseData &&
           (currentPoseData.modelAvailable ? (
             modelGender === "female" ? (
-              <XrHitFemaleModelContainer
+              <XRHitFemaleModelContainer
                 modelName={currentPoseData.label}
                 type="yoga"
               />

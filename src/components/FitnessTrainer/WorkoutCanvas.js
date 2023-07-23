@@ -16,7 +16,7 @@ import trackingBodyImg from "../../assets/tracking-body.gif";
 import workoutData from "../../data/WorkoutData";
 import Instructions from "../Instructions/Instructions";
 import MobileInstructions from "../Instructions/MobileInstructions";
-import XrHitFemaleModelContainer from "../../containers/XRHitModelContainer/XrHitFemaleModelContainer";
+import XRHitFemaleModelContainer from "../../containers/XRHitModelContainer/XRHitFemaleModelContainer";
 import XRHitMaleModelContainer from "../../containers/XRHitModelContainer/XRHitMaleModelContainer";
 // import ModelViewer from "../ModelViewer/ModelViewer";
 import * as styles from "./FitnessTrainer.module.css";
@@ -1035,7 +1035,7 @@ const WorkoutCanvas = () => {
         {currentWorkoutData &&
           (currentWorkoutData.modelAvailable ? (
             modelGender === "female" ? (
-              <XrHitFemaleModelContainer
+              <XRHitFemaleModelContainer
                 modelName={currentWorkout}
                 zRotationMul={currentWorkoutData.zRotationMul}
                 scaleMul={currentWorkoutData.scaleMul}
