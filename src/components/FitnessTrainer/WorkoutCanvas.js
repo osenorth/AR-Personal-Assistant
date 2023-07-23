@@ -16,7 +16,7 @@ import trackingBodyImg from "../../assets/tracking-body.gif";
 import workoutData from "../../data/WorkoutData";
 import Instructions from "../Instructions/Instructions";
 import MobileInstructions from "../Instructions/MobileInstructions";
-import XRHitFemaleModelContainer from "../../containers/XRHitModelContainer/XRHitFemaleModelContainer";
+import XRHitFemaleModelContainer from "../../containers/XRHitModelContainer/XrHitFemaleModelContainer";
 import XRHitMaleModelContainer from "../../containers/XRHitModelContainer/XRHitMaleModelContainer";
 // import ModelViewer from "../ModelViewer/ModelViewer";
 import * as styles from "./FitnessTrainer.module.css";

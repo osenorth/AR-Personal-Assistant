@@ -12,7 +12,7 @@ import loadingCameraImg from "../../assets/loading-camera.gif";
 import trackingBodyImg from "../../assets/tracking-body.gif";
 import Instructions from "../Instructions/Instructions";
 import MobileInstructions from "../Instructions/MobileInstructions";
-import XRHitFemaleModelContainer from "../../containers/XRHitModelContainer/XRHitFemaleModelContainer";
+import XRHitFemaleModelContainer from "../../containers/XRHitModelContainer/XrHitFemaleModelContainer";
 import XRHitMaleModelContainer from "../../containers/XRHitModelContainer/XRHitMaleModelContainer";
 import * as styles from "./FitnessTrainer.module.css";
 import * as mystyles from "../Instructions/Instructions.module.css";

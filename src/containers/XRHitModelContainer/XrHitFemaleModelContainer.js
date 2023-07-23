@@ -5,7 +5,7 @@ import XrHitModel from "../../components/XRHitModel/XRHitModel";
 import * as styles from "./XRHitModelContainer.module.css";
 import LoadingScreen from "./LoadingScreen";
 
-const XrHitFemaleModelContainer = ({
+const XRHitFemaleModelContainer = ({
   modelName,
   zRotationMul = 0.33,
   scaleMul = 0.3,
@@ -80,4 +80,4 @@ const XrHitFemaleModelContainer = ({
   );
 };
 
-export default XrHitFemaleModelContainer;
+export default XRHitFemaleModelContainer;
