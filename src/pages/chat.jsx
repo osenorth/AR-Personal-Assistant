@@ -3,6 +3,7 @@ import { FaMicrophone, FaPaperPlane, FaMicrophoneSlash } from "react-icons/fa";
 import { useWhisper } from "@chengsokdara/use-whisper";
 import { KeyboardAlt } from "@mui/icons-material";
 import Fab from "@mui/material/Fab";
+import { Button } from "@mui/material";
 import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
 import MusicNoteIcon from "@mui/icons-material/MusicNote";
 import NearMeIcon from "@mui/icons-material/NearMe";
@@ -13,6 +14,7 @@ export default function () {
   const [inputValue, setInputValue] = useState("");
   const [micState, setMicState] = useState(false);
   const [writingMode, setWritingMode] = useState(true);
+  const [listening, setListening] = useState(false);
   const router = useRouter();
   const { transcript, startRecording, stopRecording } = useWhisper({
     apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY,
@@ -37,8 +39,10 @@ export default function () {
   const handleMicState = async () => {
     if (!micState) {
       startRecording();
+      setListening(true);
     } else {
       stopRecording();
+      setListening(false);
     }
     setMicState(!micState);
   };
@@ -68,6 +72,7 @@ export default function () {
 
   const handleMicGPT = async () => {
     const content = transcript.text;
+    transcript.text = "";
     const response = await fetch("/api/chat", {
       method: "POST",
       headers: {
@@ -99,38 +104,49 @@ export default function () {
           ))}
         </div>
         <div>
-          <div>
-            {writingMode ? (
-              <div className="input-container">
-                <FaMicrophone onClick={handleMode} className="mic-button" />
-                <input
-                  value={inputValue}
-                  onChange={handleInputChange}
-                  placeholder="Type your message"
-                  className="chat-input"
-                  rows={1}
-                />
-                <button onClick={handleGPT} className="submit-button">
-                  <FaPaperPlane />
-                </button>
-              </div>
-            ) : (
-              <div className="input-container">
-                <KeyboardAlt onClick={handleMode} className="mic-button" />
-                <button onClick={handleMicState} className="mic-button whisper">
+          {writingMode ? (
+            <div className="input-container">
+              <FaMicrophone onClick={handleMode} className="mic-button" />
+              <input
+                value={inputValue}
+                onChange={handleInputChange}
+                placeholder="Type your message"
+                className="chat-input"
+              />
+              <FaPaperPlane onClick={handleGPT} className="submit-button" />
+            </div>
+          ) : (
+            <>
+              <div
+                style={{ width: "92.5%", margin: "auto", display: "flex" }}
+              >
+                <Button
+                  onClick={handleMicState}
+                  sx={{
+                    flex: 1,
+                    backgroundColor: "#EAF7FF", // Replace with your desired background color
+                    borderRadius: "8px", // Adjust the border radius as needed
+                    fontWeight: "bold",
+                    fontSize: "12px",
+                  }}
+                >
                   {micState ? "Stop" : "Speak"}
-                </button>
-                <input
-                  disabled
-                  value={transcript.text}
-                  className="chat-input"
-                />
-                <button onClick={handleMicGPT} className="submit-button">
-                  <FaPaperPlane />
-                </button>
+                </Button>
               </div>
-            )}
-          </div>
+              <div className="input-container" style={{ flex: 1 }}>
+                <KeyboardAlt onClick={handleMode} className="mic-button" />
+                <input
+                  value={listening ? "Listening..." : transcript.text}
+                  className="chat-input"
+                  placeholder='Try speaking "Explore Music"'
+                />
+                <FaPaperPlane
+                  onClick={handleMicGPT}
+                  className="submit-button"
+                />
+              </div>
+            </>
+          )}
           <div className="icons-container"></div>
         </div>
       </div>

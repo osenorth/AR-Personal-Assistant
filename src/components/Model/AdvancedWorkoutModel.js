@@ -11,7 +11,7 @@ const AdvancedWorkoutModel = ({
 }) => {
   const objects = [{ name: "shirt black", numbers: [34] }]; // An example to reduce the number of tags below
 
-  if (modelName === "lungs")
+  if (modelName === "lunges")
     return (
       <group
         ref={group}

@@ -1,7 +1,7 @@
 import bicepcurlsImg from "../assets/bicepcurls.jpg";
 import jumpingjacksImg from "../assets/jumpingjacks.jpg";
 import pullupsImg from "../assets/pullups.jpg";
-import lungsImg from "../assets/lungs.jpg";
+import lungesImg from "../assets/lunges.jpg";
 import squatImg from "../assets/squat.jpg";
 import plankImg from "../assets/plank.jpg";
 import situpsImg from "../assets/situps.jpg";
@@ -25,10 +25,10 @@ const workoutData = {
     },
     {
       id: 2,
-      title: "Lungs",
+      title: "Lunges",
       desc: "Lunges are an effective lower body exercise that targets the legs and glutes. They enhance your lower body muscle tone and overall functional fitness.",
-      poster: lungsImg,
-      route: "/workouts/lungs",
+      poster: lungesImg,
+      route: "/workouts/lunges",
     },
     {
       id: 3,
@@ -169,8 +169,8 @@ const workoutData = {
         "Once your hips are parallel with your knees, drive your hips forward and rise back to a standing position.",
       ],
     },
-    lungs: {
-      name: "Lungs",
+    lunges: {
+      name: "Lunges",
       modelAvailable: true,
       rotatedModel: true,
       scaledModel: true,
