@@ -1,0 +1,70 @@
+.loadingScreen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 100%;
+  width: auto;
+  background-color: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 3s;
+  z-index: 3;
+}
+
+.loadingScreen_board {
+  padding: 64px;
+  background-color: transparent;
+  text-align: center;
+  transition: opacity 0.4s;
+}
+
+.loadingScreen_title {
+  font-size: 2rem;
+  line-height: 3rem;
+  color: var(--primary);
+  margin: 0;
+}
+
+.loadingScreen__progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+.loadingScreen_progressvalue {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 8px;
+  background-color: var(--primary);
+  transition: width 0.4s;
+}
+
+.loadingScreen_loaded {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loadingScreen_loaded .loadingScreen_board {
+  opacity: 0;
+}
+
+.loadingScreen_start {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.loadingScreen_start .loadingScreen_board {
+  opacity: 1;
+}
+
+@media screen and (max-width: 768px) {
+  .loadingScreen_title {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+}

@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import yogaData from "../../data/YogaData";
 import * as poseDetection from "@tensorflow-models/pose-detection";
@@ -7,10 +8,14 @@ import * as tf from "@tensorflow/tfjs";
 import { POINTS, keypointConnections } from "../../data/YogaPoints";
 import { drawPoint, drawSegment } from "../../helpers/Utils";
 import Webcam from "react-webcam";
+import loadingCameraImg from "../../assets/loading-camera.gif";
+import trackingBodyImg from "../../assets/tracking-body.gif";
 import Instructions from "../Instructions/Instructions";
-import XrHitModelContainer from "../../containers/XRHitModelContainer/XRHitModelContainer";
-// import ModelViewer from "../ModelViewer/ModelViewer";
+import MobileInstructions from "../Instructions/MobileInstructions";
+import XRHitFemaleModelContainer from "../../containers/XRHitModelContainer/XrHitFemaleModelContainer";
+import XRHitMaleModelContainer from "../../containers/XRHitModelContainer/XRHitMaleModelContainer";
 import * as styles from "./FitnessTrainer.module.css";
+import * as mystyles from "../Instructions/Instructions.module.css";
 
 let flag = false,
   reps = 0,
@@ -25,6 +30,9 @@ const YogaCanvas = () => {
   const [bestPerform, setBestPerform] = useState(0);
   const [isStartPose, setIsStartPose] = useState(false);
   const [modelGender, setModelGender] = useState("female");
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const [cameraLoaded, setCameraLoaded] = useState(true);
+  const [bodyTracked, setBodyTracked] = useState(true);
 
   const router = useRouter();
   const [currentPose, setCurrentPose] = useState(null);
@@ -52,6 +60,9 @@ const YogaCanvas = () => {
       const { pose } = router.query;
       setCurrentPose(poseMapping[pose]);
       setCurrentPoseData(yogaData.poseData[poseMapping[pose]]);
+      setIsSmallScreen(
+        Math.min(window.screen.width, window.screen.height) < 768
+      );
     }
   }, [router.isReady]);
 
@@ -192,6 +203,7 @@ const YogaCanvas = () => {
         const keypoints = pose[0]?.keypoints;
         let input = null;
         if (keypoints && keypoints.length > 0) {
+          setBodyTracked(true);
           input = keypoints?.map((keypoint) => {
             if (keypoint.score > 0.4) {
               if (
@@ -219,6 +231,8 @@ const YogaCanvas = () => {
             }
             return [keypoint.x, keypoint.y];
           });
+        } else {
+          setBodyTracked(false);
         }
         if (notDetected > 4) {
           skeletonColor = "rgb(255,0,0)";
@@ -256,9 +270,52 @@ const YogaCanvas = () => {
 
   useEffect(() => {
     if (isStartPose) {
+      setCameraLoaded(false);
+      setBodyTracked(false);
       runMovenet();
     }
   }, [isStartPose]);
+
+  const SessionControls = () => {
+    if (isStartPose) {
+      return (
+        <div className={styles.countDisplay}>
+          <div>
+            <p className="text-subheading">Pose Time (sec)</p>
+            <input value={poseTime} className={styles.countInput} readOnly />
+          </div>
+          <div>
+            <p className="text-primary">Best (sec)</p>
+            <input
+              value={bestPerform}
+              className={`${styles.countInput} text-primary`}
+              readOnly
+            />
+          </div>
+          <button
+            className={`primary-btn ${styles.controlButtons}`}
+            onClick={stopPose}
+          >
+            Stop Session
+          </button>
+        </div>
+      );
+    } else if (isSmallScreen) {
+      return (
+        <div className={styles.introContainer}>
+          <h2 className="text-primary">{currentPoseData?.name}</h2>
+          <div className={mystyles.actionButtons}>
+            <button className="primary-btn" onClick={startYoga}>
+              Start Session
+            </button>
+            <a href={currentPoseData?.refLink} target="_blank">
+              <button className="secondary-btn"> Know More </button>
+            </a>
+          </div>
+        </div>
+      );
+    }
+  };
 
   if (!currentPoseData)
     return (
@@ -271,9 +328,11 @@ const YogaCanvas = () => {
     <div className={styles.workoutContainer}>
       <title>Ossistant</title>
       <div
-        className={`${styles.detectContainer} ${
-          isStartPose && styles.infoContainer
-        }`}
+        className={
+          !isStartPose && isSmallScreen
+            ? styles.infoContainer
+            : styles.detectContainer
+        }
       >
         {isStartPose ? (
           <>
@@ -282,6 +341,7 @@ const YogaCanvas = () => {
               ref={webcamRef}
               width="640px"
               height="480px"
+              onUserMedia={() => setCameraLoaded(true)}
             />
             <canvas
               ref={canvasRef}
@@ -289,13 +349,48 @@ const YogaCanvas = () => {
               width="640px"
               height="480px"
             ></canvas>
+            {!cameraLoaded && (
+              <div
+                className={`${styles.showbodyScreen} ${styles.cameraLoadingScreen}`}
+              >
+                <h4 className={`text-primary ${styles.workoutTitle}`}>
+                  Loading your environment from camera
+                </h4>
+                <Image
+                  src={loadingCameraImg}
+                  alt="bodyTrackingExample"
+                  className={styles.trackingImg}
+                />
+              </div>
+            )}
+            {cameraLoaded && !bodyTracked && (
+              <div className={styles.showbodyScreen}>
+                <h4
+                  className={`text-primary ${styles.workoutTitle} ${styles.trackTitle}`}
+                >
+                  Show your complete body in the camera and
+                </h4>
+                <h4
+                  className={`text-primary ${styles.workoutTitle} ${styles.trackTitle}`}
+                >
+                  Wait till we track your body as shown below
+                </h4>
+                <Image
+                  src={trackingBodyImg}
+                  alt="bodyTrackingExample"
+                  className={styles.trackingImg}
+                />
+              </div>
+            )}
           </>
         ) : (
-          currentPoseData && (
+          currentPoseData &&
+          !isSmallScreen && (
             <Instructions data={currentPoseData} startSession={startYoga} />
           )
         )}
       </div>
+      {isSmallScreen && <SessionControls />}
       <div className={styles.resultsContainer}>
         <div className={styles.viewerTop}>
           <h4 className={`text-primary ${styles.workoutTitle}`}>
@@ -303,22 +398,14 @@ const YogaCanvas = () => {
           </h4>
           <div className={styles.genderContainer}>
             <button
-              className={
-                modelGender === "female" ? "primary-btn" : "secondary-btn"
-              }
+              className="secondary-btn"
               onClick={() => {
-                setModelGender("female");
+                modelGender === "female"
+                  ? setModelGender("male")
+                  : setModelGender("female");
               }}
             >
-              Female
-            </button>
-            <button
-              className={
-                modelGender === "male" ? "primary-btn" : "secondary-btn"
-              }
-              onClick={() => setModelGender("male")}
-            >
-              Male
+              Change Gender
             </button>
           </div>
         </div>
@@ -331,11 +418,17 @@ const YogaCanvas = () => {
         /> */}
         {currentPoseData &&
           (currentPoseData.modelAvailable ? (
-            <XrHitModelContainer
-              modelName={currentPoseData.label}
-              modelGender={modelGender}
-              type="yoga"
-            />
+            modelGender === "female" ? (
+              <XRHitFemaleModelContainer
+                modelName={currentPoseData.label}
+                type="yoga"
+              />
+            ) : (
+              <XRHitMaleModelContainer
+                modelName={currentPoseData.label}
+                type="yoga"
+              />
+            )
           ) : (
             <iframe
               title={currentPoseData.name}
@@ -351,30 +444,13 @@ const YogaCanvas = () => {
               className={styles.modelContrainer}
             ></iframe>
           ))}
-        {isStartPose && (
-          <div className={styles.countDisplay}>
-            <div>
-              <p className="text-subheading">Pose Time (sec)</p>
-              <input value={poseTime} className={styles.countInput} readOnly />
-            </div>
-            <div>
-              <p className="text-primary">Best (sec)</p>
-              <input
-                value={bestPerform}
-                className={`${styles.countInput} text-primary`}
-                readOnly
-              />
-            </div>
-            <button
-              className={`secondary-btn ${styles.controlButtons}`}
-              onClick={stopPose}
-            >
-              Stop Pose
-            </button>
-          </div>
+        {isStartPose && !isSmallScreen && <SessionControls />}
+        {!isStartPose && currentPoseData && isSmallScreen && (
+          <MobileInstructions data={currentPoseData} startSession={startYoga} />
         )}
+
         <Link href="/yoga" className={styles.link} onClick={stopPose}>
-          <button className={`primary-btn ${styles.controlButtons}`}>
+          <button className={`primary-btn ${styles.exploreButton}`}>
             Explore More Yoga
           </button>
         </Link>

@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import Image from "next/image";
 import Webcam from "react-webcam";
 import { Pose } from "@mediapipe/pose";
 import * as cam from "@mediapipe/camera_utils";
@@ -10,11 +11,16 @@ import {
   angleBetweenThreePoints,
 } from "../../helpers/Utils";
 import { POINTS, LINES } from "../../data/WorkoutPoints";
+import loadingCameraImg from "../../assets/loading-camera.gif";
+import trackingBodyImg from "../../assets/tracking-body.gif";
 import workoutData from "../../data/WorkoutData";
 import Instructions from "../Instructions/Instructions";
-import XrHitModelContainer from "../../containers/XRHitModelContainer/XRHitModelContainer";
+import MobileInstructions from "../Instructions/MobileInstructions";
+import XRHitFemaleModelContainer from "../../containers/XRHitModelContainer/XrHitFemaleModelContainer";
+import XRHitMaleModelContainer from "../../containers/XRHitModelContainer/XRHitMaleModelContainer";
 // import ModelViewer from "../ModelViewer/ModelViewer";
 import * as styles from "./FitnessTrainer.module.css";
+import * as mystyles from "../Instructions/Instructions.module.css";
 
 const WorkoutCanvas = () => {
   const [currentWorkout, setCurrentWorkout] = useState();
@@ -25,6 +31,9 @@ const WorkoutCanvas = () => {
   const [status, setStatus] = useState(true);
   const [speech, setSpeech] = useState(null);
   const [modelGender, setModelGender] = useState("female");
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const [cameraLoaded, setCameraLoaded] = useState(true);
+  const [bodyTracked, setBodyTracked] = useState(true);
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
   const router = useRouter();
@@ -57,6 +66,9 @@ const WorkoutCanvas = () => {
       setCurrentWorkout(exercise);
       setCurrentWorkoutData(workoutData.exerciseData[exercise]);
       setSpeech(window.speechSynthesis);
+      setIsSmallScreen(
+        Math.min(window.screen.width, window.screen.height) < 768
+      );
       setCounter(0);
     }
   }, [router.isReady]);
@@ -589,7 +601,7 @@ const WorkoutCanvas = () => {
     return 0;
   }
 
-  function lungs(landmarks) {
+  function lunges(landmarks) {
     const rightHip = landmarks[POINTS.RIGHT_HIP];
     const rightKnee = landmarks[POINTS.RIGHT_KNEE];
     const rightAnkle = landmarks[POINTS.RIGHT_ANKLE];
@@ -732,8 +744,8 @@ const WorkoutCanvas = () => {
       squats(landmarks);
     } else if (currentWorkout === "bicepcurls") {
       bicepCurls(landmarks);
-    } else if (currentWorkout === "lungs") {
-      lungs(landmarks);
+    } else if (currentWorkout === "lunges") {
+      lunges(landmarks);
     } else if (currentWorkout === "bicyclecrunches") {
       bicycleCrunches(landmarks);
     } else if (currentWorkout === "plank") {
@@ -767,6 +779,8 @@ const WorkoutCanvas = () => {
         canvasElement.height
       );
       if (landmarks && landmarks.length > 0) {
+        setBodyTracked(true);
+
         const excludedPoints = [
           1, 2, 3, 4, 5, 6, 9, 10, 19, 20, 21, 22, 29, 30, 31, 32,
         ];
@@ -804,6 +818,8 @@ const WorkoutCanvas = () => {
         calculateExercise(landmarks);
       }
       canvasCtx.restore();
+    } else {
+      setBodyTracked(false);
     }
   }
 
@@ -836,7 +852,11 @@ const WorkoutCanvas = () => {
         height: 480,
       });
 
-      if (isStartSession) camera.start();
+      if (isStartSession) {
+        setCameraLoaded(false);
+        camera.start();
+        setBodyTracked(false);
+      }
     }
   }, [isStartSession]);
 
@@ -849,6 +869,23 @@ const WorkoutCanvas = () => {
 
   const resetCount = () => {
     setCounter(0);
+
+    sets = 0;
+    reps = 0;
+    direction = 0;
+    leftCounter = 0;
+    rightCounter = 0;
+
+    setscount = 0;
+    leftUp = false;
+    leftDown = false;
+
+    rightUp = false;
+    rightDown = false;
+
+    leftMaxAngle = 10;
+    rightMaxAngle = 10;
+    interval = null;
   };
 
   const startSession = () => {
@@ -858,24 +895,103 @@ const WorkoutCanvas = () => {
 
   const stopSession = () => {
     setisStartSession(false);
-    // router.reload();
+    const mediaStream = webcamRef?.current?.video?.srcObject;
+    const tracks = mediaStream.getTracks();
+    tracks.forEach((track) => track.stop());
+  };
+
+  const SessionControls = () => {
+    if (isStartSession) {
+      return (
+        <div className={styles.countDisplay}>
+          <p className="text-subheading">Count</p>
+          <input value={counter} className={styles.countInput} readOnly />
+          <button
+            className={`secondary-btn ${styles.controlButtons}`}
+            onClick={resetCount}
+          >
+            Reset
+          </button>
+          <button
+            className={`primary-btn ${styles.controlButtons}`}
+            onClick={stopSession}
+          >
+            Stop Session
+          </button>
+        </div>
+      );
+    } else if (isSmallScreen) {
+      return (
+        <div className={styles.introContainer}>
+          <h2 className="text-primary">{currentWorkoutData?.name}</h2>
+          <div className={mystyles.actionButtons}>
+            <button className="primary-btn" onClick={startSession}>
+              Start Session
+            </button>
+            <a href={currentWorkoutData?.refLink} target="_blank">
+              <button className="secondary-btn"> Know More </button>
+            </a>
+          </div>
+        </div>
+      );
+    }
   };
 
   return (
     <div className={styles.workoutContainer}>
       <title>Ossistant</title>
       <div
-        className={`${styles.detectContainer} ${
-          isStartSession && styles.infoContainer
-        }`}
+        className={
+          !isStartSession && isSmallScreen
+            ? styles.infoContainer
+            : styles.detectContainer
+        }
       >
         {isStartSession ? (
           <>
-            <Webcam className={styles.workoutWebcam} ref={webcamRef} />
+            <Webcam
+              className={styles.workoutWebcam}
+              ref={webcamRef}
+              onUserMedia={() => setCameraLoaded(true)}
+            />
             <canvas ref={canvasRef} className={styles.workoutCanvas}></canvas>
+            {!cameraLoaded && (
+              <div
+                className={`${styles.showbodyScreen} ${styles.cameraLoadingScreen}`}
+              >
+                <h4 className={`text-primary ${styles.workoutTitle}`}>
+                  Loading your environment from camera
+                </h4>
+                <Image
+                  src={loadingCameraImg}
+                  alt="bodyTrackingExample"
+                  className={styles.trackingImg}
+                />
+              </div>
+            )}
+            {cameraLoaded && !bodyTracked && (
+              <div className={styles.showbodyScreen}>
+                <h4
+                  className={`text-primary ${styles.workoutTitle} ${styles.trackTitle}`}
+                >
+                  Show your complete body in the camera and
+                </h4>
+                <h4
+                  className={`text-primary ${styles.workoutTitle} ${styles.trackTitle}`}
+                >
+                  Wait till we track your body as shown below
+                </h4>
+                <Image
+                  src={trackingBodyImg}
+                  alt="bodyTrackingExample"
+                  className={styles.trackingImg}
+                />
+              </div>
+            )}
           </>
         ) : (
-          currentWorkoutData && (
+          currentWorkoutData &&
+          !isSmallScreen && (
             <Instructions
               data={currentWorkoutData}
               startSession={startSession}
@@ -883,6 +999,7 @@ const WorkoutCanvas = () => {
           )
         )}
       </div>
+      {isSmallScreen && <SessionControls />}
       <div className={styles.resultsContainer}>
         <div className={styles.viewerTop}>
           <h4 className={`text-primary ${styles.workoutTitle}`}>
@@ -891,22 +1008,14 @@ const WorkoutCanvas = () => {
           {currentWorkoutData?.modelAvailable && (
             <div className={styles.genderContainer}>
               <button
-                className={
-                  modelGender === "female" ? "primary-btn" : "secondary-btn"
-                }
+                className="secondary-btn"
                 onClick={() => {
-                  setModelGender("female");
+                  modelGender === "female"
+                    ? setModelGender("male")
+                    : setModelGender("female");
                 }}
               >
-                Female
-              </button>
-              <button
-                className={
-                  modelGender === "male" ? "primary-btn" : "secondary-btn"
-                }
-                onClick={() => setModelGender("male")}
-              >
-                Male
+                Change Gender
               </button>
             </div>
           )}
@@ -925,13 +1034,21 @@ const WorkoutCanvas = () => {
           /> */}
         {currentWorkoutData &&
           (currentWorkoutData.modelAvailable ? (
-            <XrHitModelContainer
-              modelName={currentWorkout}
-              modelGender={modelGender}
-              zRotationMul={currentWorkoutData.zRotationMul}
-              scaleMul={currentWorkoutData.scaleMul}
-              type="workout"
-            />
+            modelGender === "female" ? (
+              <XRHitFemaleModelContainer
+                modelName={currentWorkout}
+                zRotationMul={currentWorkoutData.zRotationMul}
+                scaleMul={currentWorkoutData.scaleMul}
+                type="workout"
+              />
+            ) : (
+              <XRHitMaleModelContainer
+                modelName={currentWorkout}
+                zRotationMul={currentWorkoutData.zRotationMul}
+                scaleMul={currentWorkoutData.scaleMul}
+                type="workout"
+              />
+            )
           ) : (
             <iframe
               title={currentWorkoutData.name}
@@ -947,26 +1064,15 @@ const WorkoutCanvas = () => {
               className={styles.modelContrainer}
             ></iframe>
           ))}
-        {isStartSession && (
-          <div className={styles.countDisplay}>
-            <p className="text-subheading">Count</p>
-            <input value={counter} className={styles.countInput} readOnly />
-            <button
-              className={`primary-btn ${styles.controlButtons}`}
-              onClick={resetCount}
-            >
-              Reset
-            </button>
-            <button
-              className={`secondary-btn ${styles.controlButtons}`}
-              onClick={stopSession}
-            >
-              Stop Session
-            </button>
-          </div>
+        {isStartSession && !isSmallScreen && <SessionControls />}
+        {currentWorkoutData && isSmallScreen && (
+          <MobileInstructions
+            data={currentWorkoutData}
+            startSession={startSession}
+          />
         )}
         <Link href="/workouts" className={styles.link} onClick={stopSession}>
-          <button className={`primary-btn ${styles.controlButtons}`}>
+          <button className={`primary-btn ${styles.exploreButton}`}>
             Explore More Workouts
           </button>
         </Link>
