@@ -156,11 +156,51 @@ const ModelTypeSwitcherF = ({modelType}) => {
   )
 }
 
+const HeaderPanel = ({modelType}) => {
+  return (
+    <>
+     {
+      modelType == 'Country'
+      ? <Image imgSrc={'/country_banner.png'} position={[0.8, 0.6, -1.2]} scale={[2,0.6,0.8]}/>
+      : modelType == 'Workout'
+        ? <Image imgSrc={'/workout_banner.png'} position={[0.8, 0.6, -1.2]} scale={[2,0.6,0.8]}/>
+        : modelType == 'Salsa'
+          ? <Image imgSrc={'/salsa_banner.png'} position={[0.8, 0.6, -1.2]} scale={[2,0.6,0.8]}/>
+          : modelType == 'Hip-Hop'
+            ? <Image imgSrc={'/hip_hop_banner.png'} position={[0.8, 0.6, -1.2]} scale={[2,0.6,0.8]}/>
+            : modelType == 'Latin-Pop'
+              ? <Image imgSrc={'/latin_pop_banner.png'} position={[0.8, 0.6, -1.2]} scale={[2,0.6,0.8]}/>
+              : <Image imgSrc={'/chill_vibes_banner.png'} position={[0.8, 0.6, -1.2]} scale={[2,0.6,0.8]}/>
+    }
+    </>
+  )
+}
+
+const DetailPanel = ({modelType}) => {
+  return (
+    <>
+     {
+      modelType == 'Country'
+      ? <Image imgSrc={'/country_detail.png'} position={[0.8, -0.2, -1.2]} scale={[2,0.7,0.8]}/>
+      : modelType == 'Workout'
+        ? <Image imgSrc={'/workout_detail.png'} position={[0.8, -0.2, -1.2]} scale={[2,0.7,0.8]}/>
+        : modelType == 'Salsa'
+          ? <Image imgSrc={'/salsa_detail.png'} position={[0.8, -0.2, -1.2]} scale={[2,0.7,0.8]}/>
+          : modelType == 'Hip-Hop'
+            ? <Image imgSrc={'/hip_hop_detail.png'} position={[0.8, -0.2, -1.2]} scale={[2,0.7,0.8]}/>
+            : modelType == 'Latin-Pop'
+              ? <Image imgSrc={'/latin_pop_detail.png'} position={[0.8, -0.2, -1.2]} scale={[2,0.7,0.8]}/>
+              : <Image imgSrc={'/chill_vibes_detail.png'} position={[0.8, -0.2, -1.2]} scale={[2,0.7,0.8]}/>
+    }
+    </>
+  )
+}
+
 const SpotifyPage = () => {
-    const [modelType, setModelType] = useState('Workout');
+    const [modelType, setModelType] = useState('Chill');
     const [imgUrl, setImgUrl] = useState(modelType);
     const [toggle, setToggle] = useState('female');
-
+    const [showDetail, setShowDetail] = useState(false)
 
     return (
         <>
@@ -263,14 +303,29 @@ const SpotifyPage = () => {
                         </Interactive>
                       </>
                 }
-
+                {/* {showDetail ?
+                <>
                 <Interactive>
+                  <HeaderPanel />
+                </Interactive>
+                <Interactive>
+                  <Image imgSrc={'/songs_list.png'} position={[0.8, -0.2, -1.2]} scale={[2,0.7,0.8]}/>
+                </Interactive>
+                </>
+                :
+                <>
+                <Interactive onSelect={()=>setShowDetail(true)}>
                   <Image imgSrc={'/Chill_Vibes_Panel.png'} position={[0.3, 0.3, -1.2]} scale={0.8}/>
                 </Interactive>
                 <Interactive>
                   <Image imgSrc={'/Chill_Hits_Panel.png'} position={[1.2, 0.3, -1.2]} scale={0.8}/>
                 </Interactive>
-                      
+                </>
+                } */}
+                <Interactive>
+                  <HeaderPanel modelType={modelType}/>
+                  <DetailPanel modelType={modelType}/>
+                </Interactive>
                 {/* <Button position={[0, 0.1, -0.2]} track={track} chooseTrack={chooseTrack}/> */}
                 <Controllers />
                 </XR>
