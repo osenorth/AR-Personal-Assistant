@@ -5,26 +5,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = void 0;
 
-var _bicepcurls = _interopRequireDefault(require("../assets/bicepcurls.jpg"));
-
-var _jumpingjacks = _interopRequireDefault(require("../assets/jumpingjacks.jpg"));
-
-var _pullups = _interopRequireDefault(require("../assets/pullups.jpg"));
-
-var _lungs = _interopRequireDefault(require("../assets/lungs.jpg"));
-
-var _squat = _interopRequireDefault(require("../assets/squat.jpg"));
-
-var _plank = _interopRequireDefault(require("../assets/plank.jpg"));
-
-var _situps = _interopRequireDefault(require("../assets/situps.jpg"));
-
-var _pikewalk = _interopRequireDefault(require("../assets/pikewalk.jpg"));
-
-var _burpees = _interopRequireDefault(require("../assets/burpees.jpg"));
-
-var _pushup = _interopRequireDefault(require("../assets/pushup.jpg"));
-
 var _genreChill = _interopRequireDefault(require("../assets/genre-chill.png"));
 
 var _genreCountry = _interopRequireDefault(require("../assets/genre-country.png"));
