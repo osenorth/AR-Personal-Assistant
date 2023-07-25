@@ -30,7 +30,7 @@ export default function () {
       router.push("/use-cases/directions");
     }
     if (transcript.text?.includes("music")) {
-      router.push("/use-cases/music/music");
+      router.push("/music");
     }
     if (transcript.text?.includes("exercise")) {
       router.push("/fitnesstrainer");
@@ -163,7 +163,7 @@ export default function () {
           aria-label="add"
           color="secondary"
           sx={{ margin: "10px" }}
-          onClick={() => router.push("/use-cases/music/music")}
+          onClick={() => router.push("/music")}
         >
           <MusicNoteIcon />
         </Fab>

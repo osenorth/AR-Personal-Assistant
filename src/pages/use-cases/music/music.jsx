@@ -50,13 +50,13 @@ const SpotifyMusic = () => {
           height={400}
           width={400}
         /> */}
-        <h1 className={styles.title}>
+        {/* <h1 className={styles.title}>
           Welcome,{' '}
           {session.status === 'authenticated'
             ? session.data.user?.name || 'friend'
             : 'stranger'}
           !
-        </h1>
+        </h1> */}
       
         <div className={stylesHero.overlay}>
 
