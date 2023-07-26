@@ -18,6 +18,7 @@ import { HipHopDance2F } from '../components/SpotifyAnimations/HipHopDance2F';
 import { MacarenaDanceF } from '../components/SpotifyAnimations/MacarenaDanceF';
 import { SalsaDanceF } from '../components/SpotifyAnimations/SalsaDanceF';
 import { StepHipHopDanceF } from '../components/SpotifyAnimations/StepHipHopDanceF';
+import { FixedStepHipHopDanceF } from '../components/SpotifyAnimations/StepHipHopDanceF_Fixed';
 
 import { ChickenDanceM } from '../components/SpotifyAnimations/ChickenDanceM';
 import { HipHopDance1M } from '../components/SpotifyAnimations/HipHopDance1M';
@@ -141,7 +142,7 @@ const ModelTypeSwitcherF = ({modelType}) => {
     <>
     {
       modelType == 'Country'
-      ? <StepHipHopDanceF scale={0.045} position={[-0.5,0,-1.5]} />
+      ? <FixedStepHipHopDanceF scale={0.045} position={[-0.5,0,-1.5]} />
       : modelType == 'Workout'
         ? <ChickenDanceF scale={[0.05, 0.05, 0.05]} position={[-0.5,0,-1]} />
         : modelType == 'Salsa'
