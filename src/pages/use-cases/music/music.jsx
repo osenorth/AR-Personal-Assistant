@@ -12,20 +12,6 @@ import MusicHeroSection from '../../../components/SpotifyHero/musicHeroSection'
 
 import MusicIndex from './musicIndex'
 
-function Simple() {
-  const { rive, RiveComponent } = useRive({
-    src: '/login_screen_character.riv',
-    autoplay: false,
-  });
-
-  return (
-    <RiveComponent
-      onMouseEnter={() => rive && rive.play()}
-      onMouseLeave={() => rive && rive.pause()}
-    />
-  );
-}
-
 const SpotifyMusic = () => {
   const session = useSession()
 

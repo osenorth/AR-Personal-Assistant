@@ -6,7 +6,7 @@ const musicData = [
   {
     id: 1,
     title: "Login with your Spotify Account",
-    desc: "Click on the 'Get Started' button and you'll be redirected to the Spotify authentication page. Enter your Spotify account credentials and click on the 'Login' button to connect your account.",
+    desc: "Click on the 'Sign In with Spotify' button and you'll be redirected to the Spotify authentication page. Enter your Spotify account credentials and click on the 'Login' button to connect your account.",
     poster: step1Img,
     demoUrl: "",
   },
