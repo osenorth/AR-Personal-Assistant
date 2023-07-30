@@ -14,7 +14,7 @@ export default function FemaleWorkoutModel(props) {
   useEffect(() => {
     if (actions) {
       const action =
-        (modelName === "lungs" &&
+        (modelName === "lunges" &&
           actions["Armature|lunge animation|Anima_Layer"]) ||
         (modelName === "bicepcurls" &&
           actions["Armature|both hands|Anima_Layer"]) ||

@@ -31,7 +31,7 @@ export default function UserJourney({ journeyData }) {
                 {step.title}
               </h4>
               <p>{step.desc}</p>
-              {step.demoUrl && (
+              {step.demoUrl && step.demoUrl != "" && (
                 <Link
                   href={step.demoUrl}
                   rel="noopener noreferrer"

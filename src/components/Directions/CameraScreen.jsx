@@ -263,7 +263,7 @@ export default function ({ mapState, toggleComponent }) {
               </Typography>
             </>
           )}
-          <Box
+          {/* <Box
             sx={{
               border: "1px solid black",
               alignContent: "center",
@@ -283,7 +283,7 @@ export default function ({ mapState, toggleComponent }) {
             <Fab aria-label="add" color="success" onClick={toggleComponent}>
               <MapIcon />
             </Fab>
-          </Box>
+          </Box> */}
         </Box>
       ) : (
         <p>Loading directions...</p>
